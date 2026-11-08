@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#020617" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="mobile-web-app-capable" content="yes" />
-  <title>Class 11 Syllabus Tracker - Update Test</title>
+  <title>Class 11 Syllabus Tracker - CHSE Odisha All Subjects</title>
   <style>
     /* ==========================================================================
        100% OFFLINE COMPILED CSS & DESIGN SYSTEM (NO CDN REQUIRED)
@@ -135,7 +135,7 @@
       .sidebar {
         display: flex !important;
         position: static;
-        width: 268px;
+        width: 280px;
         flex-shrink: 0;
         height: 100vh;
         padding-bottom: 0;
@@ -150,7 +150,7 @@
     }
 
     .content-container {
-      max-width: 1024px;
+      max-width: 1060px;
       margin: 0 auto;
       padding: 1.25rem 1rem 9.5rem 1rem;
     }
@@ -236,6 +236,31 @@
       border-radius: 1rem;
       padding: 1.5rem;
       box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Subject Selection Cards */
+    .subject-pick-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding: 0.75rem 0.9rem;
+      border-radius: 0.75rem;
+      background-color: rgba(15, 23, 42, 0.8);
+      border: 1px solid var(--border-800);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-align: left;
+    }
+
+    .subject-pick-card:hover {
+      border-color: var(--border-600);
+      background-color: rgba(30, 41, 59, 0.7);
+    }
+
+    .subject-pick-card.selected {
+      background-color: rgba(79, 70, 229, 0.16);
+      border-color: rgba(99, 102, 241, 0.55);
     }
 
     /* Grids & Flex Utilities */
@@ -451,9 +476,9 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0.625rem 0.75rem;
+      padding: 0.55rem 0.75rem;
       border-radius: 0.55rem;
-      font-size: 0.875rem;
+      font-size: 0.85rem;
       font-weight: 500;
       color: var(--text-400);
       border: 1px solid transparent;
@@ -521,8 +546,8 @@
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background-color: rgba(2, 6, 23, 0.82);
-      backdrop-filter: blur(4px);
+      background-color: rgba(2, 6, 23, 0.84);
+      backdrop-filter: blur(5px);
       z-index: 60;
       display: flex;
       align-items: center;
@@ -534,21 +559,17 @@
       background-color: var(--bg-900);
       border: 1px solid var(--border-700);
       border-radius: 1rem;
-      max-width: 520px;
+      max-width: 540px;
       width: 100%;
       padding: 1.5rem;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.85);
       max-height: 90vh;
       overflow-y: auto;
     }
 
-    /* Subject Color Bars */
-    .bar-physics { background-color: #6366f1; }
-    .bar-chemistry { background-color: #10b981; }
-    .bar-mathematics { background-color: #3b82f6; }
-    .bar-english { background-color: #a855f7; }
-    .bar-odia { background-color: #f59e0b; }
-    .bar-statistics { background-color: #06b6d4; }
+    .modal-card-lg {
+      max-width: 840px;
+    }
 
     /* Typography Helpers */
     .text-white { color: #ffffff; }
@@ -650,6 +671,18 @@
       PenTool: '<path d="m12 19 7-7 3 3-7 7-3-3z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="m2 2 7.586 7.586"/><circle cx="11" cy="11" r="2"/>',
       BarChart3: '<path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/>',
       Atom: '<circle cx="12" cy="12" r="1"/><path d="M20.2 20.2c2.04-2.03.02-7.36-4.5-11.9-4.54-4.52-9.87-6.54-11.9-4.5-2.04 2.03-.02 7.36 4.5 11.9 4.54 4.52 9.87 6.54 11.9 4.5Z"/><path d="M15.7 15.7c4.52-4.54 6.54-9.87 4.5-11.9-2.03-2.04-7.36-.02-11.9 4.5-4.52 4.54-6.54 9.87-4.5 11.9 2.03 2.04 7.36.02 11.9-4.5Z"/>',
+      Dna: '<path d="M2 15c6.667-6 13.333 0 20-6"/><path d="M9 22c1.798-1.998 2.518-3.995 2.807-5.993"/><path d="M15 2c-1.798 1.998-2.518 3.995-2.807 5.993"/><path d="m17 6-2.5-2.5"/><path d="m14 8-1-1"/><path d="m7 18 2.5 2.5"/><path d="m3.5 14.5.5.5"/><path d="m20 9 .5.5"/><path d="m6.5 12.5 1 1"/><path d="m16.5 10.5 1 1"/><path d="m10 16 1.5 1.5"/>',
+      Terminal: '<polyline points="4 17 10 11 4 5"/><line x1="12" x2="20" y1="19" y2="19"/>',
+      Laptop: '<path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16"/>',
+      Cpu: '<rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/>',
+      Microscope: '<path d="M6 18h8"/><path d="M3 22h18"/><path d="M14 22a7 7 0 1 0 0-14h-1"/><path d="M9 14h2"/><path d="M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z"/><path d="M12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3"/>',
+      Compass: '<circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>',
+      Mountain: '<path d="m8 3 4 8 5-5 5 15H2L8 3z"/>',
+      Languages: '<path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/>',
+      Scroll: '<path d="M8 21h12a2 2 0 0 0 2-2v-2H10v2a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v3h4"/><path d="M19 17V5a2 2 0 0 0-2-2H4"/>',
+      Feather: '<path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" x2="2" y1="8" y2="22"/><line x1="17.5" x2="9" y1="15" y2="15"/>',
+      FileText: '<path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><line x1="10" x2="8" y1="9" y2="9"/>',
+      Sliders: '<line x1="4" x2="4" y1="21" y2="14"/><line x1="4" x2="4" y1="10" y2="3"/><line x1="12" x2="12" y1="21" y2="12"/><line x1="12" x2="12" y1="8" y2="3"/><line x1="20" x2="20" y1="21" y2="16"/><line x1="20" x2="20" y1="12" y2="3"/><line x1="2" x2="6" y1="14" y2="14"/><line x1="10" x2="14" y1="8" y2="8"/><line x1="18" x2="22" y1="16" y2="16"/>',
       Calendar: '<rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/>',
       Clock: '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',
       Download: '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/>',
@@ -688,7 +721,8 @@
     }
 
     /* ==========================================================================
-       2. CONSTANTS & ALL 80 ORIGINAL CLASS 11 SYLLABUS TOPICS (PRESERVED)
+       2. CONSTANTS & COMPLETE CHSE ODISHA CLASS 11 (+2 1ST YEAR) SYLLABUS
+          Includes all 20 subjects from Science.pdf while preserving original IDs
        ========================================================================== */
     const STATUSES = [
       { value: "Not Started", cls: "status-not-started", dot: "dot-not-started" },
@@ -706,16 +740,93 @@
       "Completed": 100
     };
 
-    const SUBJECT_ICON_NAMES = {
-      "Physics": "Atom",
-      "Chemistry": "FlaskConical",
-      "Mathematics": "Calculator",
-      "English": "Globe",
-      "Odia": "PenTool",
-      "Statistics": "BarChart3"
+    const DEFAULT_SELECTED_SUBJECT_IDS = [
+      "physics",
+      "chemistry",
+      "mathematics",
+      "english",
+      "odia",
+      "statistics"
+    ];
+
+    const SUBJECT_PRESET_COMBOS = [
+      {
+        id: "pcm-stat",
+        label: "PCM + Statistics (Default)",
+        desc: "Physics, Chemistry, Math, Statistics, English, Odia",
+        subjects: ["physics", "chemistry", "mathematics", "statistics", "english", "odia"]
+      },
+      {
+        id: "pcmb",
+        label: "PCMB (Math + Biology)",
+        desc: "Physics, Chemistry, Math, Biology, English, Odia",
+        subjects: ["physics", "chemistry", "mathematics", "biology", "english", "odia"]
+      },
+      {
+        id: "pcm-cs",
+        label: "PCM + Computer Science",
+        desc: "Physics, Chemistry, Math, Computer Science (C++), English, Odia",
+        subjects: ["physics", "chemistry", "mathematics", "computer-science", "english", "odia"]
+      },
+      {
+        id: "pcm-it",
+        label: "PCM + Information Tech (IT)",
+        desc: "Physics, Chemistry, Math, IT, English, Odia",
+        subjects: ["physics", "chemistry", "mathematics", "information-technology", "english", "odia"]
+      },
+      {
+        id: "pcb-it",
+        label: "PCB + IT / Sans / Alt Eng",
+        desc: "Physics, Chemistry, Biology, IT, English, Odia",
+        subjects: ["physics", "chemistry", "biology", "information-technology", "english", "odia"]
+      },
+      {
+        id: "pcm-elx",
+        label: "PCM + Electronics",
+        desc: "Physics, Chemistry, Math, Electronics, English, Odia",
+        subjects: ["physics", "chemistry", "mathematics", "electronics", "english", "odia"]
+      }
+    ];
+
+    const SUBJECT_META = {
+      "physics": { icon: "Atom", color: "#6366f1", group: "Core & Compulsory Subjects" },
+      "chemistry": { icon: "FlaskConical", color: "#10b981", group: "Core & Compulsory Subjects" },
+      "english": { icon: "Globe", color: "#a855f7", group: "Core & Compulsory Subjects" },
+
+      "mathematics": { icon: "Calculator", color: "#3b82f6", group: "Science & Math Electives (3rd & 4th Optional)" },
+      "biology": { icon: "Dna", color: "#22c55e", group: "Science & Math Electives (3rd & 4th Optional)" },
+      "statistics": { icon: "BarChart3", color: "#06b6d4", group: "Science & Math Electives (3rd & 4th Optional)" },
+      "geography": { icon: "Compass", color: "#84cc16", group: "Science & Math Electives (3rd & 4th Optional)" },
+      "geology": { icon: "Mountain", color: "#d97706", group: "Science & Math Electives (3rd & 4th Optional)" },
+      "economics": { icon: "TrendingUp", color: "#eab308", group: "Science & Math Electives (3rd & 4th Optional)" },
+
+      "computer-science": { icon: "Terminal", color: "#0ea5e9", group: "Tech, Vocational & Elective Subjects" },
+      "information-technology": { icon: "Laptop", color: "#14b8a6", group: "Tech, Vocational & Elective Subjects" },
+      "electronics": { icon: "Cpu", color: "#f97316", group: "Tech, Vocational & Elective Subjects" },
+      "biotechnology": { icon: "Microscope", color: "#ec4899", group: "Tech, Vocational & Elective Subjects" },
+      "sanskrit-elective": { icon: "BookMarked", color: "#c084fc", group: "Tech, Vocational & Elective Subjects" },
+
+      "odia": { icon: "PenTool", color: "#f59e0b", group: "M.I.L. & Alternative Languages" },
+      "alternative-english": { icon: "BookOpen", color: "#f472b6", group: "M.I.L. & Alternative Languages" },
+      "mil-hindi": { icon: "Languages", color: "#f43f5e", group: "M.I.L. & Alternative Languages" },
+      "mil-sanskrit": { icon: "Scroll", color: "#fb923c", group: "M.I.L. & Alternative Languages" },
+      "mil-bengali": { icon: "Feather", color: "#38bdf8", group: "M.I.L. & Alternative Languages" },
+      "mil-telugu": { icon: "FileText", color: "#4ade80", group: "M.I.L. & Alternative Languages" },
+      "mil-urdu": { icon: "BookOpen", color: "#2dd4bf", group: "M.I.L. & Alternative Languages" }
     };
 
+    function getSubjectIconName(subject) {
+      if (subject && SUBJECT_META[subject.id]) return SUBJECT_META[subject.id].icon;
+      return "BookOpen";
+    }
+
+    function getSubjectColor(subject) {
+      if (subject && SUBJECT_META[subject.id]) return SUBJECT_META[subject.id].color;
+      return "#6366f1";
+    }
+
     const INITIAL_SYLLABUS = [
+      /* 1. PHYSICS (+2 1st Year Science) */
       {
         id: "physics",
         name: "Physics",
@@ -733,6 +844,8 @@
           { id: "phy-11", unit: "Practical", name: "Section A & B", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null }
         ]
       },
+
+      /* 2. CHEMISTRY (+2 1st Year Science) */
       {
         id: "chemistry",
         name: "Chemistry",
@@ -753,6 +866,8 @@
           { id: "che-14", unit: "Practical", name: "Experiments", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null }
         ]
       },
+
+      /* 3. MATHEMATICS (+2 1st Year) */
       {
         id: "mathematics",
         name: "Mathematics",
@@ -774,6 +889,164 @@
           { id: "math-15", unit: "Unit VI", name: "Statistics and Probability", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null }
         ]
       },
+
+      /* 4. BIOLOGY - BOTANY & ZOOLOGY (+2 1st Year Science) */
+      {
+        id: "biology",
+        name: "Biology",
+        topics: [
+          { id: "bio-1", unit: "Unit I: Diversity", name: "What is Living, Biodiversity, Taxonomy & Binomial Nomenclature", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "bio-2", unit: "Unit I: Diversity", name: "Five Kingdom Classification: Monera, Protista, Fungi, Lichens & Viruses", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "bio-3", unit: "Unit I: Diversity", name: "Plant Kingdom: Algae, Bryophytes, Pteridophytes & Gymnosperms", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "bio-4", unit: "Unit I: Diversity", name: "Animal Kingdom: Non-chordates (Phyla) & Chordates (Classes)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "bio-5", unit: "Unit III: Cell", name: "Cell Theory, Prokaryotic/Eukaryotic Cell, Cell Wall & Organelles", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "bio-6", unit: "Unit III: Cell", name: "Biomolecules, Enzymes & Cell Division (Cell Cycle, Mitosis, Meiosis)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "bio-7", unit: "Unit IV: Plant Physio", name: "Photosynthesis in Higher Plants (Photochemical, C3 & C4 Pathways)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "bio-8", unit: "Unit IV: Plant Physio", name: "Respiration in Plants (Glycolysis, TCA Cycle, ETS & ATP)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "bio-9", unit: "Unit IV: Plant Physio", name: "Plant Growth and Development (Auxin, Gibberellin, Cytokinin, Ethylene, ABA)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "bio-10", unit: "Unit V: Human Physio", name: "Breathing and Respiration (Mechanism, Gas Exchange & Disorders)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "bio-11", unit: "Unit V: Human Physio", name: "Body Fluids and Circulation (Blood, Human Heart, Cardiac Cycle, ECG)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "bio-12", unit: "Unit V: Human Physio", name: "Excretory Products and Elimination (Urine Formation, Osmoregulation)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "bio-13", unit: "Unit V: Human Physio", name: "Neural Control and Coordination (Neuron, CNS, PNS & Nerve Impulse)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "bio-14", unit: "Unit V: Human Physio", name: "Chemical Coordination and Regulation (Endocrine Glands, Hormones)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "bio-15", unit: "Practical", name: "Botany & Zoology Practical Experiments and Spotting", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null }
+        ]
+      },
+
+      /* 5. COMPUTER SCIENCE C++ (+2 1st Year Science) */
+      {
+        id: "computer-science",
+        name: "Computer Science",
+        topics: [
+          { id: "cs-1", unit: "Unit I: Fundamentals", name: "Classification of Computers, Functional Components & Booting", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "cs-2", unit: "Unit I: Fundamentals", name: "Software Concepts: Operating Systems, Compiler, Interpreter & Utilities", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "cs-3", unit: "Unit I: Fundamentals", name: "Number Systems (Binary, Octal, Decimal, Hex) & Encoding (ASCII, ISCII, UNICODE)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "cs-4", unit: "Unit I: Fundamentals", name: "Microprocessor Concepts, Memory (Cache, RAM, ROM, Secondary) & I/O Ports", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "cs-5", unit: "Unit II: Methodology", name: "Modular Approach, Documentation, Debugging, Syntax/Runtime/Logical Errors", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "cs-6", unit: "Unit II: Methodology", name: "Problem Solving Methodologies: Algorithms & Flowcharts", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "cs-7", unit: "Unit III: Intro to C++", name: "C++ Character Set, Tokens, Program Structure, iostream.h, cout & cin", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "cs-8", unit: "Unit III: Intro to C++", name: "Data Types, Variables, Constants, Operators, Expressions & Type Casting", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "cs-9", unit: "Unit IV: Programming in C++", name: "Flow of Control: Conditional Statements (if-else, switch) & Loops (while, do-while, for)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "cs-10", unit: "Unit IV: Programming in C++", name: "Inbuilt Functions (stdio.h, ctype.h, math.h, stdlib.h) & User-Defined Functions", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "cs-11", unit: "Unit IV: Programming in C++", name: "Structured Data Types: 1D & 2D Arrays and User-Defined Data Types", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "cs-12", unit: "Practical", name: "C++ Lab Programs (20+), Flowcharts, Memory Game Project & Viva", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null }
+        ]
+      },
+
+      /* 6. INFORMATION TECHNOLOGY (+2 1st Year) */
+      {
+        id: "information-technology",
+        name: "Information Technology",
+        topics: [
+          { id: "it-1", unit: "Unit I: Computer System", name: "Hardware Concepts: CPU, Memory (RAM/ROM), I/O Devices & Communication Bus", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "it-2", unit: "Unit I: Computer System", name: "Types of Software: Operating Systems, Language Processors, Utility & Application Software", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "it-3", unit: "Unit I: Computer System", name: "Open Source Software Concepts", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "it-4", unit: "Unit II: Programming", name: "RAD with IDE & Java Swing GUI Controls (JFrame, JButton, JLabel, JTextField, JTable)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "it-5", unit: "Unit II: Programming", name: "Java Programming Fundamentals: Data Types, Variables, Parsing, Decision & Loops", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "it-6", unit: "Unit III: RDBMS", name: "Database Management Concepts: Relations, Tuples, Attributes & Keys (Primary, Foreign)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "it-7", unit: "Unit III: RDBMS", name: "Introduction to MySQL: DDL (CREATE, ALTER, DROP) & DML (SELECT, INSERT, UPDATE, DELETE)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "it-8", unit: "Unit IV: IT Applications", name: "E-Governance & E-Learning (Definitions, Benefits & Social Impact)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "it-9", unit: "Practical", name: "Java IDE Problem Solving (10+), MySQL Queries (15+) & Record File", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null }
+        ]
+      },
+
+      /* 7. ELECTRONICS (+2 1st Year Science) */
+      {
+        id: "electronics",
+        name: "Electronics",
+        topics: [
+          { id: "elx-1", unit: "Unit I", name: "Resistance, Capacitance & Inductance (Color Codes, Faraday's & Lenz's Law)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "elx-2", unit: "Unit II", name: "DC & AC Circuits (RC, RL, LC), Thermionic Emission & Vacuum Tubes (Diode, Triode)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "elx-3", unit: "Unit III", name: "Semiconductors (P & N Type), PN Junction, Zener, LED, Photodiode, Rectifiers & Filters", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "elx-4", unit: "Unit IV", name: "Transistors (PNP & NPN, CB/CE, Biasing, Load Line, Q-Point) & Amplifiers (Class A, B, C)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "elx-5", unit: "Unit V", name: "Instruments (Multimeter, VTVM, Microphone, Loudspeaker) & Integrated Circuits (IC)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "elx-6", unit: "Practical", name: "Electronics Lab Experiments (Ohm's Law, Meter Bridge, Diode/Zener, Soldering)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null }
+        ]
+      },
+
+      /* 8. BIOTECHNOLOGY (+2 1st Year Science) */
+      {
+        id: "biotechnology",
+        name: "Biotechnology",
+        topics: [
+          { id: "bt-1", unit: "Unit I: Overview", name: "Introduction to Biotechnology: Historical Perspectives, GMP, GLP & Global Trends", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "bt-2", unit: "Unit II: Molecules", name: "Biomolecules: Building Blocks (Sugars, Amino Acids, Fatty Acids, Nucleotides)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "bt-3", unit: "Unit II: Molecules", name: "Macromolecules: Structure & Function (Carbohydrates, Proteins, Enzymes, Nucleic Acids)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "bt-4", unit: "Unit III: Genes", name: "Gene Structure and Function: Cell Components & Discovery of DNA as Genetic Material", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "bt-5", unit: "Unit III: Genes", name: "Genomes Organization & Function: Cell Cycle, IVF, Immune Response & Apoptosis", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "bt-6", unit: "Unit IV: Cells", name: "Cells: Basic Unit of Life (Linkage, Crossing Over, Genetic Mapping, Mutations, DNA Repair)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "bt-7", unit: "Unit IV: Cells", name: "Organisms: Structure & Dynamics (DNA Replication, Transcription, Genetic Code, Translation)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "bt-8", unit: "Practical", name: "Biotechnology Lab (Buffers, Sterilization, Bacterial Growth, Mitotic Index, DNA Isolation)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null }
+        ]
+      },
+
+      /* 9. STATISTICS (+2 1st Year Science) */
+      {
+        id: "statistics",
+        name: "Statistics",
+        topics: [
+          { id: "stat-1", unit: "Unit I", name: "Basic Mathematics", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "stat-2", unit: "Unit II", name: "Probability Theory-I", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "stat-3", unit: "Unit III", name: "Probability Theory-II", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "stat-4", unit: "Unit IV", name: "Statistical Methods-I", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "stat-5", unit: "Unit V", name: "Statistical Methods-II", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "stat-6", unit: "Practical", name: "Practical Experiments", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null }
+        ]
+      },
+
+      /* 10. GEOGRAPHY (+2 1st Year Arts/Science) */
+      {
+        id: "geography",
+        name: "Geography",
+        topics: [
+          { id: "geo-1", unit: "Part A: Unit I", name: "Geography as a Discipline (Spatial Attributes, Physical & Human Branches)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "geo-2", unit: "Part A: Unit II", name: "The Earth (Origin, Evolution, Interior of the Earth, Earthquakes & Volcanoes)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "geo-3", unit: "Part A: Unit III", name: "Landforms (Major Types of Rocks, Weathering, Erosion, Deposition & Soil Formation)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "geo-4", unit: "Part A: Unit IV", name: "Climate (Atmosphere, Insolation, Pressure Belts, Winds, Cyclones & Global Warming)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "geo-5", unit: "Part A: Unit V", name: "Hydrosphere (Ocean Temperature, Salinity, Waves, Tides & Currents)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "geo-6", unit: "Part A: Unit VI", name: "Biosphere (Biodiversity, Conservation & World Map Identification)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "geo-7", unit: "Part B: Unit VII-VIII", name: "India Physical Environment: Location, Structure, Relief & Physiography (Ref. to Odisha)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "geo-8", unit: "Part B: Unit IX", name: "Climate, Natural Vegetation, Biosphere Reserves (Odisha) & Major Soil Types (ICAR)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "geo-9", unit: "Part B: Unit X", name: "Hazards and Disasters: Floods & Droughts (Causes, Consequences, Management)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "geo-10", unit: "Part C: Practical", name: "Fundamentals of Maps, Projections, Topographic Maps & Weather Instruments", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null }
+        ]
+      },
+
+      /* 11. GEOLOGY (+2 1st Year Science) */
+      {
+        id: "geology",
+        name: "Geology",
+        topics: [
+          { id: "geol-1", unit: "Unit I (A)", name: "General Geology: Scope, Origin, Age & Internal Constitution of Earth (Crust, Mantle, Core)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "geol-2", unit: "Unit I (B)", name: "Geomorphology: Weathering, Erosion, River, Glacier, Wind, Earthquake & Volcanoes", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "geol-3", unit: "Unit II", name: "Crystallography: Morphology, Symmetry Elements, Six Crystal Systems & Normal Classes", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "geol-4", unit: "Unit III", name: "Mineralogy: Physical Properties & Study of Oxides, Carbonates, Silicates, Sulphates, Fluorides", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "geol-5", unit: "Practical", name: "Crystallography Models, Rock/Ore Mineral Identification, Lab Record & Viva", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null }
+        ]
+      },
+
+      /* 12. ECONOMICS (+2 1st Year) */
+      {
+        id: "economics",
+        name: "Economics",
+        topics: [
+          { id: "eco-1", unit: "Paper I: Unit I", name: "Status of Indian Economy: Basic Characteristics, Demographic Features & Population Policy", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "eco-2", unit: "Paper I: Unit II", name: "Sectoral Development: Agriculture (Green Revolution), Industry (1991) & Infrastructure", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "eco-3", unit: "Paper I: Unit III", name: "Economic Planning and Economic Reforms (Objectives, Achievements & NITI Aayog)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "eco-4", unit: "Paper I: Unit IV", name: "Current Challenges: Poverty, Unemployment & Inflation (Causes & Govt. Programmes)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "eco-5", unit: "Paper I: Unit V", name: "Introductory Statistics: Scope, Primary/Secondary Data (NSSO, Census) & Sampling", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "eco-6", unit: "Paper I: Unit VI", name: "Frequency Distribution: Organisation, Tabular & Diagrammatic Presentation (Bar, Pie, Ogives)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "eco-7", unit: "Paper I: Unit VII", name: "Statistical Methods I: Measures of Central Tendency (Mean, Median, Mode)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "eco-8", unit: "Paper II: Unit I", name: "Introductory Microeconomics: Central Problems, Scarcity, Wants, Utility, Value & Wealth", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "eco-9", unit: "Paper II: Unit II", name: "Consumption and Demand: Laws of Utility, Demand Curve & Price Elasticity of Demand", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "eco-10", unit: "Paper II: Unit III", name: "Production: Production Function, TP, AP, MP & Law of Variable Proportions", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "eco-11", unit: "Paper II: Unit IV", name: "Cost, Revenue and Supply: Fixed/Variable, Total/Average/Marginal Cost & Revenue", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "eco-12", unit: "Paper II: Unit V", name: "Market: Perfect Competition, Monopoly, Monopolistic Competition & Oligopoly", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "eco-13", unit: "Paper II: Unit VI & VIII", name: "Introductory Macroeconomics & Public Finance (Public vs Private Finance, Budget)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null }
+        ]
+      },
+
+      /* 13. ENGLISH (Compulsory +2 1st Year) */
       {
         id: "english",
         name: "English",
@@ -798,6 +1071,30 @@
           { id: "eng-18", unit: "Unit V: Grammar", name: "The Imperatives", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null }
         ]
       },
+
+      /* 14. ALTERNATIVE ENGLISH (+2 1st Year) */
+      {
+        id: "alternative-english",
+        name: "Alternative English",
+        topics: [
+          { id: "alteng-1", unit: "Unit I: Prose", name: "The Adventure of Learning", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "alteng-2", unit: "Unit I: Prose", name: "Men and Women", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "alteng-3", unit: "Unit I: Prose", name: "Modern Living", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "alteng-4", unit: "Unit II: Poetry", name: "Ecology (A.K. Ramanujan)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "alteng-5", unit: "Unit II: Poetry", name: "Dog's Death (John Updike)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "alteng-6", unit: "Unit II: Poetry", name: "The Fog (W.H. Davies)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "alteng-7", unit: "Unit III: Short Stories", name: "The Rainbow-Bird (Vance Palmer)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "alteng-8", unit: "Unit III: Short Stories", name: "The Eyes Have It (Ruskin Bond)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "alteng-9", unit: "Unit IV: One-Act Plays", name: "Mother's Day (J.B. Priestley)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "alteng-10", unit: "Unit IV: One-Act Plays", name: "The Unexpected (Ella Adkins)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "alteng-11", unit: "Unit V: Grammar & Usage", name: "Tense and Aspect", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "alteng-12", unit: "Unit V: Grammar & Usage", name: "Modals", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "alteng-13", unit: "Unit V: Grammar & Usage", name: "The Passive", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "alteng-14", unit: "Unit V: Grammar & Usage", name: "Prepositions and Phrasal Verbs", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null }
+        ]
+      },
+
+      /* 15. M.I.L. ODIA (+2 1st Year) */
       {
         id: "odia",
         name: "Odia",
@@ -820,16 +1117,87 @@
           { id: "odia-16", unit: "Unit V: Prabandha O Byakarana", name: "Kriya", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null }
         ]
       },
+
+      /* 16. M.I.L. HINDI (+2 1st Year) */
       {
-        id: "statistics",
-        name: "Statistics",
+        id: "mil-hindi",
+        name: "M.I.L. (Hindi)",
         topics: [
-          { id: "stat-1", unit: "Unit I", name: "Basic Mathematics", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
-          { id: "stat-2", unit: "Unit II", name: "Probability Theory-I", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
-          { id: "stat-3", unit: "Unit III", name: "Probability Theory-II", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
-          { id: "stat-4", unit: "Unit IV", name: "Statistical Methods-I", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
-          { id: "stat-5", unit: "Unit V", name: "Statistical Methods-II", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
-          { id: "stat-6", unit: "Practical", name: "Practical Experiments", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null }
+          { id: "hin-1", unit: "Unit I: अपठित", name: "अपठित गद्यांश बोध एवं काव्यांश पर आधारित प्रश्न", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "hin-2", unit: "Unit II: रचनात्मक लेखन", name: "संक्षेपण (Precis) एवं निबंध लेखन (Essay Writing)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "hin-3", unit: "Unit II: व्याकरण", name: "उपसर्ग और प्रत्यय, क्रिया, काल", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "hin-4", unit: "Unit III: काव्य भाग", name: "कबीरदास (दोहे), सूरदास (बाललीला), मीरा (पद), बिहारी (दोहे)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "hin-5", unit: "Unit III: काव्य भाग", name: "सुमित्रानंदन पंत (भारतमाता), नागार्जुन, अज्ञेय (हिरोशिमा), दुष्यंत कुमार, केदारनाथ सिंह (रोटी)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "hin-6", unit: "Unit IV: गद्य भाग", name: "प्रेमचंद (जीवन में साहित्य का स्थान), दिनकर (ईर्ष्या, तू न गई मेरे मन से), रामविलास शर्मा (अतिथि)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "hin-7", unit: "Unit V: कहानी", name: "प्रेमचंद (बूढ़ी काकी), जयशंकर प्रसाद (ममता), भगवतीचरण वर्मा (कुंवर साहब का कुत्ता), उदयप्रकाश (अपराध)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null }
+        ]
+      },
+
+      /* 17. M.I.L. SANSKRIT (+2 1st Year) */
+      {
+        id: "mil-sanskrit",
+        name: "M.I.L. (Sanskrit)",
+        topics: [
+          { id: "milsan-1", unit: "Prose (संस्कृतप्रभा)", name: "मनुमत्स्याख्यानम् (Manumatsyakhyanam)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "milsan-2", unit: "Prose (संस्कृतप्रभा)", name: "चतुरशृगालः (Chaturasrugalah)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "milsan-3", unit: "Prose (संस्कृतप्रभा)", name: "जाबालः सत्यकामः (Jabalah Satyakamah)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "milsan-4", unit: "Poetry (संस्कृतप्रभा)", name: "सुभाषितावली (Subhasitavali) & वसन्तः (Vasantah)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "milsan-5", unit: "Textual Grammar", name: "सन्धिविच्छेद (Sandhi), कारकविभक्ति (Karaka) & प्रकृतिप्रत्यय (Prakrti Pratyaya)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "milsan-6", unit: "Grammar (व्याकरणदर्पणः)", name: "स्त्रीप्रत्यय (Stripratyaya) & एकपदीकरण (Ekapadikarana)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "milsan-7", unit: "Comprehension & Writing", name: "Sanskrit Passages (1-4), Translation into Odia/English & Textual Explanations", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null }
+        ]
+      },
+
+      /* 18. SANSKRIT ELECTIVE (+2 1st Year) */
+      {
+        id: "sanskrit-elective",
+        name: "Sanskrit (Elective)",
+        topics: [
+          { id: "sanel-1", unit: "Unit A: Poetry", name: "कुमारसम्भवम् (Kumarasambhavam of Kalidasa - Canto V, Verses 1–62)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "sanel-2", unit: "Unit B: Prose", name: "संस्कृतमन्दाकिनी: उपमन्युकथा, परहितसाधनम् & मुद्रिकाप्राप्तिः", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "sanel-3", unit: "Unit B: Prose", name: "संस्कृतमन्दाकिनी: चन्द्रभूपतिकथा & ससेमिराकथा", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "sanel-4", unit: "Unit C: History", name: "History of Sanskrit Literature: Valmiki, Vyasa, Kalidasa, Bhasa, Visnusarma, Jayadeva, Visvanath", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "sanel-5", unit: "Unit D & E: Text Grammar", name: "कारक-विभक्ति, प्रकृति-प्रत्यय & Translation into Odia/English", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "sanel-6", unit: "Unit E: व्याकरणदर्पणः", name: "कृदन्त (Krudanta), वाक्यरचनम् (Sentence Formation) & भ्रमसंशोधन (Correction)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null }
+        ]
+      },
+
+      /* 19. M.I.L. BENGALI (+2 1st Year) */
+      {
+        id: "mil-bengali",
+        name: "M.I.L. (Bengali)",
+        topics: [
+          { id: "ben-1", unit: "Unit I: Prose", name: "Bangladeshe Nilkar (Pyarichand Mitra) & Sitar Banabas (Iswarchandra Vidyasagar)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "ben-2", unit: "Unit I: Prose", name: "Bisarjan (Bankimchandra Chattopadhyay) & Sudra Jagaran (Swami Vivekananda)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "ben-3", unit: "Unit II: Poetry", name: "Madhukari: Srigoura Chandra (Gobinda Das) & Bhabollas (Vidyapati)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "ben-4", unit: "Unit II: Poetry", name: "Madhukari: Premer Tulana (Chandidas) & Abhisar Akshep (Gyandas)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "ben-5", unit: "Unit III & VI: Writing", name: "Personal Letter Writing & Essay Writing", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "ben-6", unit: "Unit IV: Grammar", name: "Synonyms/Antonyms, Proverbs & Idioms, Sentence & Word Formation", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null }
+        ]
+      },
+
+      /* 20. M.I.L. TELUGU (+2 1st Year) */
+      {
+        id: "mil-telugu",
+        name: "M.I.L. (Telugu)",
+        topics: [
+          { id: "tel-1", unit: "Unit I: Poetry", name: "Ekalavyudu (Nannaya), Balivamana Samvadamu (Potana) & Subhashitamulu", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "tel-2", unit: "Unit II: Prose", name: "Mitra Labhamu, Vemana, AIDS & Telugu Patrikala Purva Rangam", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "tel-3", unit: "Unit III: Non-Detailed", name: "Raja Raja Prasasti (Prof. S. Gangappa)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "tel-4", unit: "Unit IV: Grammar & Writing", name: "Vibhaktulu-Pratyayalu, Prakruti-Vikrutulu & Letter/Essay Writing", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null }
+        ]
+      },
+
+      /* 21. M.I.L. URDU (+2 1st Year) */
+      {
+        id: "mil-urdu",
+        name: "M.I.L. (Urdu)",
+        topics: [
+          { id: "urd-1", unit: "Unit I: Prose", name: "Qaumi Hamdardee, Sair Pahle Darwesh Ki, Mitti Ka Tel & Bahadur Shah", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "urd-2", unit: "Unit II (a): Poetry", name: "Aata Dal (Nazir), Tasweer-e-Dard (Iqbal), Jogan Aur Chandni Raat & Naojawanon-se-Khetab", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "urd-3", unit: "Unit II (b): Ghazaliyat", name: "Ghazaliyat: Ghalib, Dard, Aatish & Momin", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "urd-4", unit: "Unit III: Non-Detailed", name: "Taubatun Nasooh (First Half) or Musaddas-e-Hali (Tahmid Portion)", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "urd-5", unit: "Unit IV: Grammar & Writing", name: "Letter/Application Writing, Tazkir-o-Tanees & Ghalat Jumle Aur Unki Islah", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null }
         ]
       }
     ];
@@ -865,7 +1233,7 @@
       }
     }
 
-    // Safe v1 -> v2 Data Migration & Normalization
+    // Safe v1/v2 -> All-Subject Data Migration & Normalization
     function normalizeSyllabusData(rawSyllabus) {
       if (!Array.isArray(rawSyllabus)) return JSON.parse(JSON.stringify(INITIAL_SYLLABUS));
 
@@ -922,6 +1290,15 @@
       });
     }
 
+    function normalizeSelectedSubjects(rawSelected) {
+      const validIds = new Set(INITIAL_SYLLABUS.map(s => s.id));
+      if (!Array.isArray(rawSelected) || rawSelected.length === 0) {
+        return [...DEFAULT_SELECTED_SUBJECT_IDS];
+      }
+      const filtered = rawSelected.filter(id => validIds.has(id));
+      return filtered.length > 0 ? filtered : [...DEFAULT_SELECTED_SUBJECT_IDS];
+    }
+
     function getTopicProgress(topic) {
       if (Array.isArray(topic.subtopics) && topic.subtopics.length > 0) {
         const completedCount = topic.subtopics.filter(st => st.completed).length;
@@ -937,8 +1314,8 @@
       return Math.round((currentWeight / totalWeight) * 100);
     }
 
-    function getOverallProgress(syllabus) {
-      const allTopics = syllabus.flatMap(s => s.topics);
+    function getOverallProgress(syllabusList) {
+      const allTopics = syllabusList.flatMap(s => s.topics);
       if (allTopics.length === 0) return 0;
       const totalWeight = allTopics.length * 100;
       const currentWeight = allTopics.reduce((acc, t) => acc + getTopicProgress(t), 0);
@@ -977,7 +1354,8 @@
     const STORAGE_KEYS = {
       SYLLABUS: '11th-syllabus-data',
       TASKS: '11th-syllabus-tasks-v2',
-      SESSIONS: '11th-syllabus-sessions-v2'
+      SESSIONS: '11th-syllabus-sessions-v2',
+      SELECTED_SUBJECTS: '11th-syllabus-selected-subjects'
     };
 
     function loadStoredJSON(key, fallback, normalizer = null) {
@@ -1003,12 +1381,21 @@
 
     const state = {
       syllabus: loadStoredJSON(STORAGE_KEYS.SYLLABUS, INITIAL_SYLLABUS, normalizeSyllabusData),
+      selectedSubjectIds: loadStoredJSON(STORAGE_KEYS.SELECTED_SUBJECTS, DEFAULT_SELECTED_SUBJECT_IDS, normalizeSelectedSubjects),
       tasks: loadStoredJSON(STORAGE_KEYS.TASKS, []),
       sessions: loadStoredJSON(STORAGE_KEYS.SESSIONS, []),
 
       activeTab: 'dashboard', // 'dashboard' | 'planner' | 'revisions' | 'analytics' | 'settings' | subject.id
       searchQuery: '',
       mobileMenuOpen: false,
+
+      // Subject customization modal state
+      subjectModalOpen: false,
+      draftSelectedSubjectIds: [],
+
+      // Add Custom Chapter form per subject
+      customTopicOpen: {}, // { [subjectId]: boolean }
+      customTopicDraft: {}, // { [subjectId]: { unit: '', name: '' } }
 
       // UI expansion state maps (preserved across renders)
       openNotes: {},          // { [topicId]: boolean }
@@ -1058,9 +1445,17 @@
 
     // Ensure initial normalized data is written safely
     saveStoredJSON(STORAGE_KEYS.SYLLABUS, state.syllabus);
+    saveStoredJSON(STORAGE_KEYS.SELECTED_SUBJECTS, state.selectedSubjectIds);
+
+    function getActiveSyllabus() {
+      const activeSet = new Set(state.selectedSubjectIds);
+      const filtered = state.syllabus.filter(s => activeSet.has(s.id));
+      return filtered.length > 0 ? filtered : state.syllabus.slice(0, 6);
+    }
 
     function persistAll() {
       saveStoredJSON(STORAGE_KEYS.SYLLABUS, state.syllabus);
+      saveStoredJSON(STORAGE_KEYS.SELECTED_SUBJECTS, state.selectedSubjectIds);
       saveStoredJSON(STORAGE_KEYS.TASKS, state.tasks);
       saveStoredJSON(STORAGE_KEYS.SESSIONS, state.sessions);
     }
@@ -1103,7 +1498,8 @@
 
         if (!p.isBreak) {
           const durationMinutes = Math.round(p.sessionStartDuration / 60);
-          const subj = state.syllabus.find(s => s.id === p.selectedSubjectId) || state.syllabus[0];
+          const activeList = getActiveSyllabus();
+          const subj = state.syllabus.find(s => s.id === p.selectedSubjectId) || activeList[0] || state.syllabus[0];
           const newSession = {
             id: `sess-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
             subjectId: subj.id,
@@ -1159,10 +1555,15 @@
     }
 
     /* ==========================================================================
-       6. VIEW BUILDERS (PRESERVING ALL V2 FEATURES & VISUAL DESIGN)
+       6. VIEW BUILDERS (PRESERVING ALL V2 FEATURES + ALL 21 SUBJECTS)
        ========================================================================== */
     function buildPomodoroHTML() {
       const p = state.pomodoro;
+      const activeList = getActiveSyllabus();
+      if (!activeList.some(s => s.id === p.selectedSubjectId) && activeList.length > 0) {
+        p.selectedSubjectId = activeList[0].id;
+      }
+
       const mins = Math.floor(p.timeLeft / 60).toString().padStart(2, '0');
       const secs = (p.timeLeft % 60).toString().padStart(2, '0');
 
@@ -1203,7 +1604,7 @@
                 Studying Subject
               </label>
               <select data-action="pomo-subject-change" class="select" style="padding:0.35rem 0.5rem; font-size:0.75rem;" ${p.isActive ? 'disabled' : ''}>
-                ${state.syllabus.map(s => `<option value="${s.id}" ${s.id === p.selectedSubjectId ? 'selected' : ''}>${escapeHtml(s.name)}</option>`).join('')}
+                ${activeList.map(s => `<option value="${s.id}" ${s.id === p.selectedSubjectId ? 'selected' : ''}>${escapeHtml(s.name)}</option>`).join('')}
               </select>
             </div>
           ` : ''}
@@ -1261,6 +1662,7 @@
 
       const currentStatusObj = STATUSES.find(s => s.value === topic.status) || STATUSES[0];
       const draftSubtopic = state.subtopicDrafts[topic.id] || '';
+      const isCustomTopic = String(topic.id).startsWith('custom-');
 
       return `
         <div class="topic-card" data-topic-id="${topic.id}">
@@ -1330,6 +1732,12 @@
               <button type="button" data-action="toggle-notes" data-topic-id="${topic.id}" class="btn-icon ${isNotesOpen || (topic.notes && topic.notes.trim()) ? 'active-indigo' : ''}" title="Chapter Notes & Formulas">
                 ${icon('BookMarked', 16)}
               </button>
+
+              ${isCustomTopic ? `
+                <button type="button" data-action="delete-custom-topic" data-topic-id="${topic.id}" class="btn-icon" style="color:#f87171;" title="Delete Custom Chapter">
+                  ${icon('Trash2', 15)}
+                </button>
+              ` : ''}
             </div>
           </div>
 
@@ -1400,7 +1808,7 @@
                 </div>
               ` : `
                 <p class="text-xs text-slate-500 mb-3" style="font-style:italic;">
-                  No subtopics added yet. Add custom subtopics below (e.g., Position & Displacement, Velocity, Acceleration) or track this chapter using the status dropdown.
+                  No subtopics added yet. Add custom subtopics below or track this chapter using the status dropdown.
                 </p>
               `}
 
@@ -1459,9 +1867,10 @@
     }
 
     function buildDashboardViewHTML() {
-      const overall = getOverallProgress(state.syllabus);
+      const activeSyllabus = getActiveSyllabus();
+      const overall = getOverallProgress(activeSyllabus);
       const todayStr = getTodayDateString();
-      const allTopics = state.syllabus.flatMap(s => s.topics);
+      const allTopics = activeSyllabus.flatMap(s => s.topics);
       const completedChapters = allTopics.filter(t => getTopicProgress(t) === 100 || t.status === 'Completed').length;
       const dueRevisions = allTopics.filter(t => (t.nextRevisionDate && t.nextRevisionDate <= todayStr) || t.status === 'Needs Revision').length;
       const todayTasks = state.tasks.filter(t => t.targetDate === todayStr);
@@ -1473,14 +1882,19 @@
           <div class="flex flex-wrap items-center justify-between gap-4">
             <div>
               <h1 class="text-3xl font-bold text-white mb-1">Welcome Back!</h1>
-              <p class="text-sm text-slate-400">Here is your Class 11 academic syllabus & study overview.</p>
+              <p class="text-sm text-slate-400">
+                Tracking <strong class="text-indigo-300">${activeSyllabus.length} Selected Subjects</strong> (${allTopics.length} Chapters) • CHSE Odisha Class 11
+              </p>
             </div>
             <div class="flex flex-wrap items-center gap-2">
+              <button type="button" data-action="open-subject-modal" class="btn btn-primary">
+                ${icon('Sliders', 15)} <span>Choose Subjects (${activeSyllabus.length}/${state.syllabus.length})</span>
+              </button>
               <button type="button" data-action="switch-tab" data-tab="planner" class="btn btn-secondary">
                 <span class="text-indigo-400">${icon('Calendar', 15)}</span> <span>Daily Planner</span>
               </button>
               <button type="button" data-action="switch-tab" data-tab="settings" class="btn btn-secondary">
-                <span class="text-emerald-400">${icon('Download', 15)}</span> <span>Backup Data</span>
+                <span class="text-emerald-400">${icon('Download', 15)}</span> <span>Backup</span>
               </button>
             </div>
           </div>
@@ -1488,10 +1902,10 @@
           <!-- Overall Progress Hero -->
           <div class="hero-card">
             <div class="flex items-center justify-between mb-2">
-              <span class="text-sm font-semibold text-indigo-300">Overall Syllabus Completion</span>
+              <span class="text-sm font-semibold text-indigo-300">Overall Syllabus Completion (My Subjects)</span>
               <span class="text-3xl font-bold text-white">${overall}%</span>
             </div>
-            <p class="text-xs text-slate-400 mb-3">Calculated automatically from chapter status weights & subtopic progress</p>
+            <p class="text-xs text-slate-400 mb-3">Calculated automatically from your ${activeSyllabus.length} active subjects' chapter statuses & subtopic progress</p>
             <div class="progress-track" style="height:12px;">
               <div class="progress-fill" style="width:${overall}%; background: linear-gradient(90deg, #6366f1, #818cf8);"></div>
             </div>
@@ -1504,7 +1918,7 @@
                 <span>Chapters Done</span> ${icon('CheckCircle2', 15)}
               </div>
               <div class="text-2xl font-bold text-white">${completedChapters} / ${allTopics.length}</div>
-              <p class="text-xs text-slate-500 mt-1">Across all 6 subjects</p>
+              <p class="text-xs text-slate-500 mt-1">Across ${activeSyllabus.length} active subjects</p>
             </div>
 
             <div class="card card-interactive" data-action="switch-tab" data-tab="planner">
@@ -1534,16 +1948,22 @@
 
           <!-- Subjects Breakdown Grid -->
           <div>
-            <h2 class="text-lg font-semibold text-white mb-3">Subjects Breakdown</h2>
+            <div class="flex items-center justify-between mb-3">
+              <h2 class="text-lg font-semibold text-white">My Active Subjects (${activeSyllabus.length})</h2>
+              <button type="button" data-action="open-subject-modal" class="text-xs font-semibold text-indigo-400 flex items-center gap-1">
+                ${icon('Sliders', 13)} <span>Add / Change Subjects (Biology, CS, IT, Sans, Hindi...)</span>
+              </button>
+            </div>
             <div class="grid-3">
-              ${state.syllabus.map(subject => {
+              ${activeSyllabus.map(subject => {
                 const prog = getSubjectProgress(subject);
-                const iconName = SUBJECT_ICON_NAMES[subject.name] || 'BookOpen';
+                const iconName = getSubjectIconName(subject);
+                const color = getSubjectColor(subject);
                 const subtopicCount = subject.topics.reduce((sum, t) => sum + (Array.isArray(t.subtopics) ? t.subtopics.length : 0), 0);
                 return `
                   <div class="card card-interactive" data-action="switch-tab" data-tab="${subject.id}">
                     <div class="flex items-start justify-between mb-4">
-                      <div style="padding:0.65rem; background:var(--bg-800); border-radius:0.6rem; color:var(--indigo-400);">
+                      <div style="padding:0.65rem; background:var(--bg-800); border-radius:0.6rem; color:${color};">
                         ${icon(iconName, 22)}
                       </div>
                       <span class="text-2xl font-bold text-slate-200">${prog}%</span>
@@ -1553,7 +1973,7 @@
                       ${subject.topics.length} Chapters ${subtopicCount > 0 ? `• ${subtopicCount} Subtopics` : ''}
                     </p>
                     <div class="progress-track" style="height:6px;">
-                      <div class="progress-fill" style="width:${prog}%; background-color:${prog === 100 ? '#22c55e' : '#6366f1'};"></div>
+                      <div class="progress-fill" style="width:${prog}%; background-color:${prog === 100 ? '#22c55e' : color};"></div>
                     </div>
                   </div>
                 `;
@@ -1566,27 +1986,62 @@
 
     function buildSubjectViewHTML(subject) {
       const prog = getSubjectProgress(subject);
+      const color = getSubjectColor(subject);
+      const isAddOpen = Boolean(state.customTopicOpen[subject.id]);
+      const draft = state.customTopicDraft[subject.id] || { unit: '', name: '' };
+
       return `
         <div class="space-y-6">
           <div class="flex flex-wrap items-center justify-between gap-4">
             <div>
               <div class="flex items-center gap-2 text-indigo-400 text-xs font-bold uppercase mb-1">
-                ${icon(SUBJECT_ICON_NAMES[subject.name] || 'BookOpen', 16)}
-                <span>Subject Syllabus & Subtopic Tracker</span>
+                ${icon(getSubjectIconName(subject), 16)}
+                <span>CHSE Odisha Class 11 • ${subject.topics.length} Chapters</span>
               </div>
               <h1 class="text-3xl font-bold text-white">${escapeHtml(subject.name)}</h1>
             </div>
 
-            <div class="card flex items-center gap-4" style="padding:0.75rem 1.1rem;">
-              <div>
-                <div class="text-xs font-bold uppercase text-slate-500">Progress</div>
-                <div id="subject-header-prog-text" class="text-xl font-bold text-white">${prog}%</div>
-              </div>
-              <div class="progress-track" style="width:120px; height:8px;">
-                <div id="subject-header-prog-bar" class="progress-fill" style="width:${prog}%; background-color:${prog === 100 ? '#22c55e' : '#6366f1'};"></div>
+            <div class="flex flex-wrap items-center gap-3">
+              <button type="button" data-action="toggle-custom-topic-form" data-subject-id="${subject.id}" class="btn btn-secondary">
+                ${icon(isAddOpen ? 'X' : 'Plus', 15)}
+                <span>${isAddOpen ? 'Cancel' : 'Add Custom Chapter'}</span>
+              </button>
+
+              <div class="card flex items-center gap-4" style="padding:0.65rem 1rem;">
+                <div>
+                  <div class="text-xs font-bold uppercase text-slate-500">Progress</div>
+                  <div id="subject-header-prog-text" class="text-xl font-bold text-white">${prog}%</div>
+                </div>
+                <div class="progress-track" style="width:110px; height:8px;">
+                  <div id="subject-header-prog-bar" class="progress-fill" style="width:${prog}%; background-color:${prog === 100 ? '#22c55e' : color};"></div>
+                </div>
               </div>
             </div>
           </div>
+
+          ${isAddOpen ? `
+            <form data-action="add-custom-topic-form" data-subject-id="${subject.id}" class="card space-y-3" style="border-color:rgba(99,102,241,0.4);">
+              <div class="text-sm font-semibold text-white flex items-center gap-2">
+                <span class="text-indigo-400">${icon('Plus', 16)}</span>
+                <span>Add Custom Chapter / Unit to ${escapeHtml(subject.name)}</span>
+              </div>
+              <div class="grid-3">
+                <div>
+                  <label class="text-xs text-slate-400 mb-1" style="display:block;">Unit / Section</label>
+                  <input type="text" required value="${escapeHtml(draft.unit)}" data-action="custom-topic-input" data-subject-id="${subject.id}" data-field="unit" class="input" placeholder="e.g., Unit VI or Practical" />
+                </div>
+                <div style="grid-column: span 2;">
+                  <label class="text-xs text-slate-400 mb-1" style="display:block;">Chapter / Topic Name</label>
+                  <input type="text" required value="${escapeHtml(draft.name)}" data-action="custom-topic-input" data-subject-id="${subject.id}" data-field="name" class="input" placeholder="Enter chapter title..." />
+                </div>
+              </div>
+              <div class="flex justify-end gap-2">
+                <button type="submit" class="btn btn-primary">
+                  ${icon('Check', 15)} <span>Save Chapter</span>
+                </button>
+              </div>
+            </form>
+          ` : ''}
 
           <div class="space-y-3">
             ${subject.topics.map(topic => buildTopicCardHTML(topic)).join('')}
@@ -1597,8 +2052,12 @@
 
     function buildPlannerViewHTML() {
       const todayStr = getTodayDateString();
+      const activeList = getActiveSyllabus();
       const pf = state.plannerForm;
-      const selectedSubj = state.syllabus.find(s => s.id === pf.subjectId) || state.syllabus[0];
+      if (!activeList.some(s => s.id === pf.subjectId) && activeList.length > 0) {
+        pf.subjectId = activeList[0].id;
+      }
+      const selectedSubj = state.syllabus.find(s => s.id === pf.subjectId) || activeList[0] || state.syllabus[0];
 
       const todaysTasks = state.tasks.filter(t => t.targetDate === todayStr);
       const upcomingTasks = state.tasks.filter(t => t.targetDate > todayStr).sort((a, b) => a.targetDate.localeCompare(b.targetDate));
@@ -1698,7 +2157,7 @@
                 <div>
                   <label class="text-xs text-slate-400 mb-1" style="display:block;">Subject</label>
                   <select id="planner-subject" data-action="planner-subject-change" class="select">
-                    ${state.syllabus.map(s => `<option value="${s.id}" ${s.id === pf.subjectId ? 'selected' : ''}>${escapeHtml(s.name)}</option>`).join('')}
+                    ${activeList.map(s => `<option value="${s.id}" ${s.id === pf.subjectId ? 'selected' : ''}>${escapeHtml(s.name)}</option>`).join('')}
                   </select>
                 </div>
                 <div>
@@ -1762,7 +2221,8 @@
 
     function buildRevisionsViewHTML() {
       const todayStr = getTodayDateString();
-      const allTopics = state.syllabus.flatMap(s => s.topics.map(t => ({ ...t, subjectName: s.name })));
+      const activeList = getActiveSyllabus();
+      const allTopics = activeList.flatMap(s => s.topics.map(t => ({ ...t, subjectName: s.name })));
 
       const overdue = allTopics.filter(t => t.nextRevisionDate && t.nextRevisionDate < todayStr).sort((a, b) => a.nextRevisionDate.localeCompare(b.nextRevisionDate));
       const dueToday = allTopics.filter(t => t.nextRevisionDate && t.nextRevisionDate === todayStr);
@@ -1797,7 +2257,7 @@
         <div class="space-y-6">
           <div>
             <h1 class="text-3xl font-bold text-white mb-1">Smart Revision System</h1>
-            <p class="text-sm text-slate-400">Track overdue chapter reviews, complete today's revisions, and schedule spaced repetition.</p>
+            <p class="text-sm text-slate-400">Track overdue chapter reviews, complete today's revisions, and schedule spaced repetition across your active subjects.</p>
           </div>
 
           <div class="grid-3">
@@ -1861,10 +2321,15 @@
 
     function buildAnalyticsViewHTML() {
       const todayStr = getTodayDateString();
-      const allTopics = state.syllabus.flatMap(s => s.topics);
+      const activeList = getActiveSyllabus();
+      if (!activeList.some(s => s.id === state.manualSessionForm.subjectId) && activeList.length > 0) {
+        state.manualSessionForm.subjectId = activeList[0].id;
+      }
+
+      const allTopics = activeList.flatMap(s => s.topics);
       const completedChapters = allTopics.filter(t => getTopicProgress(t) === 100 || t.status === 'Completed').length;
       const revRequired = allTopics.filter(t => t.status === 'Needs Revision' || (t.nextRevisionDate && t.nextRevisionDate <= todayStr)).length;
-      const overall = getOverallProgress(state.syllabus);
+      const overall = getOverallProgress(activeList);
 
       const totalStudyMins = state.sessions.reduce((acc, s) => acc + (Number(s.durationMinutes) || 0), 0);
       const totalStudyHours = (totalStudyMins / 60).toFixed(1);
@@ -1881,11 +2346,11 @@
       const maxDayMins = Math.max(60, ...days7.map(d => d.mins));
 
       // Subject study breakdown
-      const subjHours = state.syllabus.map(s => {
+      const subjHours = activeList.map(s => {
         const mins = state.sessions
           .filter(sess => sess.subjectId === s.id || sess.subjectName === s.name)
           .reduce((acc, sess) => acc + (Number(sess.durationMinutes) || 0), 0);
-        return { id: s.id, name: s.name, mins, hours: (mins / 60).toFixed(1) };
+        return { id: s.id, name: s.name, color: getSubjectColor(s), mins, hours: (mins / 60).toFixed(1) };
       });
       const maxSubjMins = Math.max(60, ...subjHours.map(s => s.mins));
 
@@ -1941,8 +2406,9 @@
                 <span class="text-indigo-400">${icon('BookOpen', 16)}</span> <span>Subject-wise Completion</span>
               </h3>
               <div class="space-y-3">
-                ${state.syllabus.map(s => {
+                ${activeList.map(s => {
                   const prog = getSubjectProgress(s);
+                  const color = getSubjectColor(s);
                   const doneCount = s.topics.filter(t => getTopicProgress(t) === 100 || t.status === 'Completed').length;
                   return `
                     <div>
@@ -1951,7 +2417,7 @@
                         <span class="text-slate-400">${doneCount}/${s.topics.length} Chapters • <strong class="text-white">${prog}%</strong></span>
                       </div>
                       <div class="progress-track" style="height:8px;">
-                        <div class="progress-fill bar-${s.id}" style="width:${prog}%;"></div>
+                        <div class="progress-fill" style="width:${prog}%; background-color:${color};"></div>
                       </div>
                     </div>
                   `;
@@ -2000,7 +2466,7 @@
                         <span class="text-slate-400">${item.hours} hrs (${item.mins} mins)</span>
                       </div>
                       <div class="progress-track" style="height:7px;">
-                        <div class="progress-fill bar-${item.id}" style="width:${item.mins > 0 ? Math.max(5, pct) : 0}%;"></div>
+                        <div class="progress-fill" style="width:${item.mins > 0 ? Math.max(5, pct) : 0}%; background-color:${item.color};"></div>
                       </div>
                     </div>
                   `;
@@ -2021,7 +2487,7 @@
                   <div>
                     <label class="text-xs text-slate-400 mb-1" style="display:block;">Subject</label>
                     <select data-action="manual-session-input" data-field="subjectId" class="select">
-                      ${state.syllabus.map(s => `<option value="${s.id}" ${s.id === state.manualSessionForm.subjectId ? 'selected' : ''}>${escapeHtml(s.name)}</option>`).join('')}
+                      ${activeList.map(s => `<option value="${s.id}" ${s.id === state.manualSessionForm.subjectId ? 'selected' : ''}>${escapeHtml(s.name)}</option>`).join('')}
                     </select>
                   </div>
                   <div>
@@ -2054,13 +2520,19 @@
     }
 
     function buildBackupSettingsViewHTML() {
+      const activeList = getActiveSyllabus();
       return `
         <div class="space-y-6">
-          <div>
-            <h1 class="text-3xl font-bold text-white mb-1">Backup, Restore & APK Data Safety</h1>
-            <p class="text-sm text-slate-400">
-              All progress is stored locally in <code class="text-indigo-400">11th-syllabus-data</code>. Export a JSON file or copy raw backup text for 100% Android WebView compatibility.
-            </p>
+          <div class="flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <h1 class="text-3xl font-bold text-white mb-1">Subjects, Backup & APK Data Safety</h1>
+              <p class="text-sm text-slate-400">
+                Customize your Class 11 CHSE Odisha subjects or export a full offline backup.
+              </p>
+            </div>
+            <button type="button" data-action="open-subject-modal" class="btn btn-primary">
+              ${icon('Sliders', 16)} <span>Customize My Subjects (${activeList.length}/${state.syllabus.length})</span>
+            </button>
           </div>
 
           ${state.statusBanner ? `
@@ -2075,6 +2547,20 @@
             </div>
           ` : ''}
 
+          <!-- Subject Customization Banner Card -->
+          <div class="card flex flex-wrap items-center justify-between gap-4" style="border-color:rgba(99,102,241,0.35);">
+            <div>
+              <div class="text-xs font-bold uppercase text-indigo-400 mb-1">All 21 CHSE Odisha Class 11 Subjects Included</div>
+              <h3 class="text-lg font-semibold text-white">Currently Tracking: ${activeList.map(s => s.name).join(', ')}</h3>
+              <p class="text-xs text-slate-400 mt-1">
+                Switching subjects never deletes your chapter progress or notes—all 21 subjects are safely stored in LocalStorage.
+              </p>
+            </div>
+            <button type="button" data-action="open-subject-modal" class="btn btn-primary">
+              ${icon('Sliders', 15)} <span>Choose Subjects</span>
+            </button>
+          </div>
+
           <div class="grid-2">
             <!-- Export Backup Card -->
             <div class="card flex-col justify-between space-y-4">
@@ -2084,7 +2570,7 @@
                 </div>
                 <h3 class="text-lg font-semibold text-white mb-1">Export Complete Backup</h3>
                 <p class="text-sm text-slate-400">
-                  Save all 6 subjects, chapter statuses, subtopics, formula notes, revision dates, planner tasks, and study hours.
+                  Save all subjects, selected subject preferences, chapter statuses, subtopics, formula notes, revision dates, planner tasks, and study hours.
                 </p>
               </div>
               <div class="space-y-2">
@@ -2104,7 +2590,7 @@
                   ${icon('Upload', 22)}
                 </div>
                 <h3 class="text-lg font-semibold text-white mb-1">Restore from Backup</h3>
-                <p className="text-sm text-slate-400">
+                <p class="text-sm text-slate-400">
                   Import a JSON backup file or paste raw JSON text. Validates data and asks for confirmation before replacing existing progress.
                 </p>
               </div>
@@ -2128,8 +2614,8 @@
                 <h4 class="text-sm font-semibold text-white mb-1">100% Offline & Android APK Ready</h4>
                 <p class="text-xs text-slate-400">
                   • Zero external scripts, fonts, or audio URLs—works immediately on first launch in Airplane Mode.<br/>
-                  • Preserves LocalStorage keys: <code class="text-slate-200">11th-syllabus-data</code>, <code class="text-slate-200">11th-syllabus-tasks-v2</code>, and <code class="text-slate-200">11th-syllabus-sessions-v2</code>.<br/>
-                  • Compatible with both v1.0 array backups and v2.0 full backup objects.
+                  • Preserves LocalStorage keys: <code class="text-slate-200">11th-syllabus-data</code>, <code class="text-slate-200">11th-syllabus-selected-subjects</code>, <code class="text-slate-200">11th-syllabus-tasks-v2</code>, and <code class="text-slate-200">11th-syllabus-sessions-v2</code>.<br/>
+                  • Compatible with both v1.0 array backups and v2.0+ full backup objects.
                 </p>
               </div>
             </div>
@@ -2138,8 +2624,107 @@
       `;
     }
 
+    function buildSubjectModalHTML() {
+      if (!state.subjectModalOpen) return '';
+      const draftSet = new Set(state.draftSelectedSubjectIds);
+
+      const groups = [
+        "Core & Compulsory Subjects",
+        "Science & Math Electives (3rd & 4th Optional)",
+        "Tech, Vocational & Elective Subjects",
+        "M.I.L. & Alternative Languages"
+      ];
+
+      return `
+        <div class="modal-backdrop">
+          <div class="modal-card modal-card-lg space-y-4">
+            <div class="flex items-center justify-between border-b" style="padding-bottom:0.85rem; border-bottom:1px solid var(--border-800);">
+              <div>
+                <div class="flex items-center gap-2 text-indigo-400 text-xs font-bold uppercase">
+                  ${icon('Sliders', 14)} <span>CHSE Odisha +2 1st Year Science</span>
+                </div>
+                <h3 class="text-xl font-bold text-white mt-1">Choose Your Class 11 Subjects</h3>
+                <p class="text-xs text-slate-400">Select the subjects you have taken. You can change this anytime without losing progress.</p>
+              </div>
+              <button type="button" data-action="close-subject-modal" class="btn-icon" style="border:none;">
+                ${icon('X', 20)}
+              </button>
+            </div>
+
+            <!-- 1-Click Quick Stream Presets -->
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-bold uppercase text-slate-400">1-Click Quick Stream Presets</span>
+                <div class="flex gap-2">
+                  <button type="button" data-action="select-all-subjects-draft" class="text-xs font-semibold text-indigo-400">Select All (${state.syllabus.length})</button>
+                </div>
+              </div>
+              <div class="grid-3">
+                ${SUBJECT_PRESET_COMBOS.map(preset => `
+                  <button type="button" data-action="apply-subject-preset" data-preset-id="${preset.id}" class="card card-interactive" style="padding:0.65rem 0.8rem; text-align:left;">
+                    <div class="text-xs font-bold text-indigo-300 mb-1">${escapeHtml(preset.label)}</div>
+                    <div class="text-xs text-slate-400" style="font-size:0.7rem; line-height:1.35;">${escapeHtml(preset.desc)}</div>
+                  </button>
+                `).join('')}
+              </div>
+            </div>
+
+            <!-- Grouped Subject Checkboxes -->
+            <div class="space-y-4" style="max-height:48vh; overflow-y:auto; padding-right:0.25rem;">
+              ${groups.map(groupName => {
+                const groupSubjects = state.syllabus.filter(s => (SUBJECT_META[s.id] && SUBJECT_META[s.id].group) === groupName);
+                return `
+                  <div>
+                    <div class="text-xs font-bold uppercase text-indigo-400 mb-2" style="letter-spacing:0.05em;">
+                      ${escapeHtml(groupName)}
+                    </div>
+                    <div class="grid-3">
+                      ${groupSubjects.map(subj => {
+                        const isSelected = draftSet.has(subj.id);
+                        const color = getSubjectColor(subj);
+                        const iconName = getSubjectIconName(subj);
+                        return `
+                          <button type="button" data-action="toggle-draft-subject" data-subject-id="${subj.id}" class="subject-pick-card ${isSelected ? 'selected' : ''}">
+                            <div class="flex items-center gap-2-5 flex-1">
+                              <span style="color:${color}; display:inline-flex;">
+                                ${icon(iconName, 18)}
+                              </span>
+                              <div class="flex-1 truncate">
+                                <div class="text-sm font-semibold text-white truncate">${escapeHtml(subj.name)}</div>
+                                <div class="text-xs text-slate-400">${subj.topics.length} Chapters</div>
+                              </div>
+                            </div>
+                            <span style="color:${isSelected ? '#818cf8' : '#64748b'}; display:inline-flex;">
+                              ${icon(isSelected ? 'CheckSquare' : 'Square', 18)}
+                            </span>
+                          </button>
+                        `;
+                      }).join('')}
+                    </div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="flex flex-wrap items-center justify-between gap-3 pt-3 border-t">
+              <div class="text-xs text-slate-300">
+                Selected: <strong class="text-indigo-300">${state.draftSelectedSubjectIds.length} Subjects</strong>
+              </div>
+              <div class="flex items-center gap-2">
+                <button type="button" data-action="close-subject-modal" class="btn btn-secondary">Cancel</button>
+                <button type="button" data-action="save-subject-modal" class="btn btn-primary" ${state.draftSelectedSubjectIds.length === 0 ? 'disabled style="opacity:0.5;"' : ''}>
+                  ${icon('Check', 16)} <span>Save My Subjects (${state.draftSelectedSubjectIds.length})</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
     function buildModalsHTML() {
-      let html = '';
+      let html = buildSubjectModalHTML();
 
       // 1. Restore Confirmation Modal
       if (state.pendingRestoreData) {
@@ -2156,7 +2741,8 @@
               </p>
               <div style="background:var(--bg-950); border:1px solid var(--border-800); border-radius:0.75rem; padding:0.85rem;" class="text-xs text-slate-300 space-y-1">
                 <div class="font-bold uppercase text-indigo-400 mb-1">Verified Backup Contents:</div>
-                <div>• Subjects: <strong>${d.summary.subjectsCount}</strong> (${d.summary.topicsCount} chapters)</div>
+                <div>• Total Subjects Stored: <strong>${d.summary.subjectsCount}</strong> (${d.summary.topicsCount} chapters)</div>
+                <div>• Active Selected Subjects: <strong>${d.selectedSubjectIds.length}</strong></div>
                 <div>• Daily Planner Tasks: <strong>${d.summary.tasksCount}</strong></div>
                 <div>• Study Sessions: <strong>${d.summary.sessionsCount}</strong></div>
               </div>
@@ -2216,7 +2802,9 @@
        ========================================================================== */
     function renderApp() {
       const todayStr = getTodayDateString();
-      const dueRevisionsCount = state.syllabus
+      const activeSyllabus = getActiveSyllabus();
+
+      const dueRevisionsCount = activeSyllabus
         .flatMap(s => s.topics)
         .filter(t => (t.nextRevisionDate && t.nextRevisionDate <= todayStr) || t.status === 'Needs Revision')
         .length;
@@ -2227,12 +2815,13 @@
       const q = state.searchQuery.trim().toLowerCase();
 
       if (q !== '') {
-        const results = state.syllabus.flatMap(s =>
+        const results = activeSyllabus.flatMap(s =>
           s.topics
             .filter(t => {
               const matchTopic =
                 t.name.toLowerCase().includes(q) ||
                 t.unit.toLowerCase().includes(q) ||
+                s.name.toLowerCase().includes(q) ||
                 (t.notes && t.notes.toLowerCase().includes(q));
               const matchSub =
                 Array.isArray(t.subtopics) &&
@@ -2246,14 +2835,14 @@
           <div class="space-y-6">
             <div>
               <h1 class="text-2xl font-bold text-white mb-1">Search Results</h1>
-              <p class="text-sm text-slate-400">Found ${results.length} chapters/subtopics matching "${escapeHtml(state.searchQuery)}"</p>
+              <p class="text-sm text-slate-400">Found ${results.length} chapters/subtopics in your active subjects matching "${escapeHtml(state.searchQuery)}"</p>
             </div>
             ${results.length > 0
               ? `<div class="space-y-3">${results.map(r => buildTopicCardHTML(r.topic, r.subjectName)).join('')}</div>`
               : `<div class="card text-slate-400" style="text-align:center; padding:3rem 1rem;">
                    <div style="color:var(--text-500); margin-bottom:0.5rem;">${icon('Search', 36)}</div>
                    <div class="text-base font-semibold text-white">No matching chapters or subtopics</div>
-                   <div class="text-xs text-slate-500 mt-1">Try searching for another keyword or unit.</div>
+                   <div class="text-xs text-slate-500 mt-1">Try searching for another keyword or check "Choose Subjects" if the subject isn't enabled yet.</div>
                  </div>`
             }
           </div>
@@ -2269,7 +2858,7 @@
       } else if (state.activeTab === 'settings') {
         mainContentHTML = buildBackupSettingsViewHTML();
       } else {
-        const subject = state.syllabus.find(s => s.id === state.activeTab) || state.syllabus[0];
+        const subject = state.syllabus.find(s => s.id === state.activeTab) || activeSyllabus[0] || state.syllabus[0];
         mainContentHTML = buildSubjectViewHTML(subject);
       }
 
@@ -2281,31 +2870,36 @@
             <div class="flex items-center gap-2 text-indigo-400 font-bold text-base">
               ${icon('Brain', 22)}
               <span class="text-white">Syllabus Tracker</span>
-              <span class="badge badge-unit" style="font-size:0.62rem;">v2.0</span>
+              <span class="badge badge-unit" style="font-size:0.62rem;">CHSE 11th</span>
             </div>
-            <button type="button" data-action="toggle-mobile-menu" class="btn-icon">
-              ${icon(state.mobileMenuOpen ? 'X' : 'Menu', 20)}
-            </button>
+            <div class="flex items-center gap-1-5">
+              <button type="button" data-action="open-subject-modal" class="btn-icon active-indigo" title="Choose Subjects">
+                ${icon('Sliders', 18)}
+              </button>
+              <button type="button" data-action="toggle-mobile-menu" class="btn-icon">
+                ${icon(state.mobileMenuOpen ? 'X' : 'Menu', 20)}
+              </button>
+            </div>
           </header>
 
           <!-- Sidebar Navigation -->
           <aside class="sidebar ${state.mobileMenuOpen ? 'open' : ''}">
-            <div style="padding:1.25rem 1.25rem 1rem 1.25rem; border-bottom:1px solid var(--border-800);">
+            <div style="padding:1.15rem 1.15rem 0.9rem 1.15rem; border-bottom:1px solid var(--border-800);">
               <div class="flex items-center justify-between">
-                <div class="flex items-center gap-2-5 text-indigo-400 font-bold text-lg">
+                <div class="flex items-center gap-2 text-indigo-400 font-bold text-lg">
                   ${icon('Brain', 24)}
                   <span class="text-white">Syllabus Tracker</span>
                 </div>
-                <span class="badge badge-unit">v2.0</span>
+                <span class="badge badge-unit">v2.5</span>
               </div>
               <div class="flex items-center justify-between text-xs text-slate-500 font-semibold uppercase mt-1">
-                <span>Class 11 • Science</span>
+                <span>CHSE Class 11</span>
                 <span class="text-emerald-400" style="text-transform:none;">● Offline Ready</span>
               </div>
             </div>
 
             <!-- Global Search Input -->
-            <div style="padding:0.85rem; border-bottom:1px solid var(--border-800);">
+            <div style="padding:0.75rem 0.85rem; border-bottom:1px solid var(--border-800);">
               <div style="position:relative;">
                 <span style="position:absolute; left:10px; top:50%; transform:translateY(-50%); color:var(--text-500); display:inline-flex;">
                   ${icon('Search', 15)}
@@ -2347,18 +2941,26 @@
                 <span class="flex items-center gap-2-5">${icon('TrendingUp', 16)} <span>Study Analytics</span></span>
               </button>
 
-              <div class="text-xs font-bold uppercase text-slate-500" style="padding:0.85rem 0.5rem 0.25rem 0.5rem; letter-spacing:0.06em;">
-                Subjects
+              <div class="flex items-center justify-between" style="padding:0.85rem 0.5rem 0.25rem 0.5rem;">
+                <span class="text-xs font-bold uppercase text-slate-500" style="letter-spacing:0.06em;">
+                  My Subjects (${activeSyllabus.length})
+                </span>
+                <button type="button" data-action="open-subject-modal" class="text-xs font-semibold text-indigo-400 flex items-center gap-1" title="Add or Change Subjects">
+                  ${icon('Sliders', 12)} <span>Edit</span>
+                </button>
               </div>
 
-              ${state.syllabus.map(subj => {
+              ${activeSyllabus.map(subj => {
                 const prog = getSubjectProgress(subj);
                 const isActive = state.activeTab === subj.id && !state.searchQuery;
+                const color = getSubjectColor(subj);
                 return `
                   <button type="button" data-action="switch-tab" data-tab="${subj.id}" class="nav-item ${isActive ? 'active-subject' : ''}" data-sidebar-subj="${subj.id}">
-                    <span class="flex items-center gap-2-5">
-                      <span class="${isActive ? 'text-indigo-400' : 'text-slate-500'}">${icon(SUBJECT_ICON_NAMES[subj.name] || 'BookOpen', 16)}</span>
-                      <span>${escapeHtml(subj.name)}</span>
+                    <span class="flex items-center gap-2-5 truncate">
+                      <span style="color:${isActive ? color : 'var(--text-500)'}; display:inline-flex;">
+                        ${icon(getSubjectIconName(subj), 16)}
+                      </span>
+                      <span class="truncate">${escapeHtml(subj.name)}</span>
                     </span>
                     <span class="sidebar-subj-prog text-xs ${prog === 100 ? 'text-emerald-400 font-bold' : 'text-slate-400'}">
                       ${prog === 100 ? icon('CheckCircle2', 15) : prog + '%'}
@@ -2370,6 +2972,11 @@
               <div class="text-xs font-bold uppercase text-slate-500" style="padding:0.85rem 0.5rem 0.25rem 0.5rem; letter-spacing:0.06em;">
                 System
               </div>
+
+              <button type="button" data-action="open-subject-modal" class="nav-item">
+                <span class="flex items-center gap-2-5 text-indigo-300">${icon('Sliders', 16)} <span>Choose Subjects</span></span>
+                <span class="badge badge-unit">${activeSyllabus.length}/${state.syllabus.length}</span>
+              </button>
 
               <button type="button" data-action="switch-tab" data-tab="settings" class="nav-item ${state.activeTab === 'settings' && !state.searchQuery ? 'active' : ''}">
                 <span class="flex items-center gap-2-5">${icon('Settings', 16)} <span>Backup & Restore</span></span>
@@ -2389,6 +2996,9 @@
             <button type="button" data-action="switch-tab" data-tab="dashboard" class="mobile-nav-btn ${state.activeTab === 'dashboard' ? 'active' : ''}">
               ${icon('LayoutDashboard', 18)} <span>Home</span>
             </button>
+            <button type="button" data-action="open-subject-modal" class="mobile-nav-btn">
+              ${icon('Sliders', 18)} <span>Subjects</span>
+            </button>
             <button type="button" data-action="switch-tab" data-tab="planner" class="mobile-nav-btn ${state.activeTab === 'planner' ? 'active' : ''}">
               ${icon('Calendar', 18)} <span>Planner</span>
             </button>
@@ -2397,9 +3007,6 @@
             </button>
             <button type="button" data-action="switch-tab" data-tab="analytics" class="mobile-nav-btn ${state.activeTab === 'analytics' ? 'active' : ''}">
               ${icon('TrendingUp', 18)} <span>Stats</span>
-            </button>
-            <button type="button" data-action="switch-tab" data-tab="settings" class="mobile-nav-btn ${state.activeTab === 'settings' ? 'active' : ''}">
-              ${icon('Settings', 18)} <span>Backup</span>
             </button>
           </nav>
 
@@ -2420,8 +3027,9 @@
     function buildBackupPayloadObject() {
       return {
         app: "Class 11 Syllabus Tracker",
-        version: "2.0",
+        version: "2.5",
         exportedAt: new Date().toISOString(),
+        selectedSubjectIds: state.selectedSubjectIds,
         syllabus: state.syllabus,
         tasks: state.tasks,
         sessions: state.sessions
@@ -2434,6 +3042,7 @@
         let extractedSyllabus = null;
         let extractedTasks = [];
         let extractedSessions = [];
+        let extractedSelectedIds = state.selectedSubjectIds;
 
         if (Array.isArray(parsed)) {
           extractedSyllabus = parsed;
@@ -2441,6 +3050,9 @@
           extractedSyllabus = parsed.syllabus;
           extractedTasks = Array.isArray(parsed.tasks) ? parsed.tasks : [];
           extractedSessions = Array.isArray(parsed.sessions) ? parsed.sessions : [];
+          if (Array.isArray(parsed.selectedSubjectIds)) {
+            extractedSelectedIds = normalizeSelectedSubjects(parsed.selectedSubjectIds);
+          }
         } else {
           throw new Error('Invalid format. Expected a Syllabus Tracker JSON backup.');
         }
@@ -2456,6 +3068,7 @@
         state.pendingRestoreData = {
           sourceName,
           syllabus: normalizedSyllabus,
+          selectedSubjectIds: extractedSelectedIds,
           tasks: extractedTasks,
           sessions: extractedSessions,
           summary: {
@@ -2494,6 +3107,58 @@
         renderApp();
       } else if (action === 'clear-search') {
         state.searchQuery = '';
+        renderApp();
+      } else if (action === 'open-subject-modal') {
+        state.draftSelectedSubjectIds = [...state.selectedSubjectIds];
+        state.subjectModalOpen = true;
+        state.mobileMenuOpen = false;
+        renderApp();
+      } else if (action === 'close-subject-modal') {
+        state.subjectModalOpen = false;
+        renderApp();
+      } else if (action === 'toggle-draft-subject') {
+        const sid = btn.getAttribute('data-subject-id');
+        if (state.draftSelectedSubjectIds.includes(sid)) {
+          state.draftSelectedSubjectIds = state.draftSelectedSubjectIds.filter(id => id !== sid);
+        } else {
+          state.draftSelectedSubjectIds = [...state.draftSelectedSubjectIds, sid];
+        }
+        renderApp();
+      } else if (action === 'apply-subject-preset') {
+        const presetId = btn.getAttribute('data-preset-id');
+        const preset = SUBJECT_PRESET_COMBOS.find(p => p.id === presetId);
+        if (preset) {
+          state.draftSelectedSubjectIds = [...preset.subjects];
+          renderApp();
+        }
+      } else if (action === 'select-all-subjects-draft') {
+        state.draftSelectedSubjectIds = state.syllabus.map(s => s.id);
+        renderApp();
+      } else if (action === 'save-subject-modal') {
+        if (state.draftSelectedSubjectIds.length === 0) return;
+        const orderedIds = state.syllabus
+          .map(s => s.id)
+          .filter(id => state.draftSelectedSubjectIds.includes(id));
+        state.selectedSubjectIds = orderedIds;
+        saveStoredJSON(STORAGE_KEYS.SELECTED_SUBJECTS, state.selectedSubjectIds);
+        state.subjectModalOpen = false;
+        // If current activeTab is a subject that was deselected, return to dashboard
+        const specialTabs = new Set(['dashboard', 'planner', 'revisions', 'analytics', 'settings']);
+        if (!specialTabs.has(state.activeTab) && !state.selectedSubjectIds.includes(state.activeTab)) {
+          state.activeTab = 'dashboard';
+        }
+        renderApp();
+      } else if (action === 'toggle-custom-topic-form') {
+        const sid = btn.getAttribute('data-subject-id');
+        state.customTopicOpen[sid] = !state.customTopicOpen[sid];
+        renderApp();
+      } else if (action === 'delete-custom-topic') {
+        const tid = btn.getAttribute('data-topic-id');
+        state.syllabus = state.syllabus.map(s => ({
+          ...s,
+          topics: s.topics.filter(t => t.id !== tid)
+        }));
+        saveStoredJSON(STORAGE_KEYS.SYLLABUS, state.syllabus);
         renderApp();
       } else if (action === 'toggle-subtopics') {
         const tid = btn.getAttribute('data-topic-id');
@@ -2707,13 +3372,14 @@
       } else if (action === 'confirm-restore') {
         if (!state.pendingRestoreData) return;
         state.syllabus = state.pendingRestoreData.syllabus;
+        state.selectedSubjectIds = state.pendingRestoreData.selectedSubjectIds || state.selectedSubjectIds;
         state.tasks = state.pendingRestoreData.tasks;
         state.sessions = state.pendingRestoreData.sessions;
         persistAll();
         state.pendingRestoreData = null;
         state.statusBanner = {
           type: 'success',
-          message: 'Backup restored! All chapters, subtopics, notes, planner tasks, and sessions are updated.'
+          message: 'Backup restored! All subjects, chapters, subtopics, notes, planner tasks, and sessions are updated.'
         };
         renderApp();
       } else if (action === 'dismiss-banner') {
@@ -2752,6 +3418,13 @@
       } else if (action === 'subtopic-draft-input') {
         const tid = target.getAttribute('data-topic-id');
         state.subtopicDrafts[tid] = target.value;
+      } else if (action === 'custom-topic-input') {
+        const sid = target.getAttribute('data-subject-id');
+        const field = target.getAttribute('data-field');
+        if (!state.customTopicDraft[sid]) {
+          state.customTopicDraft[sid] = { unit: '', name: '' };
+        }
+        state.customTopicDraft[sid][field] = target.value;
       } else if (action === 'planner-form-input') {
         const field = target.getAttribute('data-field');
         state.plannerForm[field] = target.value;
@@ -2811,11 +3484,35 @@
         };
         state.subtopicDrafts[tid] = '';
         updateTopicById(tid, { subtopics: [...(found.topic.subtopics || []), newSt] }, true);
+      } else if (action === 'add-custom-topic-form') {
+        const sid = form.getAttribute('data-subject-id');
+        const draft = state.customTopicDraft[sid] || { unit: '', name: '' };
+        const unit = (draft.unit || 'Custom').trim();
+        const name = (draft.name || '').trim();
+        if (!name) return;
+        const newTopic = {
+          id: `custom-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+          unit: unit || 'Custom',
+          name,
+          status: 'Not Started',
+          notes: '',
+          subtopics: [],
+          nextRevisionDate: null,
+          lastRevisionDate: null
+        };
+        state.syllabus = state.syllabus.map(s =>
+          s.id === sid ? { ...s, topics: [...s.topics, newTopic] } : s
+        );
+        state.customTopicDraft[sid] = { unit: '', name: '' };
+        state.customTopicOpen[sid] = false;
+        saveStoredJSON(STORAGE_KEYS.SYLLABUS, state.syllabus);
+        renderApp();
       } else if (action === 'add-planner-task') {
         const pf = state.plannerForm;
         const trimmed = (pf.title || '').trim();
         if (!trimmed) return;
-        const subj = state.syllabus.find(s => s.id === pf.subjectId) || state.syllabus[0];
+        const activeList = getActiveSyllabus();
+        const subj = state.syllabus.find(s => s.id === pf.subjectId) || activeList[0] || state.syllabus[0];
         const topic = subj.topics.find(t => t.id === pf.topicId);
         const newTask = {
           id: `task-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
@@ -2836,7 +3533,8 @@
       } else if (action === 'log-manual-session') {
         const mf = state.manualSessionForm;
         const mins = Math.max(1, Number(mf.durationMinutes) || 25);
-        const subj = state.syllabus.find(s => s.id === mf.subjectId) || state.syllabus[0];
+        const activeList = getActiveSyllabus();
+        const subj = state.syllabus.find(s => s.id === mf.subjectId) || activeList[0] || state.syllabus[0];
         const newSess = {
           id: `sess-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
           subjectId: subj.id,
@@ -2864,7 +3562,6 @@
             scope: "./",
             updateViaCache: "none"
           });
-          // Check whether the Service Worker itself has a newer version.
           await registration.update();
           console.log("Offline support is ready.");
         } catch (error) {
