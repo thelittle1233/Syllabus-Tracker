@@ -1,61 +1,82 @@
+// Class 11 Syllabus Tracker: network-first updates with offline fallback.
+// The app is a single HTML file, so its CSS and JavaScript are included in index.html.
+const CACHE_NAME = "class11-syllabus-shell-v1";
+const APP_URL = new URL("index.html", self.registration.scope).href;
 
-const CACHE_NAME = "my-app-v1";
+self.addEventListener("install", (event) => {
+  event.waitUntil((async () => {
+    const cache = await caches.open(CACHE_NAME);
+    const response = await fetch(APP_URL, { cache: "reload" });
 
-const APP_FILES = [
-  "./",
-  "./index.html",
-  "./style.css",
-  "./script.js"
-];
+    if (!response.ok) {
+      throw new Error("Could not cache the app shell: " + response.status);
+    }
 
-// Install and cache app files
-self.addEventListener("install", event => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => {
-      return cache.addAll(APP_FILES);
-    })
-  );
-
-  self.skipWaiting();
+    await cache.put(APP_URL, response);
+    await self.skipWaiting();
+  })());
 });
 
-// Activate and remove old caches
-self.addEventListener("activate", event => {
-  event.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(
-        keys
-          .filter(key => key !== CACHE_NAME)
-          .map(key => caches.delete(key))
-      )
-    )
-  );
+self.addEventListener("activate", (event) => {
+  event.waitUntil((async () => {
+    const cacheNames = await caches.keys();
 
-  self.clients.claim();
+    await Promise.all(
+      cacheNames
+        .filter((name) => name.startsWith("class11-syllabus-shell-") && name !== CACHE_NAME)
+        .map((name) => caches.delete(name))
+    );
+
+    await self.clients.claim();
+  })());
 });
 
-// Network first, cached version if offline
-self.addEventListener("fetch", event => {
-  if (event.request.method !== "GET") return;
+self.addEventListener("fetch", (event) => {
+  const request = event.request;
 
-  const url = new URL(event.request.url);
+  if (request.method !== "GET") return;
 
-  if (url.origin !== self.location.origin) return;
+  const requestUrl = new URL(request.url);
+  if (requestUrl.origin !== self.location.origin) return;
 
-  event.respondWith(
-    fetch(event.request)
-      .then(response => {
-        if (response.ok) {
-          const copy = response.clone();
-          caches.open(CACHE_NAME).then(cache => {
-            cache.put(event.request, copy);
-          });
+  // For app-page navigation, always try GitHub Pages first so published
+  // changes are picked up on the next launch while online.
+  if (request.mode === "navigate" || requestUrl.href === APP_URL) {
+    event.respondWith((async () => {
+      try {
+        const response = await fetch(request);
+
+        if (response && response.ok) {
+          const cache = await caches.open(CACHE_NAME);
+          await cache.put(APP_URL, response.clone());
         }
+
         return response;
-      })
-      .catch(async () => {
-        const cached = await caches.match(event.request);
-        return cached || caches.match("./index.html");
-      })
-  );
+      } catch (error) {
+        const cached = await caches.match(APP_URL);
+        if (cached) return cached;
+        return new Response("The app is not cached yet. Connect to the internet and open it once.", {
+          status: 503,
+          headers: { "Content-Type": "text/plain; charset=utf-8" }
+        });
+      }
+    })());
+    return;
+  }
+
+  // Other same-origin files: network first, then cache if offline.
+  event.respondWith((async () => {
+    try {
+      const response = await fetch(request);
+      if (response && response.ok) {
+        const cache = await caches.open(CACHE_NAME);
+        await cache.put(request, response.clone());
+      }
+      return response;
+    } catch (error) {
+      const cached = await caches.match(request);
+      if (cached) return cached;
+      throw error;
+    }
+  })());
 });
