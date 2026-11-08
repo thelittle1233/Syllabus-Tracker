@@ -1,0 +1,2858 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#020617" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <title>Syllabus Tracker v2.0 — Class 11 Offline Edition</title>
+  <style>
+    /* ==========================================================================
+       100% OFFLINE COMPILED CSS & DESIGN SYSTEM (NO CDN REQUIRED)
+       ========================================================================== */
+    :root {
+      --bg-950: #020617;
+      --bg-900: #0f172a;
+      --bg-850: #131c31;
+      --bg-800: #1e293b;
+      --bg-700: #334155;
+      --border-800: #1e293b;
+      --border-700: #334155;
+      --border-600: #475569;
+      --text-100: #f1f5f9;
+      --text-200: #e2e8f0;
+      --text-300: #cbd5e1;
+      --text-400: #94a3b8;
+      --text-500: #64748b;
+      --indigo-600: #4f46e5;
+      --indigo-500: #6366f1;
+      --indigo-400: #818cf8;
+      --indigo-300: #a5b4fc;
+      --emerald-500: #10b981;
+      --emerald-400: #34d399;
+      --amber-500: #f59e0b;
+      --amber-400: #fbbf24;
+      --red-500: #ef4444;
+      --red-400: #f87171;
+      --blue-500: #3b82f6;
+      --blue-400: #60a5fa;
+      --purple-500: #a855f7;
+      --cyan-500: #06b6d4;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      min-height: 100%;
+      background-color: var(--bg-950);
+      color: var(--text-200);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    button, input, select, textarea {
+      font-family: inherit;
+      font-size: inherit;
+      color: inherit;
+    }
+
+    button {
+      cursor: pointer;
+      user-select: none;
+      background: none;
+      border: none;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+    /* Layout Shell */
+    .app-shell {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    @media (min-width: 768px) {
+      .app-shell {
+        flex-direction: row;
+        height: 100vh;
+        overflow: hidden;
+      }
+    }
+
+    /* Mobile Header */
+    .mobile-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1rem;
+      background-color: var(--bg-900);
+      border-bottom: 1px solid var(--border-800);
+      position: sticky;
+      top: 0;
+      z-index: 40;
+    }
+
+    @media (min-width: 768px) {
+      .mobile-header {
+        display: none;
+      }
+    }
+
+    /* Sidebar Navigation */
+    .sidebar {
+      width: 100%;
+      background-color: var(--bg-900);
+      border-right: 1px solid var(--border-800);
+      display: none;
+      flex-direction: column;
+      z-index: 45;
+    }
+
+    .sidebar.open {
+      display: flex;
+      position: fixed;
+      inset: 0;
+      top: 57px;
+      background-color: var(--bg-900);
+      overflow-y: auto;
+      padding-bottom: 5rem;
+    }
+
+    @media (min-width: 768px) {
+      .sidebar {
+        display: flex !important;
+        position: static;
+        width: 268px;
+        flex-shrink: 0;
+        height: 100vh;
+        padding-bottom: 0;
+      }
+    }
+
+    /* Main Content Area */
+    .main-area {
+      flex: 1;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    .content-container {
+      max-width: 1024px;
+      margin: 0 auto;
+      padding: 1.25rem 1rem 9.5rem 1rem;
+    }
+
+    @media (min-width: 768px) {
+      .content-container {
+        padding: 2.25rem 2.25rem 8.5rem 2.25rem;
+      }
+    }
+
+    /* Bottom Mobile Quick Nav */
+    .mobile-bottom-nav {
+      display: flex;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(15, 23, 42, 0.96);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid var(--border-800);
+      z-index: 35;
+      padding: 0.35rem 0.25rem;
+      justify-content: space-around;
+    }
+
+    @media (min-width: 768px) {
+      .mobile-bottom-nav {
+        display: none;
+      }
+    }
+
+    .mobile-nav-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.2rem;
+      padding: 0.35rem 0.5rem;
+      border-radius: 0.5rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--text-400);
+      position: relative;
+    }
+
+    .mobile-nav-btn.active {
+      color: var(--indigo-400);
+      background-color: rgba(99, 102, 241, 0.12);
+    }
+
+    /* Reusable Card & Surface Styles */
+    .card {
+      background-color: var(--bg-900);
+      border: 1px solid var(--border-800);
+      border-radius: 0.875rem;
+      padding: 1.25rem;
+      transition: all 0.2s ease;
+    }
+
+    .card-interactive {
+      cursor: pointer;
+    }
+
+    .card-interactive:hover {
+      border-color: var(--border-600);
+      background-color: rgba(30, 41, 59, 0.85);
+    }
+
+    .topic-card {
+      background-color: rgba(30, 41, 59, 0.5);
+      border: 1px solid rgba(51, 65, 85, 0.9);
+      border-radius: 0.85rem;
+      padding: 1rem;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .topic-card:hover {
+      background-color: rgba(30, 41, 59, 0.82);
+    }
+
+    .hero-card {
+      background: linear-gradient(135deg, rgba(49, 46, 129, 0.45) 0%, rgba(15, 23, 42, 0.96) 100%);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Grids & Flex Utilities */
+    .grid-1 { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+    .grid-2 { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+    .grid-3 { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+    .grid-4 { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+
+    @media (min-width: 640px) {
+      .grid-2 { grid-template-columns: repeat(2, 1fr); }
+      .grid-3 { grid-template-columns: repeat(2, 1fr); }
+      .grid-4 { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (min-width: 1024px) {
+      .grid-3 { grid-template-columns: repeat(3, 1fr); }
+      .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    }
+
+    .flex { display: flex; }
+    .flex-col { display: flex; flex-direction: column; }
+    .items-center { align-items: center; }
+    .items-start { align-items: flex-start; }
+    .justify-between { justify-content: space-between; }
+    .justify-center { justify-content: center; }
+    .justify-end { justify-content: flex-end; }
+    .flex-wrap { flex-wrap: wrap; }
+    .flex-1 { flex: 1; min-width: 0; }
+    .gap-1 { gap: 0.25rem; }
+    .gap-1-5 { gap: 0.375rem; }
+    .gap-2 { gap: 0.5rem; }
+    .gap-2-5 { gap: 0.625rem; }
+    .gap-3 { gap: 0.75rem; }
+    .gap-4 { gap: 1rem; }
+    .gap-6 { gap: 1.5rem; }
+
+    .space-y-1 > * + * { margin-top: 0.25rem; }
+    .space-y-2 > * + * { margin-top: 0.5rem; }
+    .space-y-2-5 > * + * { margin-top: 0.625rem; }
+    .space-y-3 > * + * { margin-top: 0.75rem; }
+    .space-y-4 > * + * { margin-top: 1rem; }
+    .space-y-6 > * + * { margin-top: 1.5rem; }
+    .space-y-8 > * + * { margin-top: 2rem; }
+
+    /* Form Controls */
+    .input, .select, .textarea {
+      width: 100%;
+      background-color: var(--bg-950);
+      border: 1px solid var(--border-700);
+      border-radius: 0.5rem;
+      padding: 0.5rem 0.75rem;
+      font-size: 0.875rem;
+      color: var(--text-100);
+      outline: none;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .input:focus, .select:focus, .textarea:focus {
+      border-color: var(--indigo-500);
+      box-shadow: 0 0 0 1px var(--indigo-500);
+    }
+
+    .input::placeholder, .textarea::placeholder {
+      color: var(--text-500);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      padding: 0.5rem 0.9rem;
+      border-radius: 0.55rem;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      transition: all 0.15s ease;
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background-color: var(--indigo-600);
+      color: #ffffff;
+    }
+    .btn-primary:hover { background-color: var(--indigo-500); }
+
+    .btn-secondary {
+      background-color: var(--bg-800);
+      border-color: var(--border-700);
+      color: var(--text-200);
+    }
+    .btn-secondary:hover {
+      background-color: var(--bg-700);
+      color: #ffffff;
+    }
+
+    .btn-success {
+      background-color: rgba(16, 185, 129, 0.18);
+      border-color: rgba(16, 185, 129, 0.35);
+      color: #6ee7b7;
+    }
+    .btn-success:hover { background-color: rgba(16, 185, 129, 0.28); }
+
+    .btn-danger {
+      background-color: rgba(239, 68, 68, 0.15);
+      border-color: rgba(239, 68, 68, 0.35);
+      color: #fca5a5;
+    }
+    .btn-danger:hover { background-color: rgba(239, 68, 68, 0.25); }
+
+    .btn-icon {
+      padding: 0.45rem;
+      border-radius: 0.45rem;
+      border: 1px solid var(--border-700);
+      background-color: var(--bg-800);
+      color: var(--text-400);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s ease;
+    }
+    .btn-icon:hover {
+      color: var(--text-100);
+      background-color: var(--bg-700);
+    }
+    .btn-icon.active-indigo {
+      background-color: rgba(79, 70, 229, 0.28);
+      border-color: rgba(99, 102, 241, 0.45);
+      color: var(--indigo-300);
+    }
+    .btn-icon.active-amber {
+      background-color: rgba(245, 158, 11, 0.22);
+      border-color: rgba(245, 158, 11, 0.45);
+      color: #fcd34d;
+    }
+
+    /* Status Badges & Colors */
+    .status-not-started { background-color: #334155; color: #cbd5e1; border-color: #475569; }
+    .status-learning { background-color: rgba(30, 58, 138, 0.45); color: #60a5fa; border-color: rgba(30, 64, 175, 0.6); }
+    .status-practicing { background-color: rgba(113, 63, 18, 0.45); color: #facc15; border-color: rgba(133, 77, 14, 0.6); }
+    .status-needs-revision { background-color: rgba(124, 45, 18, 0.45); color: #fb923c; border-color: rgba(154, 52, 18, 0.6); }
+    .status-completed { background-color: rgba(20, 83, 45, 0.45); color: #4ade80; border-color: rgba(22, 101, 52, 0.6); }
+
+    .dot { width: 8px; height: 8px; border-radius: 9999px; display: inline-block; flex-shrink: 0; }
+    .dot-not-started { background-color: #94a3b8; }
+    .dot-learning { background-color: #3b82f6; }
+    .dot-practicing { background-color: #eab308; }
+    .dot-needs-revision { background-color: #f97316; }
+    .dot-completed { background-color: #22c55e; }
+
+    /* Progress Bars */
+    .progress-track {
+      width: 100%;
+      background-color: rgba(2, 6, 23, 0.75);
+      border-radius: 9999px;
+      overflow: hidden;
+      border: 1px solid var(--border-800);
+    }
+
+    .progress-fill {
+      height: 100%;
+      border-radius: 9999px;
+      transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 0.35rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+
+    .badge-unit {
+      background-color: rgba(49, 46, 129, 0.38);
+      color: var(--indigo-400);
+      text-transform: uppercase;
+    }
+
+    .badge-subtopics {
+      background-color: rgba(15, 23, 42, 0.85);
+      border: 1px solid var(--border-700);
+      color: var(--text-300);
+      font-weight: 600;
+    }
+
+    .badge-overdue {
+      background-color: rgba(127, 29, 29, 0.45);
+      border: 1px solid rgba(239, 68, 68, 0.45);
+      color: #fca5a5;
+    }
+
+    .badge-today {
+      background-color: rgba(120, 53, 15, 0.45);
+      border: 1px solid rgba(245, 158, 11, 0.45);
+      color: #fcd34d;
+    }
+
+    .badge-scheduled {
+      background-color: rgba(15, 23, 42, 0.75);
+      border: 1px solid var(--border-700);
+      color: var(--text-400);
+    }
+
+    /* Navigation Item */
+    .nav-item {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.625rem 0.75rem;
+      border-radius: 0.55rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-400);
+      border: 1px solid transparent;
+      transition: all 0.15s ease;
+      text-align: left;
+    }
+
+    .nav-item:hover {
+      background-color: rgba(30, 41, 59, 0.55);
+      color: var(--text-100);
+    }
+
+    .nav-item.active {
+      background-color: rgba(99, 102, 241, 0.12);
+      color: var(--indigo-400);
+      border-color: rgba(99, 102, 241, 0.25);
+      font-weight: 600;
+    }
+
+    .nav-item.active-subject {
+      background-color: var(--bg-800);
+      color: #ffffff;
+      border-color: var(--border-700);
+      font-weight: 600;
+    }
+
+    /* Pomodoro Floating Widget */
+    .pomodoro-widget {
+      position: fixed;
+      right: 1rem;
+      bottom: 4.5rem;
+      z-index: 42;
+      background-color: rgba(15, 23, 42, 0.97);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border-700);
+      border-radius: 1rem;
+      padding: 1.15rem;
+      width: 296px;
+      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.7);
+    }
+
+    .pomodoro-pill {
+      position: fixed;
+      right: 1rem;
+      bottom: 4.5rem;
+      z-index: 42;
+      background-color: var(--bg-900);
+      border: 1px solid rgba(99, 102, 241, 0.45);
+      border-radius: 9999px;
+      padding: 0.65rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.65);
+    }
+
+    @media (min-width: 768px) {
+      .pomodoro-widget, .pomodoro-pill {
+        bottom: 1.5rem;
+        right: 1.5rem;
+      }
+    }
+
+    /* Modal Backdrop */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background-color: rgba(2, 6, 23, 0.82);
+      backdrop-filter: blur(4px);
+      z-index: 60;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .modal-card {
+      background-color: var(--bg-900);
+      border: 1px solid var(--border-700);
+      border-radius: 1rem;
+      max-width: 520px;
+      width: 100%;
+      padding: 1.5rem;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    /* Subject Color Bars */
+    .bar-physics { background-color: #6366f1; }
+    .bar-chemistry { background-color: #10b981; }
+    .bar-mathematics { background-color: #3b82f6; }
+    .bar-english { background-color: #a855f7; }
+    .bar-odia { background-color: #f59e0b; }
+    .bar-statistics { background-color: #06b6d4; }
+
+    /* Typography Helpers */
+    .text-white { color: #ffffff; }
+    .text-slate-100 { color: var(--text-100); }
+    .text-slate-200 { color: var(--text-200); }
+    .text-slate-300 { color: var(--text-300); }
+    .text-slate-400 { color: var(--text-400); }
+    .text-slate-500 { color: var(--text-500); }
+    .text-indigo-400 { color: var(--indigo-400); }
+    .text-indigo-300 { color: var(--indigo-300); }
+    .text-emerald-400 { color: var(--emerald-400); }
+    .text-amber-400 { color: var(--amber-400); }
+    .text-red-400 { color: var(--red-400); }
+    .text-blue-400 { color: var(--blue-400); }
+
+    .font-bold { font-weight: 700; }
+    .font-semibold { font-weight: 600; }
+    .font-medium { font-weight: 500; }
+    .font-mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
+
+    .text-xs { font-size: 0.75rem; }
+    .text-sm { font-size: 0.875rem; }
+    .text-base { font-size: 1rem; }
+    .text-lg { font-size: 1.125rem; }
+    .text-xl { font-size: 1.25rem; }
+    .text-2xl { font-size: 1.5rem; }
+    .text-3xl { font-size: 1.875rem; }
+    .text-5xl { font-size: 2.75rem; line-height: 1.1; }
+
+    .line-through { text-decoration: line-through; }
+    .truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .uppercase { text-transform: uppercase; }
+
+    .mb-1 { margin-bottom: 0.25rem; }
+    .mb-2 { margin-bottom: 0.5rem; }
+    .mb-3 { margin-bottom: 0.75rem; }
+    .mb-4 { margin-bottom: 1rem; }
+    .mb-6 { margin-bottom: 1.5rem; }
+    .mb-8 { margin-bottom: 2rem; }
+    .mt-1 { margin-top: 0.25rem; }
+    .mt-2 { margin-top: 0.5rem; }
+    .mt-3 { margin-top: 0.75rem; }
+    .mt-4 { margin-top: 1rem; }
+    .pt-3 { padding-top: 0.75rem; }
+    .pt-4 { padding-top: 1rem; }
+    .border-t { border-top: 1px solid var(--border-700); }
+
+    /* Topic Row Responsive Layout */
+    .topic-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    @media (min-width: 900px) {
+      .topic-row {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.25); }
+    }
+    .animate-pulse-dot {
+      animation: pulseDot 1.6s infinite ease-in-out;
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script>
+    /* ==========================================================================
+       1. INLINE LUCIDE SVG ICON LIBRARY (100% OFFLINE)
+       ========================================================================== */
+    const ICONS = {
+      Brain: '<path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/>',
+      LayoutDashboard: '<rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/>',
+      BookOpen: '<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>',
+      Search: '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>',
+      CheckCircle2: '<circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/>',
+      Circle: '<circle cx="12" cy="12" r="10"/>',
+      ChevronDown: '<path d="m6 9 6 6 6-6"/>',
+      ChevronRight: '<path d="m9 18 6-6-6-6"/>',
+      BookMarked: '<path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/><polyline points="10 2 10 10 13 7 16 10 16 2"/>',
+      Play: '<polygon points="6 3 20 12 6 21 6 3"/>',
+      Pause: '<rect x="14" y="4" width="4" height="16" rx="1"/><rect x="6" y="4" width="4" height="16" rx="1"/>',
+      RotateCcw: '<path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>',
+      RotateCw: '<path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/>',
+      Coffee: '<path d="M10 2v2"/><path d="M14 2v2"/><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"/><path d="M6 2v2"/>',
+      Edit3: '<path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/>',
+      X: '<path d="M18 6 6 18"/><path d="m6 6 12 12"/>',
+      Calculator: '<rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/>',
+      FlaskConical: '<path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2"/><path d="M8.5 2h7"/><path d="M7 16h10"/>',
+      Globe: '<circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/>',
+      PenTool: '<path d="m12 19 7-7 3 3-7 7-3-3z"/><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="m2 2 7.586 7.586"/><circle cx="11" cy="11" r="2"/>',
+      BarChart3: '<path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/>',
+      Atom: '<circle cx="12" cy="12" r="1"/><path d="M20.2 20.2c2.04-2.03.02-7.36-4.5-11.9-4.54-4.52-9.87-6.54-11.9-4.5-2.04 2.03-.02 7.36 4.5 11.9 4.54 4.52 9.87 6.54 11.9 4.5Z"/><path d="M15.7 15.7c4.52-4.54 6.54-9.87 4.5-11.9-2.03-2.04-7.36-.02-11.9 4.5-4.52 4.54-6.54 9.87-4.5 11.9 2.03 2.04 7.36.02 11.9-4.5Z"/>',
+      Calendar: '<rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/>',
+      Clock: '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',
+      Download: '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/>',
+      Upload: '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/>',
+      Plus: '<path d="M5 12h14"/><path d="M12 5v14"/>',
+      Trash2: '<path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/>',
+      Check: '<path d="M20 6 9 17l-5-5"/>',
+      AlertTriangle: '<path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/>',
+      Settings: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>',
+      ListTodo: '<rect x="3" y="5" width="6" height="6" rx="1"/><path d="m3 17 2 2 4-4"/><path d="M13 6h8"/><path d="M13 12h8"/><path d="M13 18h8"/>',
+      TrendingUp: '<polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/>',
+      CheckSquare: '<rect width="18" height="18" x="3" y="3" rx="2"/><path d="m9 12 2 2 4-4"/>',
+      Square: '<rect width="18" height="18" x="3" y="3" rx="2"/>',
+      Volume2: '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>',
+      VolumeX: '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="22" x2="16" y1="9" y2="15"/><line x1="16" x2="22" y1="9" y2="15"/>',
+      ShieldCheck: '<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/>',
+      Menu: '<line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/>',
+      Copy: '<rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>',
+      Award: '<circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/>',
+      History: '<path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/>'
+    };
+
+    function icon(name, size = 16, extraClass = '') {
+      const paths = ICONS[name] || ICONS.BookOpen;
+      return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="${extraClass}" style="flex-shrink:0;">${paths}</svg>`;
+    }
+
+    function escapeHtml(str) {
+      if (str === null || str === undefined) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    /* ==========================================================================
+       2. CONSTANTS & ALL 80 ORIGINAL CLASS 11 SYLLABUS TOPICS (PRESERVED)
+       ========================================================================== */
+    const STATUSES = [
+      { value: "Not Started", cls: "status-not-started", dot: "dot-not-started" },
+      { value: "Learning", cls: "status-learning", dot: "dot-learning" },
+      { value: "Practicing", cls: "status-practicing", dot: "dot-practicing" },
+      { value: "Needs Revision", cls: "status-needs-revision", dot: "dot-needs-revision" },
+      { value: "Completed", cls: "status-completed", dot: "dot-completed" }
+    ];
+
+    const WEIGHTS = {
+      "Not Started": 0,
+      "Learning": 25,
+      "Practicing": 50,
+      "Needs Revision": 75,
+      "Completed": 100
+    };
+
+    const SUBJECT_ICON_NAMES = {
+      "Physics": "Atom",
+      "Chemistry": "FlaskConical",
+      "Mathematics": "Calculator",
+      "English": "Globe",
+      "Odia": "PenTool",
+      "Statistics": "BarChart3"
+    };
+
+    const INITIAL_SYLLABUS = [
+      {
+        id: "physics",
+        name: "Physics",
+        topics: [
+          { id: "phy-1", unit: "Unit I", name: "Physical world and Measurement", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "phy-2", unit: "Unit II", name: "Kinematics", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "phy-3", unit: "Unit III", name: "Laws of Motion", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "phy-4", unit: "Unit IV", name: "Work, Energy and Power", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "phy-5", unit: "Unit V", name: "Motion of System of Particles and Rigid bodies", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "phy-6", unit: "Unit VI", name: "Gravitation", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "phy-7", unit: "Unit VII", name: "Properties of Bulk Matter", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "phy-8", unit: "Unit VIII", name: "Thermodynamics", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "phy-9", unit: "Unit IX", name: "Kinetic theory of gases", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "phy-10", unit: "Unit X", name: "Oscillation and waves", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "phy-11", unit: "Practical", name: "Section A & B", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null }
+        ]
+      },
+      {
+        id: "chemistry",
+        name: "Chemistry",
+        topics: [
+          { id: "che-1", unit: "Unit I", name: "Some Basic Concepts of Chemistry", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "che-2", unit: "Unit II", name: "Structure of Atom", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "che-3", unit: "Unit III", name: "Classification of Elements and Periodicity", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "che-4", unit: "Unit IV", name: "Chemical Bonding and Molecular Structure", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "che-5", unit: "Unit V", name: "States of Matter", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "che-6", unit: "Unit VI", name: "Chemical Thermodynamics", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "che-7", unit: "Unit VII", name: "Equilibrium", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "che-8", unit: "Unit VIII", name: "Redox Reaction", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "che-9", unit: "Unit IX", name: "Hydrogen", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "che-10", unit: "Unit X", name: "s-Block Elements", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "che-11", unit: "Unit XI", name: "Some p-Block Elements", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "che-12", unit: "Unit XII", name: "Organic Chemistry - Some Basic Principles", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "che-13", unit: "Unit XIII", name: "Hydrocarbons", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "che-14", unit: "Practical", name: "Experiments", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null }
+        ]
+      },
+      {
+        id: "mathematics",
+        name: "Mathematics",
+        topics: [
+          { id: "math-1", unit: "Unit I", name: "Sets", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "math-2", unit: "Unit I", name: "Relations & Functions", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "math-3", unit: "Unit I", name: "Trigonometric Functions", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "math-4", unit: "Unit II", name: "Principle of Mathematical Induction", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "math-5", unit: "Unit II", name: "Complex Numbers & Quadratic Equations", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "math-6", unit: "Unit II", name: "Linear Inequalities", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "math-7", unit: "Unit II", name: "Permutations & Combinations", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "math-8", unit: "Unit II", name: "Binomial Theorem", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "math-9", unit: "Unit II", name: "Sequence and Series", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "math-10", unit: "Unit III", name: "Straight Lines", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "math-11", unit: "Unit III", name: "Conic Sections", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "math-12", unit: "Unit III", name: "3D Geometry", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "math-13", unit: "Unit IV", name: "Limits and Derivatives", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "math-14", unit: "Unit V", name: "Mathematical Reasoning", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "math-15", unit: "Unit VI", name: "Statistics and Probability", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null }
+        ]
+      },
+      {
+        id: "english",
+        name: "English",
+        topics: [
+          { id: "eng-1", unit: "Unit I: Prose", name: "Standing Up for Yourself", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "eng-2", unit: "Unit I: Prose", name: "The Legend behind a Legend", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "eng-3", unit: "Unit I: Prose", name: "In London In Minus Fours", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "eng-4", unit: "Unit II: Poetry", name: "Stopping by Woods on a Snowy Evening", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "eng-5", unit: "Unit II: Poetry", name: "Oft. in the Stilly Night", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "eng-6", unit: "Unit II: Poetry", name: "The Inchcape Rock", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "eng-7", unit: "Unit II: Poetry", name: "To My True Friend", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "eng-8", unit: "Unit III: Non-Detailed Study", name: "Three Questions", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "eng-9", unit: "Unit III: Non-Detailed Study", name: "After Twenty Years", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "eng-10", unit: "Unit III: Non-Detailed Study", name: "The Open Window", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "eng-11", unit: "Unit IV: Writing Skills", name: "Writing a Paragraph", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "eng-12", unit: "Unit IV: Writing Skills", name: "Developing Ideas into Paragraphs", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "eng-13", unit: "Unit IV: Writing Skills", name: "Writing Personal Letters and Notes", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "eng-14", unit: "Unit IV: Writing Skills", name: "Writing Applications/Official Letters", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "eng-15", unit: "Unit IV: Writing Skills", name: "Using Graphics", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "eng-16", unit: "Unit V: Grammar", name: "Modal Verbs", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "eng-17", unit: "Unit V: Grammar", name: "Prepositions", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "eng-18", unit: "Unit V: Grammar", name: "The Imperatives", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null }
+        ]
+      },
+      {
+        id: "odia",
+        name: "Odia",
+        topics: [
+          { id: "odia-1", unit: "Unit I: Gadya", name: "Sharashupadara", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "odia-2", unit: "Unit I: Gadya", name: "Jhelam Nadire Sandhya", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "odia-3", unit: "Unit I: Gadya", name: "Madhubabu", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "odia-4", unit: "Unit II: Padya", name: "Sahada Bruksha", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "odia-5", unit: "Unit II: Padya", name: "Shapa Mochana", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "odia-6", unit: "Unit II: Padya", name: "Mitrata", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "odia-7", unit: "Unit III: Ekankika", name: "Atyacharita", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "odia-8", unit: "Unit III: Ekankika", name: "Bhalu Upadraba", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "odia-9", unit: "Unit IV: Bodhagyana", name: "Gadyansha", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "odia-10", unit: "Unit IV: Bodhagyana", name: "Padyansha", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "odia-11", unit: "Unit V: Prabandha O Byakarana", name: "Prabandha", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "odia-12", unit: "Unit V: Prabandha O Byakarana", name: "Bisheshya", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "odia-13", unit: "Unit V: Prabandha O Byakarana", name: "Bisheshana", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "odia-14", unit: "Unit V: Prabandha O Byakarana", name: "Sarbanama", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "odia-15", unit: "Unit V: Prabandha O Byakarana", name: "Abyaya", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "odia-16", unit: "Unit V: Prabandha O Byakarana", name: "Kriya", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null }
+        ]
+      },
+      {
+        id: "statistics",
+        name: "Statistics",
+        topics: [
+          { id: "stat-1", unit: "Unit I", name: "Basic Mathematics", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "stat-2", unit: "Unit II", name: "Probability Theory-I", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "stat-3", unit: "Unit III", name: "Probability Theory-II", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "stat-4", unit: "Unit IV", name: "Statistical Methods-I", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "stat-5", unit: "Unit V", name: "Statistical Methods-II", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "stat-6", unit: "Practical", name: "Practical Experiments", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null }
+        ]
+      }
+    ];
+
+    /* ==========================================================================
+       3. HELPERS, DATA MIGRATION & OFFLINE WEB AUDIO SYNTHESIZER
+       ========================================================================== */
+    function getTodayDateString() {
+      const now = new Date();
+      const y = now.getFullYear();
+      const m = String(now.getMonth() + 1).padStart(2, '0');
+      const d = String(now.getDate()).padStart(2, '0');
+      return `${y}-${m}-${d}`;
+    }
+
+    function addDaysToDateString(dateStr, days) {
+      const base = dateStr ? new Date(dateStr + 'T00:00:00') : new Date();
+      base.setDate(base.getDate() + days);
+      const y = base.getFullYear();
+      const m = String(base.getMonth() + 1).padStart(2, '0');
+      const d = String(base.getDate()).padStart(2, '0');
+      return `${y}-${m}-${d}`;
+    }
+
+    function formatReadableDate(dateStr) {
+      if (!dateStr) return 'Not set';
+      try {
+        const [y, m, d] = dateStr.split('-').map(Number);
+        const dt = new Date(y, m - 1, d);
+        return dt.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
+      } catch (e) {
+        return dateStr;
+      }
+    }
+
+    // Safe v1 -> v2 Data Migration & Normalization
+    function normalizeSyllabusData(rawSyllabus) {
+      if (!Array.isArray(rawSyllabus)) return JSON.parse(JSON.stringify(INITIAL_SYLLABUS));
+
+      const rawSubjectMap = new Map(rawSyllabus.map(s => [s.id || (s.name && s.name.toLowerCase()), s]));
+
+      return INITIAL_SYLLABUS.map(initSubject => {
+        const existingSubject = rawSubjectMap.get(initSubject.id) || rawSyllabus.find(s => s && s.name === initSubject.name);
+        if (!existingSubject || !Array.isArray(existingSubject.topics)) {
+          return JSON.parse(JSON.stringify(initSubject));
+        }
+
+        const existingTopicMap = new Map(existingSubject.topics.filter(Boolean).map(t => [t.id, t]));
+
+        const mergedTopics = initSubject.topics.map(initTopic => {
+          const savedTopic = existingTopicMap.get(initTopic.id);
+          if (!savedTopic) return { ...initTopic, subtopics: [] };
+
+          return {
+            ...initTopic,
+            ...savedTopic,
+            status: WEIGHTS[savedTopic.status] !== undefined ? savedTopic.status : initTopic.status,
+            notes: typeof savedTopic.notes === 'string' ? savedTopic.notes : '',
+            subtopics: Array.isArray(savedTopic.subtopics)
+              ? savedTopic.subtopics.map(st => ({
+                  id: st.id || `st-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+                  name: String(st.name || 'Untitled Subtopic'),
+                  completed: Boolean(st.completed),
+                  notes: typeof st.notes === 'string' ? st.notes : ''
+                }))
+              : [],
+            nextRevisionDate: savedTopic.nextRevisionDate || null,
+            lastRevisionDate: savedTopic.lastRevisionDate || null
+          };
+        });
+
+        const initTopicIds = new Set(initSubject.topics.map(t => t.id));
+        const customTopics = existingSubject.topics
+          .filter(t => t && t.id && !initTopicIds.has(t.id))
+          .map(t => ({
+            id: t.id,
+            unit: t.unit || 'Custom',
+            name: t.name || 'Custom Topic',
+            status: WEIGHTS[t.status] !== undefined ? t.status : 'Not Started',
+            notes: typeof t.notes === 'string' ? t.notes : '',
+            subtopics: Array.isArray(t.subtopics) ? t.subtopics : [],
+            nextRevisionDate: t.nextRevisionDate || null,
+            lastRevisionDate: t.lastRevisionDate || null
+          }));
+
+        return {
+          ...initSubject,
+          topics: [...mergedTopics, ...customTopics]
+        };
+      });
+    }
+
+    function getTopicProgress(topic) {
+      if (Array.isArray(topic.subtopics) && topic.subtopics.length > 0) {
+        const completedCount = topic.subtopics.filter(st => st.completed).length;
+        return Math.round((completedCount / topic.subtopics.length) * 100);
+      }
+      return WEIGHTS[topic.status] ?? 0;
+    }
+
+    function getSubjectProgress(subject) {
+      if (!subject || !Array.isArray(subject.topics) || subject.topics.length === 0) return 0;
+      const totalWeight = subject.topics.length * 100;
+      const currentWeight = subject.topics.reduce((acc, t) => acc + getTopicProgress(t), 0);
+      return Math.round((currentWeight / totalWeight) * 100);
+    }
+
+    function getOverallProgress(syllabus) {
+      const allTopics = syllabus.flatMap(s => s.topics);
+      if (allTopics.length === 0) return 0;
+      const totalWeight = allTopics.length * 100;
+      const currentWeight = allTopics.reduce((acc, t) => acc + getTopicProgress(t), 0);
+      return Math.round((currentWeight / totalWeight) * 100);
+    }
+
+    // 100% Offline Web Audio API Chime Generator
+    function playOfflineNotificationSound() {
+      try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        const ctx = new AudioCtx();
+        const now = ctx.currentTime;
+        const freqs = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+        freqs.forEach((f, idx) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(f, now + idx * 0.14);
+          gain.gain.setValueAtTime(0.001, now + idx * 0.14);
+          gain.gain.exponentialRampToValueAtTime(0.24, now + idx * 0.14 + 0.03);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + idx * 0.14 + 0.65);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now + idx * 0.14);
+          osc.stop(now + idx * 0.14 + 0.7);
+        });
+      } catch (err) {
+        console.warn('Web Audio API chime skipped:', err);
+      }
+    }
+
+    /* ==========================================================================
+       4. PERSISTENT APPLICATION STATE (LOCALSTORAGE KEYS STRICTLY PRESERVED)
+       ========================================================================== */
+    const STORAGE_KEYS = {
+      SYLLABUS: '11th-syllabus-data',
+      TASKS: '11th-syllabus-tasks-v2',
+      SESSIONS: '11th-syllabus-sessions-v2'
+    };
+
+    function loadStoredJSON(key, fallback, normalizer = null) {
+      try {
+        const raw = window.localStorage.getItem(key);
+        if (raw !== null) {
+          const parsed = JSON.parse(raw);
+          return normalizer ? normalizer(parsed) : parsed;
+        }
+      } catch (err) {
+        console.error('Error loading key ' + key, err);
+      }
+      return normalizer ? normalizer(fallback) : fallback;
+    }
+
+    function saveStoredJSON(key, data) {
+      try {
+        window.localStorage.setItem(key, JSON.stringify(data));
+      } catch (err) {
+        console.error('Error writing key ' + key, err);
+      }
+    }
+
+    const state = {
+      syllabus: loadStoredJSON(STORAGE_KEYS.SYLLABUS, INITIAL_SYLLABUS, normalizeSyllabusData),
+      tasks: loadStoredJSON(STORAGE_KEYS.TASKS, []),
+      sessions: loadStoredJSON(STORAGE_KEYS.SESSIONS, []),
+
+      activeTab: 'dashboard', // 'dashboard' | 'planner' | 'revisions' | 'analytics' | 'settings' | subject.id
+      searchQuery: '',
+      mobileMenuOpen: false,
+
+      // UI expansion state maps (preserved across renders)
+      openNotes: {},          // { [topicId]: boolean }
+      openSubtopics: {},      // { [topicId]: boolean }
+      openRevisions: {},      // { [topicId]: boolean }
+      openSubtopicNotes: {},  // { [subtopicId]: boolean }
+      editingSubtopicId: null,
+      editingSubtopicName: '',
+      subtopicDrafts: {},     // { [topicId]: string }
+
+      // Planner form & editing state
+      plannerForm: {
+        title: '',
+        subjectId: 'physics',
+        topicId: '',
+        targetDate: getTodayDateString(),
+        estimatedMinutes: 45
+      },
+      editingTaskId: null,
+      editingTaskForm: { title: '', targetDate: '', estimatedMinutes: 45 },
+
+      // Manual Study Session Form
+      manualSessionForm: {
+        subjectId: 'physics',
+        durationMinutes: 30
+      },
+
+      // Backup & Restore UI state
+      statusBanner: null,      // { type: 'success' | 'error', message: string }
+      pendingRestoreData: null,
+      rawJsonModalMode: null,  // 'copy' | 'paste' | null
+      rawJsonText: '',
+
+      // Pomodoro Timer State
+      pomodoro: {
+        timeLeft: 25 * 60,
+        isActive: false,
+        isBreak: false,
+        minimized: false,
+        selectedSubjectId: 'physics',
+        soundEnabled: true,
+        targetEndTime: null,
+        sessionStartDuration: 25 * 60,
+        bannerMessage: null
+      }
+    };
+
+    // Ensure initial normalized data is written safely
+    saveStoredJSON(STORAGE_KEYS.SYLLABUS, state.syllabus);
+
+    function persistAll() {
+      saveStoredJSON(STORAGE_KEYS.SYLLABUS, state.syllabus);
+      saveStoredJSON(STORAGE_KEYS.TASKS, state.tasks);
+      saveStoredJSON(STORAGE_KEYS.SESSIONS, state.sessions);
+    }
+
+    function findTopicById(topicId) {
+      for (const subj of state.syllabus) {
+        const found = subj.topics.find(t => t.id === topicId);
+        if (found) return { subject: subj, topic: found };
+      }
+      return null;
+    }
+
+    function updateTopicById(topicId, updates, shouldRender = true) {
+      state.syllabus = state.syllabus.map(subj => ({
+        ...subj,
+        topics: subj.topics.map(t => t.id === topicId ? { ...t, ...updates } : t)
+      }));
+      saveStoredJSON(STORAGE_KEYS.SYLLABUS, state.syllabus);
+      if (shouldRender) renderApp();
+    }
+
+    /* ==========================================================================
+       5. POMODORO BACKGROUND-ACCURATE TIMER ENGINE
+       ========================================================================== */
+    setInterval(() => {
+      const p = state.pomodoro;
+      if (!p.isActive || !p.targetEndTime) return;
+
+      const remainingMs = p.targetEndTime - Date.now();
+      const remainingSec = Math.max(0, Math.ceil(remainingMs / 1000));
+      p.timeLeft = remainingSec;
+
+      if (remainingSec <= 0) {
+        p.targetEndTime = null;
+        p.isActive = false;
+
+        if (p.soundEnabled) {
+          playOfflineNotificationSound();
+        }
+
+        if (!p.isBreak) {
+          const durationMinutes = Math.round(p.sessionStartDuration / 60);
+          const subj = state.syllabus.find(s => s.id === p.selectedSubjectId) || state.syllabus[0];
+          const newSession = {
+            id: `sess-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+            subjectId: subj.id,
+            subjectName: subj.name,
+            durationMinutes,
+            timestamp: new Date().toISOString(),
+            date: getTodayDateString()
+          };
+          state.sessions = [newSession, ...state.sessions];
+          saveStoredJSON(STORAGE_KEYS.SESSIONS, state.sessions);
+
+          p.bannerMessage = `+${durationMinutes}m logged for ${subj.name}!`;
+          setTimeout(() => {
+            state.pomodoro.bannerMessage = null;
+            renderPomodoroWidgetOnly();
+          }, 5000);
+
+          p.isBreak = true;
+          p.timeLeft = 5 * 60;
+          p.sessionStartDuration = 5 * 60;
+        } else {
+          p.isBreak = false;
+          p.timeLeft = 25 * 60;
+          p.sessionStartDuration = 25 * 60;
+        }
+        renderApp();
+      } else {
+        updatePomodoroClockDOM();
+      }
+    }, 250);
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible' && state.pomodoro.isActive && state.pomodoro.targetEndTime) {
+        const remainingSec = Math.max(0, Math.ceil((state.pomodoro.targetEndTime - Date.now()) / 1000));
+        state.pomodoro.timeLeft = remainingSec;
+        updatePomodoroClockDOM();
+      }
+    });
+
+    function updatePomodoroClockDOM() {
+      const clockEl = document.getElementById('pomo-clock-display');
+      if (!clockEl) return;
+      const mins = Math.floor(state.pomodoro.timeLeft / 60).toString().padStart(2, '0');
+      const secs = (state.pomodoro.timeLeft % 60).toString().padStart(2, '0');
+      clockEl.textContent = `${mins}:${secs}`;
+    }
+
+    function renderPomodoroWidgetOnly() {
+      const container = document.getElementById('pomodoro-mount');
+      if (container) {
+        container.innerHTML = buildPomodoroHTML();
+      }
+    }
+
+    /* ==========================================================================
+       6. VIEW BUILDERS (PRESERVING ALL V2 FEATURES & VISUAL DESIGN)
+       ========================================================================== */
+    function buildPomodoroHTML() {
+      const p = state.pomodoro;
+      const mins = Math.floor(p.timeLeft / 60).toString().padStart(2, '0');
+      const secs = (p.timeLeft % 60).toString().padStart(2, '0');
+
+      if (p.minimized) {
+        return `
+          <button type="button" data-action="pomo-minimize-toggle" class="pomodoro-pill" title="Expand Study Timer">
+            <span style="position:relative; display:inline-flex; color: ${p.isBreak ? '#facc15' : '#818cf8'};">
+              ${icon(p.isBreak ? 'Coffee' : 'Brain', 20)}
+              ${p.isActive ? '<span class="animate-pulse-dot" style="position:absolute; top:-3px; right:-3px; width:8px; height:8px; background:#22c55e; border-radius:9999px;"></span>' : ''}
+            </span>
+            <span id="pomo-clock-display" class="font-mono font-bold text-sm text-white">${mins}:${secs}</span>
+          </button>
+        `;
+      }
+
+      return `
+        <div class="pomodoro-widget">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2">
+              <span style="color: ${p.isBreak ? '#eab308' : '#818cf8'};">
+                ${icon(p.isBreak ? 'Coffee' : 'Brain', 18)}
+              </span>
+              <span class="font-semibold text-sm text-white">${p.isBreak ? 'Break Time (5m)' : 'Focus Session (25m)'}</span>
+            </div>
+            <div class="flex items-center gap-1">
+              <button type="button" data-action="pomo-test-sound" class="btn-icon" title="Test Offline Notification Chime" style="padding:0.3rem;">
+                ${icon(p.soundEnabled ? 'Volume2' : 'VolumeX', 15, p.soundEnabled ? 'text-indigo-400' : 'text-slate-500')}
+              </button>
+              <button type="button" data-action="pomo-minimize-toggle" class="btn-icon" title="Minimize Timer" style="padding:0.3rem;">
+                ${icon('ChevronDown', 15)}
+              </button>
+            </div>
+          </div>
+
+          ${!p.isBreak ? `
+            <div class="mb-2">
+              <label class="text-xs font-semibold uppercase text-slate-400" style="display:block; font-size:0.65rem; letter-spacing:0.05em; margin-bottom:0.25rem;">
+                Studying Subject
+              </label>
+              <select data-action="pomo-subject-change" class="select" style="padding:0.35rem 0.5rem; font-size:0.75rem;" ${p.isActive ? 'disabled' : ''}>
+                ${state.syllabus.map(s => `<option value="${s.id}" ${s.id === p.selectedSubjectId ? 'selected' : ''}>${escapeHtml(s.name)}</option>`).join('')}
+              </select>
+            </div>
+          ` : ''}
+
+          ${p.bannerMessage ? `
+            <div class="mb-2 text-xs font-semibold" style="padding:0.4rem 0.6rem; border-radius:0.5rem; background:rgba(20,83,45,0.45); border:1px solid rgba(34,197,94,0.4); color:#86efac; text-align:center;">
+              ${escapeHtml(p.bannerMessage)}
+            </div>
+          ` : ''}
+
+          <div id="pomo-clock-display" class="text-5xl font-bold font-mono text-white" style="text-align:center; margin:0.85rem 0;">
+            ${mins}:${secs}
+          </div>
+
+          <div class="flex justify-center gap-3 mb-3">
+            <button type="button" data-action="pomo-toggle" class="btn" style="border-radius:9999px; padding:0.75rem; ${p.isActive ? 'background:rgba(249,115,22,0.2); color:#fb923c; border-color:rgba(249,115,22,0.35);' : 'background:rgba(99,102,241,0.2); color:#818cf8; border-color:rgba(99,102,241,0.35);'}">
+              ${icon(p.isActive ? 'Pause' : 'Play', 22)}
+            </button>
+            <button type="button" data-action="pomo-reset" class="btn btn-secondary" style="border-radius:9999px; padding:0.75rem;" title="Reset Timer (Cancelled sessions are not logged)">
+              ${icon('RotateCcw', 22)}
+            </button>
+          </div>
+
+          <div class="flex" style="background:var(--bg-950); border:1px solid var(--border-800); border-radius:0.5rem; padding:0.2rem;">
+            <button type="button" data-action="pomo-mode" data-break="false" style="flex:1; padding:0.38rem; border-radius:0.35rem; font-size:0.75rem; font-weight:600; ${!p.isBreak ? 'background:var(--indigo-600); color:#fff;' : 'color:var(--text-400);'}">
+              Pomodoro
+            </button>
+            <button type="button" data-action="pomo-mode" data-break="true" style="flex:1; padding:0.38rem; border-radius:0.35rem; font-size:0.75rem; font-weight:600; ${p.isBreak ? 'background:var(--indigo-600); color:#fff;' : 'color:var(--text-400);'}">
+              Short Break
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function buildTopicCardHTML(topic, subjectNameBadge = null) {
+      const subtopics = Array.isArray(topic.subtopics) ? topic.subtopics : [];
+      const hasSubtopics = subtopics.length > 0;
+      const completedSubtopicsCount = subtopics.filter(st => st.completed).length;
+      const topicProgress = getTopicProgress(topic);
+
+      const todayStr = getTodayDateString();
+      const isOverdue = topic.nextRevisionDate && topic.nextRevisionDate < todayStr;
+      const isDueToday = topic.nextRevisionDate && topic.nextRevisionDate === todayStr;
+
+      const isSubtopicsOpen = Boolean(state.openSubtopics[topic.id]) || (
+        state.searchQuery.trim() !== '' &&
+        subtopics.some(st =>
+          st.name.toLowerCase().includes(state.searchQuery.toLowerCase()) ||
+          (st.notes && st.notes.toLowerCase().includes(state.searchQuery.toLowerCase()))
+        )
+      );
+      const isRevisionOpen = Boolean(state.openRevisions[topic.id]);
+      const isNotesOpen = Boolean(state.openNotes[topic.id]);
+
+      const currentStatusObj = STATUSES.find(s => s.value === topic.status) || STATUSES[0];
+      const draftSubtopic = state.subtopicDrafts[topic.id] || '';
+
+      return `
+        <div class="topic-card" data-topic-id="${topic.id}">
+          ${subjectNameBadge ? `<div class="text-xs font-bold uppercase text-indigo-400 mb-1">${escapeHtml(subjectNameBadge)}</div>` : ''}
+          <div class="topic-row">
+            <div class="flex-1">
+              <div class="flex flex-wrap items-center gap-2 mb-1">
+                <span class="badge badge-unit">${escapeHtml(topic.unit)}</span>
+                ${hasSubtopics ? `
+                  <span class="badge badge-subtopics" id="subtopic-badge-${topic.id}">
+                    ${completedSubtopicsCount}/${subtopics.length} Subtopics (${topicProgress}%)
+                  </span>
+                ` : ''}
+                ${isOverdue ? `
+                  <span class="badge badge-overdue">
+                    ${icon('AlertTriangle', 12)} Revision Overdue (${formatReadableDate(topic.nextRevisionDate)})
+                  </span>
+                ` : ''}
+                ${isDueToday ? `
+                  <span class="badge badge-today">
+                    ${icon('Clock', 12)} Revise Today
+                  </span>
+                ` : ''}
+                ${!isOverdue && !isDueToday && topic.nextRevisionDate ? `
+                  <span class="badge badge-scheduled">
+                    ${icon('Calendar', 12)} Next Rev: ${formatReadableDate(topic.nextRevisionDate)}
+                  </span>
+                ` : ''}
+              </div>
+
+              <button type="button" data-action="toggle-subtopics" data-topic-id="${topic.id}" class="flex items-center gap-2" style="text-align:left; margin-top:0.2rem;">
+                <span style="color: ${isSubtopicsOpen ? '#818cf8' : '#94a3b8'}; transform: rotate(${isSubtopicsOpen ? '90deg' : '0deg'}); transition: transform 0.2s; display:inline-flex;">
+                  ${icon('ChevronRight', 16)}
+                </span>
+                <span class="text-base font-semibold text-slate-100">${escapeHtml(topic.name)}</span>
+              </button>
+
+              ${hasSubtopics ? `
+                <div class="progress-track mt-2" style="height:6px; max-width:380px;">
+                  <div class="progress-fill" id="topic-prog-bar-${topic.id}" style="width:${topicProgress}%; background-color:${topicProgress === 100 ? '#22c55e' : '#6366f1'};"></div>
+                </div>
+              ` : ''}
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2">
+              <!-- Status Select -->
+              <div style="position:relative; display:inline-flex; align-items:center;">
+                <span class="dot ${currentStatusObj.dot}" style="position:absolute; left:10px; pointer-events:none;"></span>
+                <select data-action="topic-status-change" data-topic-id="${topic.id}" class="select ${currentStatusObj.cls}" style="width:166px; padding:0.38rem 0.6rem 0.38rem 1.65rem; font-size:0.8125rem; font-weight:600; border-radius:0.45rem;">
+                  ${STATUSES.map(st => `<option value="${st.value}" style="background:#1e293b; color:#f1f5f9;" ${st.value === topic.status ? 'selected' : ''}>${st.value}</option>`).join('')}
+                </select>
+              </div>
+
+              <!-- Subtopics Button -->
+              <button type="button" data-action="toggle-subtopics" data-topic-id="${topic.id}" class="btn-icon ${isSubtopicsOpen || hasSubtopics ? 'active-indigo' : ''}" style="padding:0.42rem 0.65rem; font-size:0.75rem; font-weight:600; gap:0.35rem;" title="Manage Chapter Subtopics">
+                ${icon('ListTodo', 15)}
+                <span>Subtopics</span>
+                ${hasSubtopics ? `<span style="background:rgba(99,102,241,0.25); padding:0.05rem 0.35rem; border-radius:0.25rem; font-size:0.68rem;">${completedSubtopicsCount}/${subtopics.length}</span>` : ''}
+              </button>
+
+              <!-- Smart Revision Button -->
+              <button type="button" data-action="toggle-revision" data-topic-id="${topic.id}" class="btn-icon ${isRevisionOpen || topic.nextRevisionDate || topic.lastRevisionDate ? 'active-amber' : ''}" title="Smart Revision Schedule">
+                ${icon('RotateCw', 16)}
+              </button>
+
+              <!-- Notes Button -->
+              <button type="button" data-action="toggle-notes" data-topic-id="${topic.id}" class="btn-icon ${isNotesOpen || (topic.notes && topic.notes.trim()) ? 'active-indigo' : ''}" title="Chapter Notes & Formulas">
+                ${icon('BookMarked', 16)}
+              </button>
+            </div>
+          </div>
+
+          <!-- Expandable Subtopics Section -->
+          ${isSubtopicsOpen ? `
+            <div class="mt-4 pt-3 border-t">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                <div class="flex items-center gap-2 text-sm font-medium text-slate-300">
+                  <span class="text-indigo-400">${icon('ListTodo', 16)}</span>
+                  <span>Chapter Subtopics</span>
+                  ${hasSubtopics ? `<span class="text-xs text-slate-400">• Automatic chapter progress (${topicProgress}%)</span>` : ''}
+                </div>
+              </div>
+
+              ${hasSubtopics ? `
+                <div class="space-y-2 mb-3">
+                  ${subtopics.map(st => {
+                    const isEditing = state.editingSubtopicId === st.id;
+                    const isStNoteOpen = Boolean(state.openSubtopicNotes[st.id]);
+                    return `
+                      <div style="background:rgba(15,23,42,0.75); border:1px solid var(--border-800); border-radius:0.55rem; padding:0.55rem 0.7rem;">
+                        <div class="flex items-center justify-between gap-2">
+                          <div class="flex items-center gap-2 flex-1">
+                            <button type="button" data-action="toggle-subtopic-check" data-topic-id="${topic.id}" data-subtopic-id="${st.id}" style="color:${st.completed ? '#22c55e' : '#94a3b8'}; display:inline-flex;">
+                              ${icon(st.completed ? 'CheckSquare' : 'Square', 17)}
+                            </button>
+
+                            ${isEditing ? `
+                              <div class="flex items-center gap-1-5 flex-1">
+                                <input type="text" id="edit-subtopic-input-${st.id}" value="${escapeHtml(state.editingSubtopicName)}" class="input" style="padding:0.25rem 0.5rem; font-size:0.8125rem;" />
+                                <button type="button" data-action="save-subtopic-edit" data-topic-id="${topic.id}" data-subtopic-id="${st.id}" class="btn btn-success" style="padding:0.25rem 0.5rem;">
+                                  ${icon('Check', 14)}
+                                </button>
+                                <button type="button" data-action="cancel-subtopic-edit" class="btn btn-secondary" style="padding:0.25rem 0.5rem;">
+                                  ${icon('X', 14)}
+                                </button>
+                              </div>
+                            ` : `
+                              <span data-action="toggle-subtopic-check" data-topic-id="${topic.id}" data-subtopic-id="${st.id}" class="text-sm flex-1 truncate ${st.completed ? 'line-through text-slate-500' : 'text-slate-200'}" style="cursor:pointer;">
+                                ${escapeHtml(st.name)}
+                              </span>
+                            `}
+                          </div>
+
+                          ${!isEditing ? `
+                            <div class="flex items-center gap-1">
+                              <button type="button" data-action="toggle-subtopic-note" data-subtopic-id="${st.id}" class="btn-icon ${st.notes || isStNoteOpen ? 'active-indigo' : ''}" style="padding:0.3rem; border:none;" title="Subtopic Notes">
+                                ${icon('BookMarked', 14)}
+                              </button>
+                              <button type="button" data-action="start-subtopic-edit" data-subtopic-id="${st.id}" data-subtopic-name="${escapeHtml(st.name)}" class="btn-icon" style="padding:0.3rem; border:none;" title="Edit Subtopic">
+                                ${icon('Edit3', 14)}
+                              </button>
+                              <button type="button" data-action="delete-subtopic" data-topic-id="${topic.id}" data-subtopic-id="${st.id}" class="btn-icon" style="padding:0.3rem; border:none; color:#f87171;" title="Delete Subtopic">
+                                ${icon('Trash2', 14)}
+                              </button>
+                            </div>
+                          ` : ''}
+                        </div>
+
+                        ${isStNoteOpen ? `
+                          <div class="mt-2 pt-2" style="border-top:1px solid var(--border-800);">
+                            <textarea data-action="subtopic-note-input" data-topic-id="${topic.id}" data-subtopic-id="${st.id}" rows="2" class="textarea" style="font-size:0.75rem; padding:0.4rem 0.6rem;" placeholder="Notes for ${escapeHtml(st.name)}...">${escapeHtml(st.notes || '')}</textarea>
+                          </div>
+                        ` : ''}
+                      </div>
+                    `;
+                  }).join('')}
+                </div>
+              ` : `
+                <p class="text-xs text-slate-500 mb-3" style="font-style:italic;">
+                  No subtopics added yet. Add custom subtopics below (e.g., Position & Displacement, Velocity, Acceleration) or track this chapter using the status dropdown.
+                </p>
+              `}
+
+              <form data-action="add-subtopic-form" data-topic-id="${topic.id}" class="flex gap-2">
+                <input type="text" name="subtopicName" value="${escapeHtml(draftSubtopic)}" data-action="subtopic-draft-input" data-topic-id="${topic.id}" class="input" placeholder="Add a subtopic..." />
+                <button type="submit" class="btn btn-primary">
+                  ${icon('Plus', 15)} <span>Add</span>
+                </button>
+              </form>
+            </div>
+          ` : ''}
+
+          <!-- Expandable Smart Revision Section -->
+          ${isRevisionOpen ? `
+            <div class="mt-4 pt-3 border-t">
+              <div class="flex flex-wrap items-center justify-between gap-3" style="background:rgba(15,23,42,0.7); border:1px solid var(--border-800); border-radius:0.75rem; padding:0.85rem;">
+                <div>
+                  <div class="flex items-center gap-2 text-sm font-semibold text-amber-400 mb-1">
+                    ${icon('RotateCw', 15)} <span>Smart Revision Schedule</span>
+                  </div>
+                  <div class="text-xs text-slate-400">
+                    Last Revised: <strong class="text-slate-200">${formatReadableDate(topic.lastRevisionDate)}</strong>
+                    &nbsp;•&nbsp;
+                    Next Revision: <strong class="text-slate-200">${formatReadableDate(topic.nextRevisionDate)}</strong>
+                  </div>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-2">
+                  <input type="date" value="${topic.nextRevisionDate || ''}" data-action="set-revision-date" data-topic-id="${topic.id}" class="input" style="width:auto; padding:0.3rem 0.55rem; font-size:0.75rem;" />
+                  <button type="button" data-action="mark-revised" data-topic-id="${topic.id}" data-days="7" class="btn btn-success" style="padding:0.35rem 0.65rem; font-size:0.75rem;">
+                    ${icon('Check', 14)} <span>Mark Revised (+7d)</span>
+                  </button>
+                  <button type="button" data-action="mark-revised" data-topic-id="${topic.id}" data-days="3" class="btn btn-secondary" style="padding:0.35rem 0.55rem; font-size:0.75rem;">+3d</button>
+                  <button type="button" data-action="mark-revised" data-topic-id="${topic.id}" data-days="14" class="btn btn-secondary" style="padding:0.35rem 0.55rem; font-size:0.75rem;">+14d</button>
+                  ${topic.nextRevisionDate ? `
+                    <button type="button" data-action="clear-revision-date" data-topic-id="${topic.id}" class="btn-icon" style="padding:0.3rem;" title="Clear Revision Date">
+                      ${icon('X', 14)}
+                    </button>
+                  ` : ''}
+                </div>
+              </div>
+            </div>
+          ` : ''}
+
+          <!-- Expandable Chapter Notes Section -->
+          ${isNotesOpen ? `
+            <div class="mt-4 pt-3 border-t">
+              <div class="flex items-center gap-2 text-xs font-semibold uppercase text-slate-400 mb-2">
+                ${icon('Edit3', 14)} <span>Notes, Links & Important Formulas</span>
+              </div>
+              <textarea data-action="topic-note-input" data-topic-id="${topic.id}" rows="4" class="textarea" placeholder="Type your study notes, key derivations, or formulas here... (Saved automatically)">${escapeHtml(topic.notes || '')}</textarea>
+            </div>
+          ` : ''}
+        </div>
+      `;
+    }
+
+    function buildDashboardViewHTML() {
+      const overall = getOverallProgress(state.syllabus);
+      const todayStr = getTodayDateString();
+      const allTopics = state.syllabus.flatMap(s => s.topics);
+      const completedChapters = allTopics.filter(t => getTopicProgress(t) === 100 || t.status === 'Completed').length;
+      const dueRevisions = allTopics.filter(t => (t.nextRevisionDate && t.nextRevisionDate <= todayStr) || t.status === 'Needs Revision').length;
+      const todayTasks = state.tasks.filter(t => t.targetDate === todayStr);
+      const todayDoneTasks = todayTasks.filter(t => t.completed).length;
+      const totalStudyMins = state.sessions.reduce((acc, s) => acc + (Number(s.durationMinutes) || 0), 0);
+
+      return `
+        <div class="space-y-6">
+          <div class="flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <h1 class="text-3xl font-bold text-white mb-1">Welcome Back!</h1>
+              <p class="text-sm text-slate-400">Here is your Class 11 academic syllabus & study overview.</p>
+            </div>
+            <div class="flex flex-wrap items-center gap-2">
+              <button type="button" data-action="switch-tab" data-tab="planner" class="btn btn-secondary">
+                <span class="text-indigo-400">${icon('Calendar', 15)}</span> <span>Daily Planner</span>
+              </button>
+              <button type="button" data-action="switch-tab" data-tab="settings" class="btn btn-secondary">
+                <span class="text-emerald-400">${icon('Download', 15)}</span> <span>Backup Data</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Overall Progress Hero -->
+          <div class="hero-card">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm font-semibold text-indigo-300">Overall Syllabus Completion</span>
+              <span class="text-3xl font-bold text-white">${overall}%</span>
+            </div>
+            <p class="text-xs text-slate-400 mb-3">Calculated automatically from chapter status weights & subtopic progress</p>
+            <div class="progress-track" style="height:12px;">
+              <div class="progress-fill" style="width:${overall}%; background: linear-gradient(90deg, #6366f1, #818cf8);"></div>
+            </div>
+          </div>
+
+          <!-- Quick Summary KPIs -->
+          <div class="grid-4">
+            <div class="card card-interactive" data-action="switch-tab" data-tab="analytics">
+              <div class="flex items-center justify-between text-xs font-bold uppercase text-indigo-400 mb-1">
+                <span>Chapters Done</span> ${icon('CheckCircle2', 15)}
+              </div>
+              <div class="text-2xl font-bold text-white">${completedChapters} / ${allTopics.length}</div>
+              <p class="text-xs text-slate-500 mt-1">Across all 6 subjects</p>
+            </div>
+
+            <div class="card card-interactive" data-action="switch-tab" data-tab="planner">
+              <div class="flex items-center justify-between text-xs font-bold uppercase text-emerald-400 mb-1">
+                <span>Today's Tasks</span> ${icon('Calendar', 15)}
+              </div>
+              <div class="text-2xl font-bold text-white">${todayDoneTasks} / ${todayTasks.length}</div>
+              <p class="text-xs text-slate-500 mt-1">Daily study planner</p>
+            </div>
+
+            <div class="card card-interactive" data-action="switch-tab" data-tab="revisions">
+              <div class="flex items-center justify-between text-xs font-bold uppercase text-amber-400 mb-1">
+                <span>Revisions Due</span> ${icon('RotateCw', 15)}
+              </div>
+              <div class="text-2xl font-bold text-white">${dueRevisions}</div>
+              <p class="text-xs text-slate-500 mt-1">Due today or flagged</p>
+            </div>
+
+            <div class="card card-interactive" data-action="switch-tab" data-tab="analytics">
+              <div class="flex items-center justify-between text-xs font-bold uppercase text-blue-400 mb-1">
+                <span>Study Hours</span> ${icon('Clock', 15)}
+              </div>
+              <div class="text-2xl font-bold text-white">${(totalStudyMins / 60).toFixed(1)}h</div>
+              <p class="text-xs text-slate-500 mt-1">${totalStudyMins} mins recorded</p>
+            </div>
+          </div>
+
+          <!-- Subjects Breakdown Grid -->
+          <div>
+            <h2 class="text-lg font-semibold text-white mb-3">Subjects Breakdown</h2>
+            <div class="grid-3">
+              ${state.syllabus.map(subject => {
+                const prog = getSubjectProgress(subject);
+                const iconName = SUBJECT_ICON_NAMES[subject.name] || 'BookOpen';
+                const subtopicCount = subject.topics.reduce((sum, t) => sum + (Array.isArray(t.subtopics) ? t.subtopics.length : 0), 0);
+                return `
+                  <div class="card card-interactive" data-action="switch-tab" data-tab="${subject.id}">
+                    <div class="flex items-start justify-between mb-4">
+                      <div style="padding:0.65rem; background:var(--bg-800); border-radius:0.6rem; color:var(--indigo-400);">
+                        ${icon(iconName, 22)}
+                      </div>
+                      <span class="text-2xl font-bold text-slate-200">${prog}%</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-1">${escapeHtml(subject.name)}</h3>
+                    <p class="text-xs text-slate-500 mb-3">
+                      ${subject.topics.length} Chapters ${subtopicCount > 0 ? `• ${subtopicCount} Subtopics` : ''}
+                    </p>
+                    <div class="progress-track" style="height:6px;">
+                      <div class="progress-fill" style="width:${prog}%; background-color:${prog === 100 ? '#22c55e' : '#6366f1'};"></div>
+                    </div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function buildSubjectViewHTML(subject) {
+      const prog = getSubjectProgress(subject);
+      return `
+        <div class="space-y-6">
+          <div class="flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <div class="flex items-center gap-2 text-indigo-400 text-xs font-bold uppercase mb-1">
+                ${icon(SUBJECT_ICON_NAMES[subject.name] || 'BookOpen', 16)}
+                <span>Subject Syllabus & Subtopic Tracker</span>
+              </div>
+              <h1 class="text-3xl font-bold text-white">${escapeHtml(subject.name)}</h1>
+            </div>
+
+            <div class="card flex items-center gap-4" style="padding:0.75rem 1.1rem;">
+              <div>
+                <div class="text-xs font-bold uppercase text-slate-500">Progress</div>
+                <div id="subject-header-prog-text" class="text-xl font-bold text-white">${prog}%</div>
+              </div>
+              <div class="progress-track" style="width:120px; height:8px;">
+                <div id="subject-header-prog-bar" class="progress-fill" style="width:${prog}%; background-color:${prog === 100 ? '#22c55e' : '#6366f1'};"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-3">
+            ${subject.topics.map(topic => buildTopicCardHTML(topic)).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function buildPlannerViewHTML() {
+      const todayStr = getTodayDateString();
+      const pf = state.plannerForm;
+      const selectedSubj = state.syllabus.find(s => s.id === pf.subjectId) || state.syllabus[0];
+
+      const todaysTasks = state.tasks.filter(t => t.targetDate === todayStr);
+      const upcomingTasks = state.tasks.filter(t => t.targetDate > todayStr).sort((a, b) => a.targetDate.localeCompare(b.targetDate));
+      const overdueTasks = state.tasks.filter(t => t.targetDate < todayStr && !t.completed).sort((a, b) => b.targetDate.localeCompare(a.targetDate));
+
+      const todayCompleted = todaysTasks.filter(t => t.completed).length;
+      const todayPct = todaysTasks.length > 0 ? Math.round((todayCompleted / todaysTasks.length) * 100) : 0;
+      const totalTodayMins = todaysTasks.reduce((acc, t) => acc + (Number(t.estimatedMinutes) || 0), 0);
+      const doneTodayMins = todaysTasks.filter(t => t.completed).reduce((acc, t) => acc + (Number(t.estimatedMinutes) || 0), 0);
+
+      const renderTaskRow = (task, badge = null) => {
+        const isEditing = state.editingTaskId === task.id;
+        if (isEditing) {
+          return `
+            <div class="card">
+              <div class="grid-3 mb-3">
+                <input type="text" id="edit-task-title" value="${escapeHtml(state.editingTaskForm.title)}" class="input" placeholder="Task title" />
+                <input type="date" id="edit-task-date" value="${escapeHtml(state.editingTaskForm.targetDate)}" class="input" />
+                <input type="number" id="edit-task-mins" min="5" max="600" value="${escapeHtml(state.editingTaskForm.estimatedMinutes)}" class="input" placeholder="Minutes" />
+              </div>
+              <div class="flex justify-end gap-2">
+                <button type="button" data-action="cancel-task-edit" class="btn btn-secondary">Cancel</button>
+                <button type="button" data-action="save-task-edit" data-task-id="${task.id}" class="btn btn-primary">Save Changes</button>
+              </div>
+            </div>
+          `;
+        }
+
+        return `
+          <div class="card" style="padding:1rem; ${task.completed ? 'opacity:0.72;' : ''}">
+            <div class="flex items-start justify-between gap-3">
+              <div class="flex items-start gap-3 flex-1">
+                <button type="button" data-action="toggle-task" data-task-id="${task.id}" style="margin-top:2px; color:${task.completed ? '#22c55e' : '#94a3b8'};">
+                  ${icon(task.completed ? 'CheckCircle2' : 'Circle', 20)}
+                </button>
+                <div class="flex-1">
+                  <div class="flex flex-wrap items-center gap-2 mb-1">
+                    <span class="badge badge-unit">${escapeHtml(task.subjectName)}</span>
+                    ${task.topicName ? `<span class="text-xs text-slate-400">• ${escapeHtml(task.topicName)}</span>` : ''}
+                    ${badge ? `<span class="badge badge-overdue">${escapeHtml(badge)}</span>` : ''}
+                  </div>
+                  <div class="text-sm font-semibold ${task.completed ? 'line-through text-slate-500' : 'text-white'}">
+                    ${escapeHtml(task.title)}
+                  </div>
+                  <div class="flex items-center gap-3 text-xs text-slate-400 mt-1">
+                    <span class="flex items-center gap-1">${icon('Clock', 13)} ${task.estimatedMinutes} mins</span>
+                    <span class="flex items-center gap-1">${icon('Calendar', 13)} ${formatReadableDate(task.targetDate)}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="flex items-center gap-1">
+                <button type="button" data-action="start-task-edit" data-task-id="${task.id}" class="btn-icon" style="padding:0.35rem; border:none;" title="Edit Task">
+                  ${icon('Edit3', 15)}
+                </button>
+                <button type="button" data-action="delete-task" data-task-id="${task.id}" class="btn-icon" style="padding:0.35rem; border:none; color:#f87171;" title="Delete Task">
+                  ${icon('Trash2', 15)}
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      };
+
+      return `
+        <div class="space-y-6">
+          <div>
+            <h1 class="text-3xl font-bold text-white mb-1">Daily Study Planner</h1>
+            <p class="text-sm text-slate-400">Plan your study tasks, link chapters, and track daily completion.</p>
+          </div>
+
+          <!-- Daily Completion Progress Card -->
+          <div class="hero-card">
+            <div class="flex flex-wrap items-center justify-between gap-4 mb-3">
+              <div>
+                <span class="text-xs font-bold uppercase text-indigo-300">Today's Task Completion</span>
+                <h2 class="text-2xl font-bold text-white mt-1">${todayCompleted} of ${todaysTasks.length} Tasks Completed</h2>
+                <p class="text-xs text-slate-400 mt-1">Estimated Study Time: ${doneTodayMins} / ${totalTodayMins} mins completed today</p>
+              </div>
+              <div class="text-3xl font-bold text-indigo-300">${todayPct}%</div>
+            </div>
+            <div class="progress-track" style="height:10px;">
+              <div class="progress-fill" style="width:${todayPct}%; background-color:#6366f1;"></div>
+            </div>
+          </div>
+
+          <!-- Add Study Task Form -->
+          <form data-action="add-planner-task" class="card space-y-4">
+            <h3 class="text-base font-semibold text-white flex items-center gap-2">
+              <span class="text-indigo-400">${icon('Plus', 16)}</span> <span>Add New Study Task</span>
+            </h3>
+            <div class="grid-2">
+              <div>
+                <label class="text-xs text-slate-400 mb-1" style="display:block;">Task Description</label>
+                <input type="text" required id="planner-title" value="${escapeHtml(pf.title)}" data-action="planner-form-input" data-field="title" class="input" placeholder="e.g., Solve 15 numericals on Kinematics" />
+              </div>
+              <div class="grid-2">
+                <div>
+                  <label class="text-xs text-slate-400 mb-1" style="display:block;">Subject</label>
+                  <select id="planner-subject" data-action="planner-subject-change" class="select">
+                    ${state.syllabus.map(s => `<option value="${s.id}" ${s.id === pf.subjectId ? 'selected' : ''}>${escapeHtml(s.name)}</option>`).join('')}
+                  </select>
+                </div>
+                <div>
+                  <label class="text-xs text-slate-400 mb-1" style="display:block;">Chapter (Optional)</label>
+                  <select id="planner-topic" data-action="planner-form-input" data-field="topicId" class="select">
+                    <option value="">General / All Chapters</option>
+                    ${selectedSubj.topics.map(t => `<option value="${t.id}" ${t.id === pf.topicId ? 'selected' : ''}>${escapeHtml(t.unit)} - ${escapeHtml(t.name)}</option>`).join('')}
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-between gap-4">
+              <div class="flex flex-wrap items-center gap-3">
+                <div>
+                  <label class="text-xs text-slate-400 mb-1" style="display:block;">Target Date</label>
+                  <input type="date" value="${escapeHtml(pf.targetDate)}" data-action="planner-form-input" data-field="targetDate" class="input" style="width:auto;" />
+                </div>
+                <div>
+                  <label class="text-xs text-slate-400 mb-1" style="display:block;">Duration (mins)</label>
+                  <input type="number" min="5" max="600" step="5" value="${escapeHtml(pf.estimatedMinutes)}" data-action="planner-form-input" data-field="estimatedMinutes" class="input" style="width:110px;" />
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary" style="padding:0.6rem 1.2rem;">
+                ${icon('Plus', 16)} <span>Add to Planner</span>
+              </button>
+            </div>
+          </form>
+
+          ${overdueTasks.length > 0 ? `
+            <div class="space-y-2-5">
+              <h3 class="text-sm font-bold uppercase text-amber-400 flex items-center gap-2">
+                ${icon('AlertTriangle', 16)} <span>Pending from Previous Days (${overdueTasks.length})</span>
+              </h3>
+              ${overdueTasks.map(t => renderTaskRow(t, 'Overdue')).join('')}
+            </div>
+          ` : ''}
+
+          <div class="space-y-2-5">
+            <h3 class="text-lg font-semibold text-white flex items-center gap-2">
+              <span class="text-indigo-400">${icon('Calendar', 18)}</span> <span>Today's Tasks (${todaysTasks.length})</span>
+            </h3>
+            ${todaysTasks.length > 0
+              ? todaysTasks.map(t => renderTaskRow(t)).join('')
+              : `<div class="card text-slate-500 text-sm" style="text-align:center; padding:2rem;">No study tasks scheduled for today yet. Add a task above!</div>`
+            }
+          </div>
+
+          <div class="space-y-2-5">
+            <h3 class="text-lg font-semibold text-white flex items-center gap-2">
+              <span class="text-indigo-400">${icon('Clock', 18)}</span> <span>Upcoming Tasks (${upcomingTasks.length})</span>
+            </h3>
+            ${upcomingTasks.length > 0
+              ? upcomingTasks.map(t => renderTaskRow(t)).join('')
+              : `<div class="card text-slate-500 text-sm" style="text-align:center; padding:1.5rem;">No upcoming tasks scheduled for future dates.</div>`
+            }
+          </div>
+        </div>
+      `;
+    }
+
+    function buildRevisionsViewHTML() {
+      const todayStr = getTodayDateString();
+      const allTopics = state.syllabus.flatMap(s => s.topics.map(t => ({ ...t, subjectName: s.name })));
+
+      const overdue = allTopics.filter(t => t.nextRevisionDate && t.nextRevisionDate < todayStr).sort((a, b) => a.nextRevisionDate.localeCompare(b.nextRevisionDate));
+      const dueToday = allTopics.filter(t => t.nextRevisionDate && t.nextRevisionDate === todayStr);
+      const flaggedStatus = allTopics.filter(t => t.status === 'Needs Revision' && (!t.nextRevisionDate || t.nextRevisionDate > todayStr));
+      const upcoming = allTopics.filter(t => t.nextRevisionDate && t.nextRevisionDate > todayStr).sort((a, b) => a.nextRevisionDate.localeCompare(b.nextRevisionDate));
+
+      const renderRevItem = (t, badgeHtml) => `
+        <div class="card flex flex-wrap items-center justify-between gap-4" style="padding:1rem;">
+          <div class="flex-1">
+            <div class="flex flex-wrap items-center gap-2 mb-1">
+              <span class="badge badge-unit">${escapeHtml(t.subjectName)} • ${escapeHtml(t.unit)}</span>
+              ${badgeHtml}
+            </div>
+            <h4 class="text-base font-semibold text-white">${escapeHtml(t.name)}</h4>
+            <div class="text-xs text-slate-400 mt-1">
+              Status: <strong class="text-slate-200">${escapeHtml(t.status)}</strong>
+              &nbsp;•&nbsp; Last Revised: <strong class="text-slate-200">${formatReadableDate(t.lastRevisionDate)}</strong>
+              &nbsp;•&nbsp; Scheduled: <strong class="text-slate-200">${formatReadableDate(t.nextRevisionDate)}</strong>
+            </div>
+          </div>
+          <div class="flex flex-wrap items-center gap-2">
+            <button type="button" data-action="mark-revised" data-topic-id="${t.id}" data-days="7" class="btn btn-success">
+              ${icon('Check', 14)} <span>Revised (+7d)</span>
+            </button>
+            <button type="button" data-action="mark-revised" data-topic-id="${t.id}" data-days="14" class="btn btn-secondary">+14d</button>
+            <input type="date" value="${t.nextRevisionDate || ''}" data-action="set-revision-date" data-topic-id="${t.id}" class="input" style="width:auto; padding:0.35rem 0.55rem; font-size:0.75rem;" />
+          </div>
+        </div>
+      `;
+
+      return `
+        <div class="space-y-6">
+          <div>
+            <h1 class="text-3xl font-bold text-white mb-1">Smart Revision System</h1>
+            <p class="text-sm text-slate-400">Track overdue chapter reviews, complete today's revisions, and schedule spaced repetition.</p>
+          </div>
+
+          <div class="grid-3">
+            <div class="card" style="border-color:rgba(239,68,68,0.25);">
+              <span class="text-xs font-bold uppercase text-red-400">Overdue Revisions</span>
+              <div class="text-3xl font-bold text-white mt-1">${overdue.length}</div>
+              <p class="text-xs text-slate-500 mt-1">Chapters past scheduled date</p>
+            </div>
+            <div class="card" style="border-color:rgba(245,158,11,0.25);">
+              <span class="text-xs font-bold uppercase text-amber-400">Due Today & Flagged</span>
+              <div class="text-3xl font-bold text-white mt-1">${dueToday.length + flaggedStatus.length}</div>
+              <p class="text-xs text-slate-500 mt-1">Due today or "Needs Revision"</p>
+            </div>
+            <div class="card" style="border-color:rgba(99,102,241,0.25);">
+              <span class="text-xs font-bold uppercase text-indigo-400">Upcoming Scheduled</span>
+              <div class="text-3xl font-bold text-white mt-1">${upcoming.length}</div>
+              <p class="text-xs text-slate-500 mt-1">Planned future chapter reviews</p>
+            </div>
+          </div>
+
+          ${overdue.length > 0 ? `
+            <div class="space-y-2-5">
+              <h3 class="text-lg font-semibold text-red-400 flex items-center gap-2">
+                ${icon('AlertTriangle', 18)} <span>Overdue Revisions (${overdue.length})</span>
+              </h3>
+              ${overdue.map(t => renderRevItem(t, '<span class="badge badge-overdue">Overdue</span>')).join('')}
+            </div>
+          ` : ''}
+
+          <div class="space-y-2-5">
+            <h3 class="text-lg font-semibold text-amber-400 flex items-center gap-2">
+              ${icon('Clock', 18)} <span>Due Today (${dueToday.length})</span>
+            </h3>
+            ${dueToday.length > 0
+              ? dueToday.map(t => renderRevItem(t, '<span class="badge badge-today">Due Today</span>')).join('')
+              : `<div class="card text-slate-500 text-sm" style="text-align:center; padding:1.5rem;">No revisions specifically scheduled for today.</div>`
+            }
+          </div>
+
+          ${flaggedStatus.length > 0 ? `
+            <div class="space-y-2-5">
+              <h3 class="text-lg font-semibold text-amber-400 flex items-center gap-2">
+                ${icon('RotateCw', 18)} <span>Marked "Needs Revision" Status (${flaggedStatus.length})</span>
+              </h3>
+              ${flaggedStatus.map(t => renderRevItem(t, '<span class="badge badge-today">Needs Revision</span>')).join('')}
+            </div>
+          ` : ''}
+
+          <div class="space-y-2-5">
+            <h3 class="text-lg font-semibold text-indigo-300 flex items-center gap-2">
+              ${icon('Calendar', 18)} <span>Upcoming Scheduled Revisions (${upcoming.length})</span>
+            </h3>
+            ${upcoming.length > 0
+              ? upcoming.map(t => renderRevItem(t, '<span class="badge badge-scheduled">Scheduled</span>')).join('')
+              : `<div class="card text-slate-500 text-sm" style="text-align:center; padding:1.5rem;">Tip: Click the revision icon (${icon('RotateCw', 13)}) on any chapter card to set a revision date.</div>`
+            }
+          </div>
+        </div>
+      `;
+    }
+
+    function buildAnalyticsViewHTML() {
+      const todayStr = getTodayDateString();
+      const allTopics = state.syllabus.flatMap(s => s.topics);
+      const completedChapters = allTopics.filter(t => getTopicProgress(t) === 100 || t.status === 'Completed').length;
+      const revRequired = allTopics.filter(t => t.status === 'Needs Revision' || (t.nextRevisionDate && t.nextRevisionDate <= todayStr)).length;
+      const overall = getOverallProgress(state.syllabus);
+
+      const totalStudyMins = state.sessions.reduce((acc, s) => acc + (Number(s.durationMinutes) || 0), 0);
+      const totalStudyHours = (totalStudyMins / 60).toFixed(1);
+
+      // Last 7 days bar chart data
+      const days7 = [];
+      for (let i = 6; i >= 0; i--) {
+        const dStr = addDaysToDateString(todayStr, -i);
+        const mins = state.sessions.filter(s => s.date === dStr).reduce((acc, s) => acc + (Number(s.durationMinutes) || 0), 0);
+        const [, m, d] = dStr.split('-');
+        days7.push({ dStr, label: `${d}/${m}`, mins });
+      }
+      const weeklyMins = days7.reduce((acc, d) => acc + d.mins, 0);
+      const maxDayMins = Math.max(60, ...days7.map(d => d.mins));
+
+      // Subject study breakdown
+      const subjHours = state.syllabus.map(s => {
+        const mins = state.sessions
+          .filter(sess => sess.subjectId === s.id || sess.subjectName === s.name)
+          .reduce((acc, sess) => acc + (Number(sess.durationMinutes) || 0), 0);
+        return { id: s.id, name: s.name, mins, hours: (mins / 60).toFixed(1) };
+      });
+      const maxSubjMins = Math.max(60, ...subjHours.map(s => s.mins));
+
+      const totalTasks = state.tasks.length;
+      const doneTasks = state.tasks.filter(t => t.completed).length;
+      const taskRate = totalTasks > 0 ? Math.round((doneTasks / totalTasks) * 100) : 0;
+
+      return `
+        <div class="space-y-6">
+          <div>
+            <h1 class="text-3xl font-bold text-white mb-1">Study Analytics Dashboard</h1>
+            <p class="text-sm text-slate-400">Detailed breakdown of your syllabus completion, focus hours, and study consistency.</p>
+          </div>
+
+          <div class="grid-4">
+            <div class="card">
+              <div class="flex items-center justify-between text-xs font-bold uppercase text-indigo-400 mb-1">
+                <span>Overall Progress</span> ${icon('TrendingUp', 15)}
+              </div>
+              <div class="text-3xl font-bold text-white">${overall}%</div>
+              <p class="text-xs text-slate-500 mt-1">${completedChapters}/${allTopics.length} chapters done</p>
+            </div>
+
+            <div class="card">
+              <div class="flex items-center justify-between text-xs font-bold uppercase text-emerald-400 mb-1">
+                <span>Total Study Time</span> ${icon('Clock', 15)}
+              </div>
+              <div class="text-3xl font-bold text-white">${totalStudyHours} hrs</div>
+              <p class="text-xs text-slate-500 mt-1">${totalStudyMins} mins (${state.sessions.length} sessions)</p>
+            </div>
+
+            <div class="card">
+              <div class="flex items-center justify-between text-xs font-bold uppercase text-blue-400 mb-1">
+                <span>Weekly Study</span> ${icon('BarChart3', 15)}
+              </div>
+              <div class="text-3xl font-bold text-white">${(weeklyMins / 60).toFixed(1)} hrs</div>
+              <p class="text-xs text-slate-500 mt-1">${weeklyMins} mins in last 7 days</p>
+            </div>
+
+            <div class="card">
+              <div class="flex items-center justify-between text-xs font-bold uppercase text-amber-400 mb-1">
+                <span>Needs Revision</span> ${icon('RotateCw', 15)}
+              </div>
+              <div class="text-3xl font-bold text-white">${revRequired}</div>
+              <p class="text-xs text-slate-500 mt-1">Planner Tasks: ${doneTasks}/${totalTasks} (${taskRate}%)</p>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <!-- Subject Completion Bars -->
+            <div class="card space-y-4">
+              <h3 class="text-base font-semibold text-white flex items-center gap-2">
+                <span class="text-indigo-400">${icon('BookOpen', 16)}</span> <span>Subject-wise Completion</span>
+              </h3>
+              <div class="space-y-3">
+                ${state.syllabus.map(s => {
+                  const prog = getSubjectProgress(s);
+                  const doneCount = s.topics.filter(t => getTopicProgress(t) === 100 || t.status === 'Completed').length;
+                  return `
+                    <div>
+                      <div class="flex justify-between text-xs mb-1">
+                        <span class="font-semibold text-slate-200">${escapeHtml(s.name)}</span>
+                        <span class="text-slate-400">${doneCount}/${s.topics.length} Chapters • <strong class="text-white">${prog}%</strong></span>
+                      </div>
+                      <div class="progress-track" style="height:8px;">
+                        <div class="progress-fill bar-${s.id}" style="width:${prog}%;"></div>
+                      </div>
+                    </div>
+                  `;
+                }).join('')}
+              </div>
+            </div>
+
+            <!-- Last 7 Days Bar Chart -->
+            <div class="card flex-col justify-between">
+              <div>
+                <h3 class="text-base font-semibold text-white flex items-center gap-2 mb-1">
+                  <span class="text-indigo-400">${icon('Clock', 16)}</span> <span>Last 7 Days Study Activity</span>
+                </h3>
+                <p class="text-xs text-slate-400 mb-4">Completed Pomodoro sessions & logged study hours</p>
+              </div>
+              <div class="flex items-center justify-between gap-2" style="height:170px; align-items:flex-end; padding-top:1rem; border-bottom:1px solid var(--border-800);">
+                ${days7.map(d => {
+                  const hPct = Math.round((d.mins / maxDayMins) * 100);
+                  return `
+                    <div class="flex-col items-center justify-end flex-1" style="height:100%;">
+                      <span class="text-xs font-mono text-slate-400" style="font-size:0.65rem; margin-bottom:0.25rem;">${d.mins > 0 ? d.mins + 'm' : ''}</span>
+                      <div style="width:100%; max-width:34px; height:120px; background:var(--bg-950); border:1px solid var(--border-800); border-radius:0.35rem 0.35rem 0 0; display:flex; align-items:flex-end; overflow:hidden;">
+                        <div style="width:100%; height:${d.mins > 0 ? Math.max(8, hPct) : 0}%; background:var(--indigo-500); border-radius:0.25rem 0.25rem 0 0;"></div>
+                      </div>
+                      <span class="text-xs text-slate-400 mt-1" style="font-size:0.68rem;">${d.label}</span>
+                    </div>
+                  `;
+                }).join('')}
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <!-- Subject-wise Study Hours -->
+            <div class="card space-y-4">
+              <h3 class="text-base font-semibold text-white flex items-center gap-2">
+                <span class="text-indigo-400">${icon('Award', 16)}</span> <span>Subject-wise Study Hours</span>
+              </h3>
+              <div class="space-y-3">
+                ${subjHours.map(item => {
+                  const pct = Math.round((item.mins / maxSubjMins) * 100);
+                  return `
+                    <div>
+                      <div class="flex justify-between text-xs mb-1">
+                        <span class="font-medium text-slate-200">${escapeHtml(item.name)}</span>
+                        <span class="text-slate-400">${item.hours} hrs (${item.mins} mins)</span>
+                      </div>
+                      <div class="progress-track" style="height:7px;">
+                        <div class="progress-fill bar-${item.id}" style="width:${item.mins > 0 ? Math.max(5, pct) : 0}%;"></div>
+                      </div>
+                    </div>
+                  `;
+                }).join('')}
+              </div>
+            </div>
+
+            <!-- Log Manual Study Session -->
+            <div class="card space-y-4">
+              <div>
+                <h3 class="text-base font-semibold text-white flex items-center gap-2 mb-1">
+                  <span class="text-indigo-400">${icon('History', 16)}</span> <span>Log Offline Study Session</span>
+                </h3>
+                <p class="text-xs text-slate-400">Pomodoro focus sessions log automatically. You can also record offline study time here.</p>
+              </div>
+              <form data-action="log-manual-session" class="space-y-3">
+                <div class="grid-2">
+                  <div>
+                    <label class="text-xs text-slate-400 mb-1" style="display:block;">Subject</label>
+                    <select data-action="manual-session-input" data-field="subjectId" class="select">
+                      ${state.syllabus.map(s => `<option value="${s.id}" ${s.id === state.manualSessionForm.subjectId ? 'selected' : ''}>${escapeHtml(s.name)}</option>`).join('')}
+                    </select>
+                  </div>
+                  <div>
+                    <label class="text-xs text-slate-400 mb-1" style="display:block;">Duration (Mins)</label>
+                    <input type="number" min="5" max="600" value="${escapeHtml(state.manualSessionForm.durationMinutes)}" data-action="manual-session-input" data-field="durationMinutes" class="input" />
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%;">
+                  ${icon('Plus', 15)} <span>Record Study Session</span>
+                </button>
+              </form>
+
+              ${state.sessions.length > 0 ? `
+                <div class="pt-3 border-t">
+                  <div class="text-xs font-semibold text-slate-400 mb-2">Recent Sessions</div>
+                  <div class="space-y-1">
+                    ${state.sessions.slice(0, 4).map(sess => `
+                      <div class="flex justify-between text-xs" style="background:var(--bg-950); padding:0.35rem 0.6rem; border-radius:0.35rem; border:1px solid var(--border-800);">
+                        <span class="text-slate-300 font-medium">${escapeHtml(sess.subjectName)}</span>
+                        <span class="text-indigo-400 font-mono">+${sess.durationMinutes}m (${sess.date})</span>
+                      </div>
+                    `).join('')}
+                  </div>
+                </div>
+              ` : ''}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function buildBackupSettingsViewHTML() {
+      return `
+        <div class="space-y-6">
+          <div>
+            <h1 class="text-3xl font-bold text-white mb-1">Backup, Restore & APK Data Safety</h1>
+            <p class="text-sm text-slate-400">
+              All progress is stored locally in <code class="text-indigo-400">11th-syllabus-data</code>. Export a JSON file or copy raw backup text for 100% Android WebView compatibility.
+            </p>
+          </div>
+
+          ${state.statusBanner ? `
+            <div class="card flex items-center justify-between gap-3" style="padding:0.9rem 1.1rem; ${state.statusBanner.type === 'success' ? 'background:rgba(20,83,45,0.35); border-color:rgba(34,197,94,0.45); color:#86efac;' : 'background:rgba(127,29,29,0.35); border-color:rgba(239,68,68,0.45); color:#fca5a5;'}">
+              <div class="flex items-center gap-2 text-sm font-medium">
+                ${icon(state.statusBanner.type === 'success' ? 'CheckCircle2' : 'AlertTriangle', 18)}
+                <span>${escapeHtml(state.statusBanner.message)}</span>
+              </div>
+              <button type="button" data-action="dismiss-banner" class="btn-icon" style="border:none; background:transparent;">
+                ${icon('X', 16)}
+              </button>
+            </div>
+          ` : ''}
+
+          <div class="grid-2">
+            <!-- Export Backup Card -->
+            <div class="card flex-col justify-between space-y-4">
+              <div>
+                <div style="width:44px; height:44px; border-radius:0.75rem; background:rgba(99,102,241,0.14); border:1px solid rgba(99,102,241,0.3); display:flex; align-items:center; justify-content:center; color:var(--indigo-400); margin-bottom:0.85rem;">
+                  ${icon('Download', 22)}
+                </div>
+                <h3 class="text-lg font-semibold text-white mb-1">Export Complete Backup</h3>
+                <p class="text-sm text-slate-400">
+                  Save all 6 subjects, chapter statuses, subtopics, formula notes, revision dates, planner tasks, and study hours.
+                </p>
+              </div>
+              <div class="space-y-2">
+                <button type="button" data-action="export-json-file" class="btn btn-primary" style="width:100%; padding:0.7rem;">
+                  ${icon('Download', 16)} <span>Download Backup (.JSON File)</span>
+                </button>
+                <button type="button" data-action="open-raw-copy-modal" class="btn btn-secondary" style="width:100%; padding:0.65rem;">
+                  ${icon('Copy', 16)} <span>Copy Raw JSON Backup (Android APK Safe)</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Restore Backup Card -->
+            <div class="card flex-col justify-between space-y-4">
+              <div>
+                <div style="width:44px; height:44px; border-radius:0.75rem; background:rgba(16,185,129,0.14); border:1px solid rgba(16,185,129,0.3); display:flex; align-items:center; justify-content:center; color:var(--emerald-400); margin-bottom:0.85rem;">
+                  ${icon('Upload', 22)}
+                </div>
+                <h3 class="text-lg font-semibold text-white mb-1">Restore from Backup</h3>
+                <p className="text-sm text-slate-400">
+                  Import a JSON backup file or paste raw JSON text. Validates data and asks for confirmation before replacing existing progress.
+                </p>
+              </div>
+              <div class="space-y-2">
+                <label class="btn btn-secondary" style="width:100%; padding:0.7rem; cursor:pointer;">
+                  <span class="text-emerald-400">${icon('Upload', 16)}</span>
+                  <span>Select Backup (.JSON) File</span>
+                  <input type="file" accept=".json,application/json" data-action="import-json-file" style="display:none;" />
+                </label>
+                <button type="button" data-action="open-raw-paste-modal" class="btn btn-secondary" style="width:100%; padding:0.65rem;">
+                  ${icon('Edit3', 16)} <span>Paste Raw JSON Backup Text</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="flex items-start gap-3">
+              <span class="text-indigo-400" style="margin-top:2px;">${icon('ShieldCheck', 22)}</span>
+              <div>
+                <h4 class="text-sm font-semibold text-white mb-1">100% Offline & Android APK Ready</h4>
+                <p class="text-xs text-slate-400">
+                  • Zero external scripts, fonts, or audio URLs—works immediately on first launch in Airplane Mode.<br/>
+                  • Preserves LocalStorage keys: <code class="text-slate-200">11th-syllabus-data</code>, <code class="text-slate-200">11th-syllabus-tasks-v2</code>, and <code class="text-slate-200">11th-syllabus-sessions-v2</code>.<br/>
+                  • Compatible with both v1.0 array backups and v2.0 full backup objects.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function buildModalsHTML() {
+      let html = '';
+
+      // 1. Restore Confirmation Modal
+      if (state.pendingRestoreData) {
+        const d = state.pendingRestoreData;
+        html += `
+          <div class="modal-backdrop">
+            <div class="modal-card space-y-4">
+              <div class="flex items-center gap-2 text-amber-400">
+                ${icon('AlertTriangle', 22)}
+                <h3 class="text-lg font-bold text-white">Confirm Data Restore</h3>
+              </div>
+              <p class="text-sm text-slate-300">
+                Are you sure you want to replace your current syllabus data with the backup from <strong class="text-white">${escapeHtml(d.sourceName)}</strong>?
+              </p>
+              <div style="background:var(--bg-950); border:1px solid var(--border-800); border-radius:0.75rem; padding:0.85rem;" class="text-xs text-slate-300 space-y-1">
+                <div class="font-bold uppercase text-indigo-400 mb-1">Verified Backup Contents:</div>
+                <div>• Subjects: <strong>${d.summary.subjectsCount}</strong> (${d.summary.topicsCount} chapters)</div>
+                <div>• Daily Planner Tasks: <strong>${d.summary.tasksCount}</strong></div>
+                <div>• Study Sessions: <strong>${d.summary.sessionsCount}</strong></div>
+              </div>
+              <div class="flex justify-end gap-2 pt-2">
+                <button type="button" data-action="cancel-restore" class="btn btn-secondary">Cancel</button>
+                <button type="button" data-action="confirm-restore" class="btn btn-primary">
+                  ${icon('Check', 15)} <span>Confirm & Restore</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      // 2. Raw JSON Copy / Paste Modal for Android WebView compatibility
+      if (state.rawJsonModalMode) {
+        const isCopy = state.rawJsonModalMode === 'copy';
+        html += `
+          <div class="modal-backdrop">
+            <div class="modal-card space-y-4">
+              <div class="flex items-center justify-between">
+                <h3 class="text-lg font-bold text-white">
+                  ${isCopy ? 'Copy Raw JSON Backup' : 'Paste Raw JSON Backup'}
+                </h3>
+                <button type="button" data-action="close-raw-modal" class="btn-icon" style="border:none;">
+                  ${icon('X', 18)}
+                </button>
+              </div>
+              <p class="text-xs text-slate-400">
+                ${isCopy
+                  ? 'Copy the JSON text below and save it in your notes or files app as a backup.'
+                  : 'Paste your previously exported Syllabus Tracker JSON backup below to validate and restore.'}
+              </p>
+              <textarea id="raw-json-textarea" rows="8" class="textarea font-mono text-xs" ${isCopy ? 'readonly' : ''} placeholder="Paste JSON backup here...">${escapeHtml(state.rawJsonText)}</textarea>
+              <div class="flex justify-end gap-2">
+                <button type="button" data-action="close-raw-modal" class="btn btn-secondary">Close</button>
+                ${isCopy ? `
+                  <button type="button" data-action="copy-raw-json-btn" class="btn btn-primary">
+                    ${icon('Copy', 15)} <span>Copy to Clipboard</span>
+                  </button>
+                ` : `
+                  <button type="button" data-action="validate-raw-json-btn" class="btn btn-primary">
+                    ${icon('Check', 15)} <span>Validate & Continue</span>
+                  </button>
+                `}
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      return html;
+    }
+
+    /* ==========================================================================
+       7. MASTER RENDER FUNCTION
+       ========================================================================== */
+    function renderApp() {
+      const todayStr = getTodayDateString();
+      const dueRevisionsCount = state.syllabus
+        .flatMap(s => s.topics)
+        .filter(t => (t.nextRevisionDate && t.nextRevisionDate <= todayStr) || t.status === 'Needs Revision')
+        .length;
+      const todayPendingTasksCount = state.tasks.filter(t => t.targetDate === todayStr && !t.completed).length;
+
+      // Determine main view content
+      let mainContentHTML = '';
+      const q = state.searchQuery.trim().toLowerCase();
+
+      if (q !== '') {
+        const results = state.syllabus.flatMap(s =>
+          s.topics
+            .filter(t => {
+              const matchTopic =
+                t.name.toLowerCase().includes(q) ||
+                t.unit.toLowerCase().includes(q) ||
+                (t.notes && t.notes.toLowerCase().includes(q));
+              const matchSub =
+                Array.isArray(t.subtopics) &&
+                t.subtopics.some(st => st.name.toLowerCase().includes(q) || (st.notes && st.notes.toLowerCase().includes(q)));
+              return matchTopic || matchSub;
+            })
+            .map(t => ({ topic: t, subjectName: s.name }))
+        );
+
+        mainContentHTML = `
+          <div class="space-y-6">
+            <div>
+              <h1 class="text-2xl font-bold text-white mb-1">Search Results</h1>
+              <p class="text-sm text-slate-400">Found ${results.length} chapters/subtopics matching "${escapeHtml(state.searchQuery)}"</p>
+            </div>
+            ${results.length > 0
+              ? `<div class="space-y-3">${results.map(r => buildTopicCardHTML(r.topic, r.subjectName)).join('')}</div>`
+              : `<div class="card text-slate-400" style="text-align:center; padding:3rem 1rem;">
+                   <div style="color:var(--text-500); margin-bottom:0.5rem;">${icon('Search', 36)}</div>
+                   <div class="text-base font-semibold text-white">No matching chapters or subtopics</div>
+                   <div class="text-xs text-slate-500 mt-1">Try searching for another keyword or unit.</div>
+                 </div>`
+            }
+          </div>
+        `;
+      } else if (state.activeTab === 'dashboard') {
+        mainContentHTML = buildDashboardViewHTML();
+      } else if (state.activeTab === 'planner') {
+        mainContentHTML = buildPlannerViewHTML();
+      } else if (state.activeTab === 'revisions') {
+        mainContentHTML = buildRevisionsViewHTML();
+      } else if (state.activeTab === 'analytics') {
+        mainContentHTML = buildAnalyticsViewHTML();
+      } else if (state.activeTab === 'settings') {
+        mainContentHTML = buildBackupSettingsViewHTML();
+      } else {
+        const subject = state.syllabus.find(s => s.id === state.activeTab) || state.syllabus[0];
+        mainContentHTML = buildSubjectViewHTML(subject);
+      }
+
+      const appEl = document.getElementById('app');
+      appEl.innerHTML = `
+        <div class="app-shell">
+          <!-- Mobile Top Header -->
+          <header class="mobile-header">
+            <div class="flex items-center gap-2 text-indigo-400 font-bold text-base">
+              ${icon('Brain', 22)}
+              <span class="text-white">Syllabus Tracker</span>
+              <span class="badge badge-unit" style="font-size:0.62rem;">v2.0</span>
+            </div>
+            <button type="button" data-action="toggle-mobile-menu" class="btn-icon">
+              ${icon(state.mobileMenuOpen ? 'X' : 'Menu', 20)}
+            </button>
+          </header>
+
+          <!-- Sidebar Navigation -->
+          <aside class="sidebar ${state.mobileMenuOpen ? 'open' : ''}">
+            <div style="padding:1.25rem 1.25rem 1rem 1.25rem; border-bottom:1px solid var(--border-800);">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2-5 text-indigo-400 font-bold text-lg">
+                  ${icon('Brain', 24)}
+                  <span class="text-white">Syllabus Tracker</span>
+                </div>
+                <span class="badge badge-unit">v2.0</span>
+              </div>
+              <div class="flex items-center justify-between text-xs text-slate-500 font-semibold uppercase mt-1">
+                <span>Class 11 • Science</span>
+                <span class="text-emerald-400" style="text-transform:none;">● Offline Ready</span>
+              </div>
+            </div>
+
+            <!-- Global Search Input -->
+            <div style="padding:0.85rem; border-bottom:1px solid var(--border-800);">
+              <div style="position:relative;">
+                <span style="position:absolute; left:10px; top:50%; transform:translateY(-50%); color:var(--text-500); display:inline-flex;">
+                  ${icon('Search', 15)}
+                </span>
+                <input
+                  id="global-search-input"
+                  type="text"
+                  value="${escapeHtml(state.searchQuery)}"
+                  data-action="search-input"
+                  class="input"
+                  style="padding-left:2rem; padding-right:1.8rem; font-size:0.8125rem;"
+                  placeholder="Search chapters & subtopics..."
+                />
+                ${state.searchQuery ? `
+                  <button type="button" data-action="clear-search" style="position:absolute; right:8px; top:50%; transform:translateY(-50%); color:var(--text-400);">
+                    ${icon('X', 14)}
+                  </button>
+                ` : ''}
+              </div>
+            </div>
+
+            <!-- Navigation Links -->
+            <nav style="flex:1; overflow-y:auto; padding:0.75rem;" class="space-y-1">
+              <button type="button" data-action="switch-tab" data-tab="dashboard" class="nav-item ${state.activeTab === 'dashboard' && !state.searchQuery ? 'active' : ''}">
+                <span class="flex items-center gap-2-5">${icon('LayoutDashboard', 16)} <span>Dashboard</span></span>
+              </button>
+
+              <button type="button" data-action="switch-tab" data-tab="planner" class="nav-item ${state.activeTab === 'planner' && !state.searchQuery ? 'active' : ''}">
+                <span class="flex items-center gap-2-5">${icon('Calendar', 16)} <span>Daily Planner</span></span>
+                ${todayPendingTasksCount > 0 ? `<span class="badge badge-unit">${todayPendingTasksCount}</span>` : ''}
+              </button>
+
+              <button type="button" data-action="switch-tab" data-tab="revisions" class="nav-item ${state.activeTab === 'revisions' && !state.searchQuery ? 'active' : ''}">
+                <span class="flex items-center gap-2-5">${icon('RotateCw', 16)} <span>Smart Revision</span></span>
+                ${dueRevisionsCount > 0 ? `<span class="badge badge-today">${dueRevisionsCount}</span>` : ''}
+              </button>
+
+              <button type="button" data-action="switch-tab" data-tab="analytics" class="nav-item ${state.activeTab === 'analytics' && !state.searchQuery ? 'active' : ''}">
+                <span class="flex items-center gap-2-5">${icon('TrendingUp', 16)} <span>Study Analytics</span></span>
+              </button>
+
+              <div class="text-xs font-bold uppercase text-slate-500" style="padding:0.85rem 0.5rem 0.25rem 0.5rem; letter-spacing:0.06em;">
+                Subjects
+              </div>
+
+              ${state.syllabus.map(subj => {
+                const prog = getSubjectProgress(subj);
+                const isActive = state.activeTab === subj.id && !state.searchQuery;
+                return `
+                  <button type="button" data-action="switch-tab" data-tab="${subj.id}" class="nav-item ${isActive ? 'active-subject' : ''}" data-sidebar-subj="${subj.id}">
+                    <span class="flex items-center gap-2-5">
+                      <span class="${isActive ? 'text-indigo-400' : 'text-slate-500'}">${icon(SUBJECT_ICON_NAMES[subj.name] || 'BookOpen', 16)}</span>
+                      <span>${escapeHtml(subj.name)}</span>
+                    </span>
+                    <span class="sidebar-subj-prog text-xs ${prog === 100 ? 'text-emerald-400 font-bold' : 'text-slate-400'}">
+                      ${prog === 100 ? icon('CheckCircle2', 15) : prog + '%'}
+                    </span>
+                  </button>
+                `;
+              }).join('')}
+
+              <div class="text-xs font-bold uppercase text-slate-500" style="padding:0.85rem 0.5rem 0.25rem 0.5rem; letter-spacing:0.06em;">
+                System
+              </div>
+
+              <button type="button" data-action="switch-tab" data-tab="settings" class="nav-item ${state.activeTab === 'settings' && !state.searchQuery ? 'active' : ''}">
+                <span class="flex items-center gap-2-5">${icon('Settings', 16)} <span>Backup & Restore</span></span>
+              </button>
+            </nav>
+          </aside>
+
+          <!-- Main Content View -->
+          <main class="main-area">
+            <div class="content-container">
+              ${mainContentHTML}
+            </div>
+          </main>
+
+          <!-- Mobile Bottom Quick Navigation Bar -->
+          <nav class="mobile-bottom-nav">
+            <button type="button" data-action="switch-tab" data-tab="dashboard" class="mobile-nav-btn ${state.activeTab === 'dashboard' ? 'active' : ''}">
+              ${icon('LayoutDashboard', 18)} <span>Home</span>
+            </button>
+            <button type="button" data-action="switch-tab" data-tab="planner" class="mobile-nav-btn ${state.activeTab === 'planner' ? 'active' : ''}">
+              ${icon('Calendar', 18)} <span>Planner</span>
+            </button>
+            <button type="button" data-action="switch-tab" data-tab="revisions" class="mobile-nav-btn ${state.activeTab === 'revisions' ? 'active' : ''}">
+              ${icon('RotateCw', 18)} <span>Revise</span>
+            </button>
+            <button type="button" data-action="switch-tab" data-tab="analytics" class="mobile-nav-btn ${state.activeTab === 'analytics' ? 'active' : ''}">
+              ${icon('TrendingUp', 18)} <span>Stats</span>
+            </button>
+            <button type="button" data-action="switch-tab" data-tab="settings" class="mobile-nav-btn ${state.activeTab === 'settings' ? 'active' : ''}">
+              ${icon('Settings', 18)} <span>Backup</span>
+            </button>
+          </nav>
+
+          <!-- Floating Pomodoro Timer Mount -->
+          <div id="pomodoro-mount">
+            ${buildPomodoroHTML()}
+          </div>
+
+          <!-- Modals Mount -->
+          ${buildModalsHTML()}
+        </div>
+      `;
+    }
+
+    /* ==========================================================================
+       8. EVENT DELEGATION & INTERACTION CONTROLLERS
+       ========================================================================== */
+    function buildBackupPayloadObject() {
+      return {
+        app: "Class 11 Syllabus Tracker",
+        version: "2.0",
+        exportedAt: new Date().toISOString(),
+        syllabus: state.syllabus,
+        tasks: state.tasks,
+        sessions: state.sessions
+      };
+    }
+
+    function parseAndValidateBackupJSON(rawText, sourceName = 'Pasted JSON Backup') {
+      try {
+        const parsed = JSON.parse(rawText);
+        let extractedSyllabus = null;
+        let extractedTasks = [];
+        let extractedSessions = [];
+
+        if (Array.isArray(parsed)) {
+          extractedSyllabus = parsed;
+        } else if (parsed && typeof parsed === 'object' && Array.isArray(parsed.syllabus)) {
+          extractedSyllabus = parsed.syllabus;
+          extractedTasks = Array.isArray(parsed.tasks) ? parsed.tasks : [];
+          extractedSessions = Array.isArray(parsed.sessions) ? parsed.sessions : [];
+        } else {
+          throw new Error('Invalid format. Expected a Syllabus Tracker JSON backup.');
+        }
+
+        const hasValidSubjects = extractedSyllabus.some(s => s && typeof s.name === 'string' && Array.isArray(s.topics));
+        if (!hasValidSubjects) {
+          throw new Error('Backup does not contain recognizable Class 11 subjects and chapters.');
+        }
+
+        const normalizedSyllabus = normalizeSyllabusData(extractedSyllabus);
+        const totalTopicsCount = normalizedSyllabus.reduce((acc, s) => acc + s.topics.length, 0);
+
+        state.pendingRestoreData = {
+          sourceName,
+          syllabus: normalizedSyllabus,
+          tasks: extractedTasks,
+          sessions: extractedSessions,
+          summary: {
+            subjectsCount: normalizedSyllabus.length,
+            topicsCount: totalTopicsCount,
+            tasksCount: extractedTasks.length,
+            sessionsCount: extractedSessions.length
+          }
+        };
+        state.rawJsonModalMode = null;
+        state.statusBanner = null;
+        renderApp();
+      } catch (err) {
+        state.statusBanner = {
+          type: 'error',
+          message: 'Restore validation failed: ' + (err.message || 'Invalid JSON')
+        };
+        state.rawJsonModalMode = null;
+        renderApp();
+      }
+    }
+
+    // Click Delegation
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-action]');
+      if (!btn) return;
+      const action = btn.getAttribute('data-action');
+
+      if (action === 'toggle-mobile-menu') {
+        state.mobileMenuOpen = !state.mobileMenuOpen;
+        renderApp();
+      } else if (action === 'switch-tab') {
+        state.activeTab = btn.getAttribute('data-tab');
+        state.searchQuery = '';
+        state.mobileMenuOpen = false;
+        renderApp();
+      } else if (action === 'clear-search') {
+        state.searchQuery = '';
+        renderApp();
+      } else if (action === 'toggle-subtopics') {
+        const tid = btn.getAttribute('data-topic-id');
+        state.openSubtopics[tid] = !state.openSubtopics[tid];
+        renderApp();
+      } else if (action === 'toggle-revision') {
+        const tid = btn.getAttribute('data-topic-id');
+        state.openRevisions[tid] = !state.openRevisions[tid];
+        renderApp();
+      } else if (action === 'toggle-notes') {
+        const tid = btn.getAttribute('data-topic-id');
+        state.openNotes[tid] = !state.openNotes[tid];
+        renderApp();
+      } else if (action === 'toggle-subtopic-check') {
+        const tid = btn.getAttribute('data-topic-id');
+        const stId = btn.getAttribute('data-subtopic-id');
+        const found = findTopicById(tid);
+        if (!found) return;
+        const updatedList = (found.topic.subtopics || []).map(st =>
+          st.id === stId ? { ...st, completed: !st.completed } : st
+        );
+        const allDone = updatedList.length > 0 && updatedList.every(st => st.completed);
+        const anyDone = updatedList.some(st => st.completed);
+        const extra = {};
+        if (allDone && found.topic.status !== 'Completed') extra.status = 'Completed';
+        else if (!allDone && anyDone && found.topic.status === 'Not Started') extra.status = 'Learning';
+        updateTopicById(tid, { subtopics: updatedList, ...extra });
+      } else if (action === 'toggle-subtopic-note') {
+        const stId = btn.getAttribute('data-subtopic-id');
+        state.openSubtopicNotes[stId] = !state.openSubtopicNotes[stId];
+        renderApp();
+      } else if (action === 'start-subtopic-edit') {
+        state.editingSubtopicId = btn.getAttribute('data-subtopic-id');
+        state.editingSubtopicName = btn.getAttribute('data-subtopic-name') || '';
+        renderApp();
+      } else if (action === 'cancel-subtopic-edit') {
+        state.editingSubtopicId = null;
+        state.editingSubtopicName = '';
+        renderApp();
+      } else if (action === 'save-subtopic-edit') {
+        const tid = btn.getAttribute('data-topic-id');
+        const stId = btn.getAttribute('data-subtopic-id');
+        const inputEl = document.getElementById(`edit-subtopic-input-${stId}`);
+        const newName = (inputEl ? inputEl.value : state.editingSubtopicName).trim();
+        if (!newName) return;
+        const found = findTopicById(tid);
+        if (!found) return;
+        const updatedList = (found.topic.subtopics || []).map(st =>
+          st.id === stId ? { ...st, name: newName } : st
+        );
+        state.editingSubtopicId = null;
+        state.editingSubtopicName = '';
+        updateTopicById(tid, { subtopics: updatedList });
+      } else if (action === 'delete-subtopic') {
+        const tid = btn.getAttribute('data-topic-id');
+        const stId = btn.getAttribute('data-subtopic-id');
+        const found = findTopicById(tid);
+        if (!found) return;
+        const updatedList = (found.topic.subtopics || []).filter(st => st.id !== stId);
+        updateTopicById(tid, { subtopics: updatedList });
+      } else if (action === 'mark-revised') {
+        const tid = btn.getAttribute('data-topic-id');
+        const days = Number(btn.getAttribute('data-days')) || 7;
+        const today = getTodayDateString();
+        const nextDate = addDaysToDateString(today, days);
+        const found = findTopicById(tid);
+        updateTopicById(tid, {
+          lastRevisionDate: today,
+          nextRevisionDate: nextDate,
+          status: found && found.topic.status === 'Needs Revision' ? 'Completed' : (found ? found.topic.status : 'Learning')
+        });
+      } else if (action === 'clear-revision-date') {
+        const tid = btn.getAttribute('data-topic-id');
+        updateTopicById(tid, { nextRevisionDate: null });
+      } else if (action === 'toggle-task') {
+        const taskId = btn.getAttribute('data-task-id');
+        state.tasks = state.tasks.map(t => t.id === taskId ? { ...t, completed: !t.completed } : t);
+        saveStoredJSON(STORAGE_KEYS.TASKS, state.tasks);
+        renderApp();
+      } else if (action === 'delete-task') {
+        const taskId = btn.getAttribute('data-task-id');
+        state.tasks = state.tasks.filter(t => t.id !== taskId);
+        saveStoredJSON(STORAGE_KEYS.TASKS, state.tasks);
+        renderApp();
+      } else if (action === 'start-task-edit') {
+        const taskId = btn.getAttribute('data-task-id');
+        const task = state.tasks.find(t => t.id === taskId);
+        if (!task) return;
+        state.editingTaskId = taskId;
+        state.editingTaskForm = {
+          title: task.title,
+          targetDate: task.targetDate,
+          estimatedMinutes: task.estimatedMinutes
+        };
+        renderApp();
+      } else if (action === 'cancel-task-edit') {
+        state.editingTaskId = null;
+        renderApp();
+      } else if (action === 'save-task-edit') {
+        const taskId = btn.getAttribute('data-task-id');
+        const titleEl = document.getElementById('edit-task-title');
+        const dateEl = document.getElementById('edit-task-date');
+        const minsEl = document.getElementById('edit-task-mins');
+        const nextTitle = (titleEl ? titleEl.value : '').trim();
+        if (!nextTitle) return;
+        state.tasks = state.tasks.map(t =>
+          t.id === taskId
+            ? {
+                ...t,
+                title: nextTitle,
+                targetDate: (dateEl && dateEl.value) || getTodayDateString(),
+                estimatedMinutes: Math.max(5, Number(minsEl && minsEl.value) || 30)
+              }
+            : t
+        );
+        state.editingTaskId = null;
+        saveStoredJSON(STORAGE_KEYS.TASKS, state.tasks);
+        renderApp();
+      } else if (action === 'pomo-minimize-toggle') {
+        state.pomodoro.minimized = !state.pomodoro.minimized;
+        renderPomodoroWidgetOnly();
+      } else if (action === 'pomo-test-sound') {
+        state.pomodoro.soundEnabled = !state.pomodoro.soundEnabled;
+        if (state.pomodoro.soundEnabled) playOfflineNotificationSound();
+        renderPomodoroWidgetOnly();
+      } else if (action === 'pomo-toggle') {
+        const p = state.pomodoro;
+        if (!p.isActive) {
+          p.targetEndTime = Date.now() + p.timeLeft * 1000;
+          p.isActive = true;
+        } else {
+          if (p.targetEndTime) {
+            p.timeLeft = Math.max(0, Math.ceil((p.targetEndTime - Date.now()) / 1000));
+          }
+          p.targetEndTime = null;
+          p.isActive = false;
+        }
+        renderPomodoroWidgetOnly();
+      } else if (action === 'pomo-reset') {
+        const p = state.pomodoro;
+        p.targetEndTime = null;
+        p.isActive = false;
+        const def = p.isBreak ? 5 * 60 : 25 * 60;
+        p.timeLeft = def;
+        p.sessionStartDuration = def;
+        renderPomodoroWidgetOnly();
+      } else if (action === 'pomo-mode') {
+        const isBrk = btn.getAttribute('data-break') === 'true';
+        const p = state.pomodoro;
+        p.targetEndTime = null;
+        p.isBreak = isBrk;
+        p.isActive = false;
+        const nextSec = isBrk ? 5 * 60 : 25 * 60;
+        p.timeLeft = nextSec;
+        p.sessionStartDuration = nextSec;
+        renderPomodoroWidgetOnly();
+      } else if (action === 'export-json-file') {
+        try {
+          const payloadStr = JSON.stringify(buildBackupPayloadObject(), null, 2);
+          const fileName = `class11-syllabus-backup-${getTodayDateString()}.json`;
+          const blob = new Blob([payloadStr], { type: 'application/json' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = fileName;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          setTimeout(() => URL.revokeObjectURL(url), 2000);
+
+          state.statusBanner = {
+            type: 'success',
+            message: 'Backup file generated! If your Android APK viewer blocks downloads, use "Copy Raw JSON Backup" below.'
+          };
+          renderApp();
+        } catch (err) {
+          state.rawJsonModalMode = 'copy';
+          state.rawJsonText = JSON.stringify(buildBackupPayloadObject(), null, 2);
+          renderApp();
+        }
+      } else if (action === 'open-raw-copy-modal') {
+        state.rawJsonModalMode = 'copy';
+        state.rawJsonText = JSON.stringify(buildBackupPayloadObject(), null, 2);
+        renderApp();
+      } else if (action === 'open-raw-paste-modal') {
+        state.rawJsonModalMode = 'paste';
+        state.rawJsonText = '';
+        renderApp();
+      } else if (action === 'close-raw-modal') {
+        state.rawJsonModalMode = null;
+        renderApp();
+      } else if (action === 'copy-raw-json-btn') {
+        const ta = document.getElementById('raw-json-textarea');
+        if (ta) {
+          ta.select();
+          document.execCommand('copy');
+        }
+        state.rawJsonModalMode = null;
+        state.statusBanner = {
+          type: 'success',
+          message: 'Raw JSON backup copied to clipboard!'
+        };
+        renderApp();
+      } else if (action === 'validate-raw-json-btn') {
+        const ta = document.getElementById('raw-json-textarea');
+        const val = ta ? ta.value.trim() : '';
+        parseAndValidateBackupJSON(val, 'Pasted Raw JSON');
+      } else if (action === 'cancel-restore') {
+        state.pendingRestoreData = null;
+        renderApp();
+      } else if (action === 'confirm-restore') {
+        if (!state.pendingRestoreData) return;
+        state.syllabus = state.pendingRestoreData.syllabus;
+        state.tasks = state.pendingRestoreData.tasks;
+        state.sessions = state.pendingRestoreData.sessions;
+        persistAll();
+        state.pendingRestoreData = null;
+        state.statusBanner = {
+          type: 'success',
+          message: 'Backup restored! All chapters, subtopics, notes, planner tasks, and sessions are updated.'
+        };
+        renderApp();
+      } else if (action === 'dismiss-banner') {
+        state.statusBanner = null;
+        renderApp();
+      }
+    });
+
+    // Change & Input Delegation (Preserving cursor focus on textareas/inputs)
+    document.addEventListener('input', (e) => {
+      const target = e.target;
+      const action = target.getAttribute('data-action');
+      if (!action) return;
+
+      if (action === 'search-input') {
+        state.searchQuery = target.value;
+        const pos = target.selectionStart;
+        renderApp();
+        const newSearchInput = document.getElementById('global-search-input');
+        if (newSearchInput) {
+          newSearchInput.focus();
+          newSearchInput.setSelectionRange(pos, pos);
+        }
+      } else if (action === 'topic-note-input') {
+        const tid = target.getAttribute('data-topic-id');
+        updateTopicById(tid, { notes: target.value }, false);
+      } else if (action === 'subtopic-note-input') {
+        const tid = target.getAttribute('data-topic-id');
+        const stId = target.getAttribute('data-subtopic-id');
+        const found = findTopicById(tid);
+        if (!found) return;
+        const updatedList = (found.topic.subtopics || []).map(st =>
+          st.id === stId ? { ...st, notes: target.value } : st
+        );
+        updateTopicById(tid, { subtopics: updatedList }, false);
+      } else if (action === 'subtopic-draft-input') {
+        const tid = target.getAttribute('data-topic-id');
+        state.subtopicDrafts[tid] = target.value;
+      } else if (action === 'planner-form-input') {
+        const field = target.getAttribute('data-field');
+        state.plannerForm[field] = target.value;
+      } else if (action === 'manual-session-input') {
+        const field = target.getAttribute('data-field');
+        state.manualSessionForm[field] = target.value;
+      }
+    });
+
+    document.addEventListener('change', (e) => {
+      const target = e.target;
+      const action = target.getAttribute('data-action');
+      if (!action) return;
+
+      if (action === 'topic-status-change') {
+        const tid = target.getAttribute('data-topic-id');
+        updateTopicById(tid, { status: target.value }, true);
+      } else if (action === 'set-revision-date') {
+        const tid = target.getAttribute('data-topic-id');
+        updateTopicById(tid, { nextRevisionDate: target.value || null }, true);
+      } else if (action === 'planner-subject-change') {
+        state.plannerForm.subjectId = target.value;
+        state.plannerForm.topicId = '';
+        renderApp();
+      } else if (action === 'pomo-subject-change') {
+        state.pomodoro.selectedSubjectId = target.value;
+      } else if (action === 'import-json-file') {
+        const file = target.files && target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          parseAndValidateBackupJSON(ev.target.result, file.name);
+        };
+        reader.readAsText(file);
+        target.value = '';
+      }
+    });
+
+    // Form Submissions
+    document.addEventListener('submit', (e) => {
+      const form = e.target;
+      const action = form.getAttribute('data-action');
+      if (!action) return;
+      e.preventDefault();
+
+      if (action === 'add-subtopic-form') {
+        const tid = form.getAttribute('data-topic-id');
+        const name = (state.subtopicDrafts[tid] || '').trim();
+        if (!name) return;
+        const found = findTopicById(tid);
+        if (!found) return;
+        const newSt = {
+          id: `st-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+          name,
+          completed: false,
+          notes: ''
+        };
+        state.subtopicDrafts[tid] = '';
+        updateTopicById(tid, { subtopics: [...(found.topic.subtopics || []), newSt] }, true);
+      } else if (action === 'add-planner-task') {
+        const pf = state.plannerForm;
+        const trimmed = (pf.title || '').trim();
+        if (!trimmed) return;
+        const subj = state.syllabus.find(s => s.id === pf.subjectId) || state.syllabus[0];
+        const topic = subj.topics.find(t => t.id === pf.topicId);
+        const newTask = {
+          id: `task-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+          title: trimmed,
+          subjectId: subj.id,
+          subjectName: subj.name,
+          topicId: topic ? topic.id : '',
+          topicName: topic ? topic.name : '',
+          targetDate: pf.targetDate || getTodayDateString(),
+          estimatedMinutes: Math.max(5, Number(pf.estimatedMinutes) || 30),
+          completed: false,
+          createdAt: new Date().toISOString()
+        };
+        state.tasks = [newTask, ...state.tasks];
+        state.plannerForm.title = '';
+        saveStoredJSON(STORAGE_KEYS.TASKS, state.tasks);
+        renderApp();
+      } else if (action === 'log-manual-session') {
+        const mf = state.manualSessionForm;
+        const mins = Math.max(1, Number(mf.durationMinutes) || 25);
+        const subj = state.syllabus.find(s => s.id === mf.subjectId) || state.syllabus[0];
+        const newSess = {
+          id: `sess-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+          subjectId: subj.id,
+          subjectName: subj.name,
+          durationMinutes: mins,
+          timestamp: new Date().toISOString(),
+          date: getTodayDateString()
+        };
+        state.sessions = [newSess, ...state.sessions];
+        saveStoredJSON(STORAGE_KEYS.SESSIONS, state.sessions);
+        renderApp();
+      }
+    });
+
+    // Initial Launch
+    renderApp();
+  </script>
+</body>
+</html>
