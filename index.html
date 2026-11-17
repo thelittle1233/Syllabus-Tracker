@@ -155,10 +155,6 @@
     .nav-item.active { background-color: rgba(99, 102, 241, 0.12); color: var(--indigo-400); border-color: rgba(99, 102, 241, 0.25); font-weight: 600; }
     .nav-item.active-subject { background-color: var(--bg-800); color: #ffffff; border-color: var(--border-700); font-weight: 600; }
 
-    .pomodoro-widget { position: fixed; right: 1rem; bottom: 4.5rem; z-index: 42; background-color: rgba(15, 23, 42, 0.97); backdrop-filter: blur(12px); border: 1px solid var(--border-700); border-radius: 1rem; padding: 1.15rem; width: 296px; box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.7); }
-    .pomodoro-pill { position: fixed; right: 1rem; bottom: 4.5rem; z-index: 42; background-color: var(--bg-900); border: 1px solid rgba(99, 102, 241, 0.45); border-radius: 9999px; padding: 0.65rem 1rem; display: flex; align-items: center; gap: 0.55rem; box-shadow: 0 12px 28px rgba(0, 0, 0, 0.65); }
-    @media (min-width: 768px) { .pomodoro-widget, .pomodoro-pill { bottom: 1.5rem; right: 1.5rem; } }
-
     .modal-backdrop { position: fixed; inset: 0; background-color: rgba(2, 6, 23, 0.84); backdrop-filter: blur(5px); z-index: 60; display: flex; align-items: center; justify-content: center; padding: 1rem; }
     .modal-card { background-color: var(--bg-900); border: 1px solid var(--border-700); border-radius: 1rem; max-width: 540px; width: 100%; padding: 1.5rem; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.85); max-height: 90vh; overflow-y: auto; }
     .modal-card-lg { max-width: 840px; }
@@ -172,9 +168,6 @@
 
     .topic-row { display: flex; flex-direction: column; gap: 0.85rem; }
     @media (min-width: 900px) { .topic-row { flex-direction: row; align-items: center; justify-content: space-between; } }
-
-    @keyframes pulseDot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(1.25); } }
-    .animate-pulse-dot { animation: pulseDot 1.6s infinite ease-in-out; }
   </style>
 </head>
 <body>
@@ -437,6 +430,20 @@
           { id: "irpm-3", unit: "Unit III", name: "Collective Bargaining", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
           { id: "irpm-4", unit: "Unit IV", name: "Workers Participation in Management", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null }
         ]
+      },
+      // 17. ECONOMICS
+      {
+        id: "economics",
+        name: "Economics",
+        topics: [
+          { id: "eco-1", unit: "Unit I", name: "Status of Indian Economy", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "eco-2", unit: "Unit II", name: "Basic characteristics of contemporary Indian economy", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "eco-3", unit: "Unit III", name: "Economic Planning and Economic Reforms", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "eco-4", unit: "Unit IV", name: "Current Challenges Facing the Indian Economy", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "eco-5", unit: "Unit V", name: "Introductory Statistics", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "eco-6", unit: "Unit VI", name: "Frequency Distribution", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null },
+          { id: "eco-7", unit: "Unit VII", name: "Statistical Methods - 1", status: "Not Started", notes: "", subtopics: [], nextRevisionDate: null, lastRevisionDate: null }
+        ]
       }
     ];
 
@@ -501,13 +508,6 @@
       return Math.round((currentWeight / totalWeight) * 100);
     }
 
-    function playOfflineNotificationSound() {
-      try {
-        const AudioCtx = window.AudioContext || window.webkitAudioContext; if (!AudioCtx) return; const ctx = new AudioCtx(); const now = ctx.currentTime; const freqs = [523.25, 659.25, 783.99, 1046.50];
-        freqs.forEach((f, idx) => { const osc = ctx.createOscillator(); const gain = ctx.createGain(); osc.type = 'sine'; osc.frequency.setValueAtTime(f, now + idx * 0.14); gain.gain.setValueAtTime(0.001, now + idx * 0.14); gain.gain.exponentialRampToValueAtTime(0.24, now + idx * 0.14 + 0.03); gain.gain.exponentialRampToValueAtTime(0.0001, now + idx * 0.14 + 0.65); osc.connect(gain); gain.connect(ctx.destination); osc.start(now + idx * 0.14); osc.stop(now + idx * 0.14 + 0.7); });
-      } catch (err) { console.warn('Web Audio API chime skipped:', err); }
-    }
-
     const STORAGE_KEYS = { SYLLABUS: '11th-syllabus-data', TASKS: '11th-syllabus-tasks-v2', SESSIONS: '11th-syllabus-sessions-v2', SELECTED_SUBJECTS: '11th-syllabus-selected-subjects' };
 
     function loadStoredJSON(key, fallback, normalizer = null) { try { const raw = window.localStorage.getItem(key); if (raw !== null) { const parsed = JSON.parse(raw); return normalizer ? normalizer(parsed) : parsed; } } catch (err) {} return normalizer ? normalizer(fallback) : fallback; }
@@ -522,8 +522,7 @@
       customTopicOpen: {}, customTopicDraft: {}, openNotes: {}, openSubtopics: {}, openRevisions: {}, openSubtopicNotes: {}, editingSubtopicId: null, editingSubtopicName: '', subtopicDrafts: {},
       plannerForm: { title: '', subjectId: 'physics', topicId: '', targetDate: getTodayDateString(), estimatedMinutes: 45 },
       editingTaskId: null, editingTaskForm: { title: '', targetDate: '', estimatedMinutes: 45 }, manualSessionForm: { subjectId: 'physics', durationMinutes: 30 },
-      statusBanner: null, pendingRestoreData: null, rawJsonModalMode: null, rawJsonText: '',
-      pomodoro: { timeLeft: 25 * 60, isActive: false, isBreak: false, minimized: false, selectedSubjectId: 'physics', soundEnabled: true, targetEndTime: null, sessionStartDuration: 25 * 60, bannerMessage: null }
+      statusBanner: null, pendingRestoreData: null, rawJsonModalMode: null, rawJsonText: ''
     };
 
     saveStoredJSON(STORAGE_KEYS.SYLLABUS, state.syllabus);
@@ -533,40 +532,6 @@
     function persistAll() { saveStoredJSON(STORAGE_KEYS.SYLLABUS, state.syllabus); saveStoredJSON(STORAGE_KEYS.SELECTED_SUBJECTS, state.selectedSubjectIds); saveStoredJSON(STORAGE_KEYS.TASKS, state.tasks); saveStoredJSON(STORAGE_KEYS.SESSIONS, state.sessions); }
     function findTopicById(topicId) { for (const subj of state.syllabus) { const found = subj.topics.find(t => t.id === topicId); if (found) return { subject: subj, topic: found }; } return null; }
     function updateTopicById(topicId, updates, shouldRender = true) { state.syllabus = state.syllabus.map(subj => ({ ...subj, topics: subj.topics.map(t => t.id === topicId ? { ...t, ...updates } : t) })); saveStoredJSON(STORAGE_KEYS.SYLLABUS, state.syllabus); if (shouldRender) renderApp(); }
-
-    setInterval(() => {
-      const p = state.pomodoro; if (!p.isActive || !p.targetEndTime) return; const remainingMs = p.targetEndTime - Date.now(); const remainingSec = Math.max(0, Math.ceil(remainingMs / 1000)); p.timeLeft = remainingSec;
-      if (remainingSec <= 0) {
-        p.targetEndTime = null; p.isActive = false; if (p.soundEnabled) { playOfflineNotificationSound(); }
-        if (!p.isBreak) {
-          const durationMinutes = Math.round(p.sessionStartDuration / 60); const activeList = getActiveSyllabus(); const subj = state.syllabus.find(s => s.id === p.selectedSubjectId) || activeList[0] || state.syllabus[0];
-          const newSession = { id: `sess-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`, subjectId: subj.id, subjectName: subj.name, durationMinutes, timestamp: new Date().toISOString(), date: getTodayDateString() };
-          state.sessions = [newSession, ...state.sessions]; saveStoredJSON(STORAGE_KEYS.SESSIONS, state.sessions);
-          p.bannerMessage = `+${durationMinutes}m logged for ${subj.name}!`; setTimeout(() => { state.pomodoro.bannerMessage = null; renderPomodoroWidgetOnly(); }, 5000);
-          p.isBreak = true; p.timeLeft = 5 * 60; p.sessionStartDuration = 5 * 60;
-        } else { p.isBreak = false; p.timeLeft = 25 * 60; p.sessionStartDuration = 25 * 60; }
-        renderApp();
-      } else { updatePomodoroClockDOM(); }
-    }, 250);
-
-    document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && state.pomodoro.isActive && state.pomodoro.targetEndTime) { const remainingSec = Math.max(0, Math.ceil((state.pomodoro.targetEndTime - Date.now()) / 1000)); state.pomodoro.timeLeft = remainingSec; updatePomodoroClockDOM(); } });
-
-    function updatePomodoroClockDOM() { const clockEl = document.getElementById('pomo-clock-display'); if (!clockEl) return; const mins = Math.floor(state.pomodoro.timeLeft / 60).toString().padStart(2, '0'); const secs = (state.pomodoro.timeLeft % 60).toString().padStart(2, '0'); clockEl.textContent = `${mins}:${secs}`; }
-    function renderPomodoroWidgetOnly() { const container = document.getElementById('pomodoro-mount'); if (container) { container.innerHTML = buildPomodoroHTML(); } }
-
-    function buildPomodoroHTML() {
-      const p = state.pomodoro; const activeList = getActiveSyllabus(); if (!activeList.some(s => s.id === p.selectedSubjectId) && activeList.length > 0) { p.selectedSubjectId = activeList[0].id; }
-      const mins = Math.floor(p.timeLeft / 60).toString().padStart(2, '0'); const secs = (p.timeLeft % 60).toString().padStart(2, '0');
-      if (p.minimized) return `<button type="button" data-action="pomo-minimize-toggle" class="pomodoro-pill"><span style="position:relative; display:inline-flex; color: ${p.isBreak ? '#facc15' : '#818cf8'};">${icon(p.isBreak ? 'Coffee' : 'Brain', 20)}${p.isActive ? '<span class="animate-pulse-dot" style="position:absolute; top:-3px; right:-3px; width:8px; height:8px; background:#22c55e; border-radius:9999px;"></span>' : ''}</span><span id="pomo-clock-display" class="font-mono font-bold text-sm text-white">${mins}:${secs}</span></button>`;
-      return `
-        <div class="pomodoro-widget">
-          <div class="flex items-center justify-between mb-3"><div class="flex items-center gap-2"><span style="color: ${p.isBreak ? '#eab308' : '#818cf8'};">${icon(p.isBreak ? 'Coffee' : 'Brain', 18)}</span><span class="font-semibold text-sm text-white">${p.isBreak ? 'Break Time (5m)' : 'Focus Session (25m)'}</span></div><div class="flex items-center gap-1"><button type="button" data-action="pomo-test-sound" class="btn-icon" style="padding:0.3rem;">${icon(p.soundEnabled ? 'Volume2' : 'VolumeX', 15, p.soundEnabled ? 'text-indigo-400' : 'text-slate-500')}</button><button type="button" data-action="pomo-minimize-toggle" class="btn-icon" style="padding:0.3rem;">${icon('ChevronDown', 15)}</button></div></div>
-          ${!p.isBreak ? `<div class="mb-2"><select data-action="pomo-subject-change" class="select" style="padding:0.35rem 0.5rem; font-size:0.75rem;" ${p.isActive ? 'disabled' : ''}>${activeList.map(s => `<option value="${s.id}" ${s.id === p.selectedSubjectId ? 'selected' : ''}>${escapeHtml(s.name)}</option>`).join('')}</select></div>` : ''}
-          <div id="pomo-clock-display" class="text-5xl font-bold font-mono text-white" style="text-align:center; margin:0.85rem 0;">${mins}:${secs}</div>
-          <div class="flex justify-center gap-3 mb-3"><button type="button" data-action="pomo-toggle" class="btn" style="border-radius:9999px; padding:0.75rem; ${p.isActive ? 'background:rgba(249,115,22,0.2); color:#fb923c; border-color:rgba(249,115,22,0.35);' : 'background:rgba(99,102,241,0.2); color:#818cf8; border-color:rgba(99,102,241,0.35);'}">${icon(p.isActive ? 'Pause' : 'Play', 22)}</button><button type="button" data-action="pomo-reset" class="btn btn-secondary" style="border-radius:9999px; padding:0.75rem;">${icon('RotateCcw', 22)}</button></div>
-          <div class="flex" style="background:var(--bg-950); border:1px solid var(--border-800); border-radius:0.5rem; padding:0.2rem;"><button type="button" data-action="pomo-mode" data-break="false" style="flex:1; padding:0.38rem; border-radius:0.35rem; font-size:0.75rem; font-weight:600; ${!p.isBreak ? 'background:var(--indigo-600); color:#fff;' : 'color:var(--text-400);'}">Pomodoro</button><button type="button" data-action="pomo-mode" data-break="true" style="flex:1; padding:0.38rem; border-radius:0.35rem; font-size:0.75rem; font-weight:600; ${p.isBreak ? 'background:var(--indigo-600); color:#fff;' : 'color:var(--text-400);'}">Break</button></div>
-        </div>`;
-    }
 
     function buildTopicCardHTML(topic, subjectNameBadge = null) {
       const subtopics = Array.isArray(topic.subtopics) ? topic.subtopics : []; const hasSubtopics = subtopics.length > 0; const completedSubtopicsCount = subtopics.filter(st => st.completed).length; const topicProgress = getTopicProgress(topic);
@@ -716,7 +681,6 @@
             </nav>
           </aside>
           <main class="main-area"><div class="content-container">${mainContentHTML}</div></main>
-          <div id="pomodoro-mount">${buildPomodoroHTML()}</div>
           ${buildSubjectModalHTML()}
         </div>
       `;
